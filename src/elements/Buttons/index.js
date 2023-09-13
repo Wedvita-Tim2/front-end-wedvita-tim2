@@ -2,7 +2,7 @@ import React from 'react'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-export default function Button(props){
+const Button = (props) =>{
     const className = [props.className];
     className.push("rounded-md")
     if(props.isPrimary) className.push("bg-yellow-300", "text-md" ,
@@ -51,6 +51,8 @@ export default function Button(props){
         </button>
       )
 }
+
+export default Button
 
 
 Button.propTypes ={
