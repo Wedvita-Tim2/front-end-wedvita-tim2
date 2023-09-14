@@ -1,36 +1,41 @@
-import React, { useState } from "react";
-
+import React from "react";
+import propTypes from 'prop-types'
 
 const InputText = (props) =>{
 
     const className = [props.className]
 
-    className.push("rounded-md")
-    const [inputValue, setInputValue] = useState(props.value)
-
-    const onChange = e =>{
-        setInputValue(e.target.value)
-    }
+    className.push("rounded-md", "py-1", "px-2", "border", "border-yellow-600")
 
     
+    const additionalProps = props.isRequired ? { required: true } : {};
     const element = props.element ==='input'?(
         <input name={props.name} type={props.type} 
-         placeholder={props.placeholder} value={inputValue} onChange={onChange}
-         className={className.join(" ")} 
+         placeholder={props.placeholder} value={props.value} onChange={props.onChange}
+         className={className.join(" ") } {...additionalProps}
        />
     ):(
-        <textarea name={props.name} rows= "4" value={inputValue} 
-        onChange={onChange}
-        className={className.join(" ")} 
+        <textarea name={props.name} rows= "4" value={props.value} 
+        onChange={props.onChange}
+        className={className.join(" ")} {...additionalProps}
         />
     )
 
     return(
-        <div>
-        <label htmlFor={props.id}> {props.label}</label> 
-          {element}
-        </div>
+        <>
+            {element}
+        </>
     )
 }
 
 export default InputText
+
+InputText.propTypes={
+    value: propTypes.string,
+    name: propTypes.string,
+    element: propTypes.oneOf(["input", "textarea"]),
+    placeholder: propTypes.string,
+    type: propTypes.string,
+    onChange: propTypes.func,
+    isRequired: propTypes.bool
+}
