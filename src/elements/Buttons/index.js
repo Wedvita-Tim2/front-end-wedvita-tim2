@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom'
 
 const Button = (props) =>{
     const className = [props.className];
-    className.push("rounded-md")
+    className.push("rounded-md", "text-black", "shadow-sm")
     if(props.isPrimary) className.push("bg-yellow-300", "text-md" ,
-                                        "p-1.5", "text-black", "shadow-sm", 
+                                        "p-1.5", 
                                         "hover:bg-yellow-500")
     if(props.isLarge) className.push("bg-yellow-300", "text-xl",
-                                    "py-2.5", "px-4", "text-black", "shadow-sm", 
+                                    "py-2.5", "px-4", 
                                     "hover:bg-yellow-500")
     if(props.isSmall) className.push("bg-yellow-300", "text-sm",
-                                    "p-1", "text-black", "shadow-sm", 
+                                    "p-1", 
                                     "hover:bg-yellow-500")
     if(props.isBlock) className.push("btn-block")
     if(props.hasShadow) className.push("btn-shadow")

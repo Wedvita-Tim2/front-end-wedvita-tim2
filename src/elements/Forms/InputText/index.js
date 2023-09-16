@@ -11,11 +11,11 @@ const InputText = (props) =>{
     const additionalProps = props.isRequired ? { required: true } : {};
     const element = props.element ==='input'?(
         <input name={props.name} type={props.type} 
-         placeholder={props.placeholder} value={props.value} onChange={props.onChange}
+         placeholder={props.placeholder} value={props.text} onChange={props.onChange}
          className={className.join(" ") } {...additionalProps}
        />
     ):(
-        <textarea name={props.name} rows= "4" value={props.value} 
+        <textarea name={props.name} rows= "4" value={props.text} 
         onChange={props.onChange}
         className={className.join(" ")} {...additionalProps}
         />
