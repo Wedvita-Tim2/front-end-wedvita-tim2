@@ -26,7 +26,7 @@ const ImageSlider = ({ children: images }) => {
                 {images.map((image, index) => (
                     <div
                         key={index}
-                        className="w-115 h-140 flex-shrink-0"
+                        className="w-115 h-140 flex-shrink-0 scale-75 sm:scale-75 md:scale-75 lg:scale-85"
                     >
                         {image}
                     </div>
