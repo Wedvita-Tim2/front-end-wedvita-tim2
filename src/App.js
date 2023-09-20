@@ -4,7 +4,7 @@ import AppRouter from './router';
 function App() {
   
   return (
-    <div className="App">
+    <div className="App font-sans">
       <AppRouter/>
     </div>
   );

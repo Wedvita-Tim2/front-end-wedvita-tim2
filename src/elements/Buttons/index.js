@@ -4,18 +4,18 @@ import { Link } from 'react-router-dom'
 
 const Button = (props) =>{
     const className = [props.className];
-    className.push("rounded-md", "text-black", "shadow-sm")
-    if(props.isPrimary) className.push("bg-yellow-300", "text-md" ,
-                                        "p-1.5", 
-                                        "hover:bg-yellow-500")
-    if(props.isLarge) className.push("bg-yellow-300", "text-xl",
+    className.push("text-center")
+    if(props.isPrimary) className.push("bg-primary-100", "text-md" ,
+                                        "rounded-md", "shadow-md", 
+                                        "text-white", "py-2.5 px-3", "w-36", 
+                                        "font-normal", 
+                                        "hover:bg-primary-200")
+    if(props.isLarge) className.push("bg-primary-100", "text-xl",
                                     "py-2.5", "px-4", 
-                                    "hover:bg-yellow-500")
-    if(props.isSmall) className.push("bg-yellow-300", "text-sm",
+                                    "hover:bg-primary-200")
+    if(props.isSmall) className.push("text-sm",
                                     "p-1", 
                                     "hover:bg-yellow-500")
-    if(props.isBlock) className.push("btn-block")
-    if(props.hasShadow) className.push("btn-shadow")
     
     const onClick=()=>{
       if(props.onClick) props.onClick()

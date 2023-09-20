@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Button from '../../../elements/Buttons';
 import { InputText } from '../../../elements/Forms';
+import AuthImage from '../AuthImage';
 const Login = () =>{
     const [text, setText] = useState({username : '', password: ''})
+    const [isInputValid, setInputValid] = useState({username: true, password: true});
     const handleTextChanged = (e) =>{
         const {name, value} = e.target
 
@@ -10,31 +12,68 @@ const Login = () =>{
             ...text,
             [name]: value,
         })
+
+        setInputValid({
+            ...isInputValid,
+            [name]: value !== '',
+        });
+
     }
+
+    const handleSignInClick = () =>{
+        const isValidation = Object.values(isInputValid).every((isValid) => isValid);
+
+        setInputValid({
+            username: text.username !== '',
+            password: text.password !== '',
+        });
+        if (isValidation) {
+            console.log(text); 
+        }
+    }
+    
     return(
-        <>
-            <h1>Halaman Login</h1>
-            <InputText 
-            element={'input'} 
-            type={ 'text' } 
-            value={text.username} 
-            onChange={handleTextChanged} 
-            className='block' 
-            name={'username'}
-            placeholder={'Username'}/>
+        <div className='bg-gradient-to-tr from-[#62DDEF6B] from-15% via-[#FF8CED9A] via-35% to-[#3C64F0B2] to-75%' style={{minHeight: '100vh'}}>
+            <div className='flex justify-center'>
+                <div className='mr-20 mt-16'>
+                    <AuthImage/>
+                </div>
+                <div className='ml-20 mt-36'>
+                    <h1 className='text-3xl text-white font-bold text-center'>Halaman Login</h1>
+                    <InputText 
+                    element={'input'} 
+                    type={ 'text' } 
+                    value={text.username} 
+                    onChange={handleTextChanged} 
+                    className='block mt-6 w-96 text-lg' 
+                    name={'username'}
+                    placeholder={'Username'} isRequired/>
+                     {!isInputValid.username && <div className='text-red-500 font-md block'>*This fill is required</div>}
 
-
-            <InputText 
-            element={'input'} 
-            type={ 'password' } 
-            value={text.password} 
-            onChange={handleTextChanged} 
-            className='block' 
-            name={'password'}
-            placeholder={'Password'}/>
-            <Button type={'button'} onClick={() => console.log(text)} isPrimary>Submit</Button>
-        </>
-        
+                    <InputText 
+                    element={'input'} 
+                    type={ 'password' } 
+                    value={text.password} 
+                    onChange={handleTextChanged} 
+                    className='block mt-6 w-96 text-lg' 
+                    name={'password'}
+                    placeholder={'Password'} isRequired/>
+                    {!isInputValid.password && <div className='text-red-500 font-md block'>*This fill is required</div>}
+                    
+                    <Button type={'link'} href={'/forgotPassword'} className='block text-end text-md mt-6 text-primary-100 hover:text-primary-200 hover:underline'>Forgot your password ?</Button>
+                    
+                    <div className="flex justify-center mt-10">
+                        <Button type={'button'} onClick={handleSignInClick} isPrimary className="block">
+                            Sign In
+                        </Button>
+                    </div>
+                    <div className="flex justify-center mt-4 text-md, text-primary-100">
+                        <p className='text-md mr-2'>New Here ? </p> <Button type={'link'} href={'/register'} className='font-bold hover:text-primary-200 hover:underline'>Sign Up</Button>
+                    </div>                    
+                </div>
+               
+            </div>
+        </div>
     )
 }
 
