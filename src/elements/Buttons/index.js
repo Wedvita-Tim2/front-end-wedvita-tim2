@@ -7,7 +7,7 @@ const Button = (props) =>{
     className.push("text-center")
     if(props.isPrimary) className.push("bg-primary-100", "text-md" ,
                                         "rounded-md", "shadow-md", 
-                                        "text-white", "py-2.5 px-3", "w-36", 
+                                        "text-white", "py-2.5 px-3", "w-24 md:w-36", 
                                         "font-normal", 
                                         "hover:bg-primary-200")
     if(props.isLarge) className.push("bg-primary-100", "text-xl",
@@ -15,7 +15,7 @@ const Button = (props) =>{
                                     "hover:bg-primary-200")
     if(props.isGradient) className.push("bg-gradient-to-tr", "from-[#0087E8]",
                                         "from-35%", "to-[#1200DD]", "to-85%", "text-white",
-                                        "font-medium", "py-2 px-8", "rounded-full", "w-36")
+                                        "font-medium", "py-2 px-8", "rounded-full", "w-24 md:w-36")
     
     const onClick=()=>{
       if(props.onClick) props.onClick()

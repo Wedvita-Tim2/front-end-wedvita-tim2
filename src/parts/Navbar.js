@@ -86,7 +86,7 @@ import Button from "../elements/Buttons";
             </div>
             
         </header>
-        <div style={{ height: isNavbarFixed ? '80px' : '0' }}></div>
+        <div style={{ height: isNavbarFixed ? '92px' : '0' }}></div>
         </>
       );
  }

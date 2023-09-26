@@ -2,8 +2,8 @@ import Button from "../elements/Buttons"
 
 const Hero = () =>{
     return (
-        <div className="grid relative md:grid-cols-2 md:mt-36">
-            <img src="/logo.png" alt="logo" className="mx-auto md:w-96 md:h-80"></img>
+        <div className="grid relative md:grid-cols-2 md:mt-32">
+            <img src="/logo.png" alt="logo" className="mx-auto md:w-115 md:h-80"></img>
             <div>
                 <p className="mx-auto font-bold text-4xl text-center md:text-7xl md:text-left">Wedding <span className="text-primary-300 block">Invitation</span> Digital</p>
                 <p className="mt-7 text-center mx-9 text-lg md:text-left md:text-xl md:ml-0">Platform kami menyediakan solusi modern yang menggabungkan efisiensi digital dengan kemewahan berbagi informasi kepada tamu undangan, menciptakan pengalaman pernikahan yang lebih fleksibel, dan praktis.</p>
