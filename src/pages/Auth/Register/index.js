@@ -48,83 +48,89 @@ const Register = () =>{
     }
     
     return(
-        <div className='bg-gradient-to-tr from-[#62DDEF6B] from-15% via-[#FF8CED9A] via-35% to-[#3C64F0B2] to-75%' style={{minHeight: '100vh'}}>
-            <div className='flex justify-center'>
-                <div className='mr-20 mt-16'>
-                    <AuthImage/>
+        <div className='bg-gradient-to-tr from-[#62DDEF6B] from-15% via-[#FF8CED9A] via-35% to-[#3C64F0B2] to-75%' style={{ minHeight: '100vh' }}>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mt-8'>
+                <div className='flex justify-center'>
+                    <AuthImage />
                 </div>
-                <div className='ml-20 mt-24'>
-                    <h1 className='text-3xl text-white font-bold text-center'>Halaman Register</h1>
-                    <InputText 
-                    element={'input'} 
-                    type={ 'text' } 
-                    value={text.username} 
-                    onChange={handleTextChanged} 
-                    className='block mt-6 w-96 text-lg' 
-                    name={'username'}
-                    placeholder={'Username'} isRequired/>
-                    {!isInputValid.username && <div className='text-red-500 font-md block'>*This fill is required</div>}
+                <div className='flex justify-center'>
+                    <div className='lg:w-96'>
+                        <h1 className='text-3xl text-white font-bold text-center'>Halaman Register</h1>
+                        
 
-                    <PhoneInput
-                    defaultCountry="id"
-                    value={text.phone}
-                    name={'phone'}
-                    className='block mt-6'
-                    placeholder={'Phone'}
-                    inputStyle={{width : 340, paddingTop : 23, paddingBottom:23, fontSize:18}}
-                    countrySelectorStyleProps={{
-                        buttonStyle : {
-                            height:48
-                            // Tambahkan properti CSS lain yang Anda inginkan di sini
-                        },
-                    }}
-                    onChange={(phone) =>{setPhone(phone)}}/>
+                        <InputText 
+                        element={'input'} 
+                        type={ 'text' } 
+                        value={text.username} 
+                        onChange={handleTextChanged} 
+                        className='block mt-6 lg:w-96 text-lg' 
+                        name={'username'}
+                        placeholder={'Username'} isRequired/>
+                        {!isInputValid.username && <div className='text-red-500 font-md block'>*This fill is required</div>}
+                        
+                        <div className='w-full lg:w-96'></div> 
+                        <PhoneInput
+                        defaultCountry="id"
+                        value={text.phone}
+                        name={'phone'}
+                        className='block mt-6 lg:w-96'
+                        placeholder={'Phone'}
+                        inputStyle={{paddingTop : 23, paddingBottom:23, fontSize:18., width:200}}
+                        countrySelectorStyleProps={{
+                            buttonStyle : {
+                                height:48
+                                // Tambahkan properti CSS lain yang Anda inginkan di sini
+                            },
+                        }}
+                        onChange={(phone) =>{setPhone(phone)}}/>
 
-                   
-                    {!isInputValid.phone && <div className='text-red-500 font-md block'>*This fill is required</div>}
+                        
+                        {!isInputValid.phone && <div className='text-red-500 font-md block'>*This fill is required</div>}
+                        
 
-                    <InputText 
-                    element={'input'} 
-                    type={ 'email' } 
-                    value={text.email} 
-                    onChange={handleTextChanged} 
-                    className='block mt-6 w-96 text-lg' 
-                    name={'email'}
-                    placeholder={'Email'} isRequired/>
-                    {!isInputValid.email && <div className='text-red-500 font-md block'>*This fill is required</div>}
+                        <InputText 
+                        element={'input'} 
+                        type={ 'email' } 
+                        value={text.email} 
+                        onChange={handleTextChanged} 
+                        className='block mt-6 lg:w-96 text-lg' 
+                        name={'email'}
+                        placeholder={'Email'} isRequired/>
+                        {!isInputValid.email && <div className='text-red-500 font-md block'>*This fill is required</div>}
 
-                    <InputText 
-                    element={'input'} 
-                    type={ 'password' } 
-                    value={text.password} 
-                    onChange={handleTextChanged} 
-                    className='block mt-6 w-96 text-lg' 
-                    name={'password'}
-                    placeholder={'Password'} isRequired/>
-                    {!isInputValid.password && <div className='text-red-500 font-md block'>*This fill is required</div>}
+                        <InputText 
+                        element={'input'} 
+                        type={ 'password' } 
+                        value={text.password} 
+                        onChange={handleTextChanged} 
+                        className='block mt-6 lg:w-96 text-lg' 
+                        name={'password'}
+                        placeholder={'Password'} isRequired/>
+                        {!isInputValid.password && <div className='text-red-500 font-md block'>*This fill is required</div>}
 
-                    <InputText 
-                    element={'input'} 
-                    type={ 'password' } 
-                    value={text.password_confirmation} 
-                    onChange={handleTextChanged} 
-                    className='block mt-6 w-96 text-lg' 
-                    name={'password_confirmation'}
-                    placeholder={'Konfirmasi Password'} isRequired/>
-                    {!isInputValid.password_confirmation && <div className='text-red-500 font-md block'>*This fill is required</div>}
-                    {!isPasswordValid && <div className='text-red-500 font-md block'>*Password and password confirmation don't match</div>}
-                    
-                    <div className="flex justify-center mt-10">
-                        <Button type={'button'} onClick={handleSignInClick} isPrimary className="block">
-                            Sign Up
-                        </Button>
-                    </div>
-                    <div className="flex justify-center mt-4 text-md, text-primary-100">
-                        <p className='text-md mr-2'>Already have account ? </p> <Button type={'link'} href={'/login'} className='font-bold hover:text-primary-200 hover:underline'>Sign In Here</Button>
-                    </div>                    
-                </div>
-               
+                        <InputText 
+                        element={'input'} 
+                        type={ 'password' } 
+                        value={text.password_confirmation} 
+                        onChange={handleTextChanged} 
+                        className='block mt-6 lg:w-96 text-lg' 
+                        name={'password_confirmation'}
+                        placeholder={'Konfirmasi Password'} isRequired/>
+                        {!isInputValid.password_confirmation && <div className='text-red-500 font-md block'>*This fill is required</div>}
+                        {!isPasswordValid && <div className='text-red-500 font-md block'>*Password and password confirmation don't match</div>}
+                        
+                        <div className="flex justify-center mt-10">
+                            <Button type={'button'} onClick={handleSignInClick} isPrimary className="block">
+                                Sign Up
+                            </Button>
+                        </div>
+                        <div className="flex justify-center mt-4 text-md, text-primary-100">
+                            <p className='text-md mr-2'>Already have account ? </p> <Button type={'link'} href={'/login'} className='font-bold hover:text-primary-200 hover:underline'>Sign In Here</Button>
+                            </div>
+                        </div>                    
+                </div>  
             </div>
+                 
         </div>
     )
 }
