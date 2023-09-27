@@ -5,7 +5,7 @@ const InputText = (props) =>{
 
     const className = [props.className]
 
-    className.push("rounded-md", "py-2.5", "px-5", "shadow-md")
+    className.push("py-2.5", "px-5", "shadow-md")
 
     
     const additionalProps = props.isRequired ? { required: true } : {};

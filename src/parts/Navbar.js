@@ -26,7 +26,7 @@ import "./css/navbar.css"
     const UserAccount = ()=>{
         if(!isLogin){
             return(
-                    <Button type={'link'} href={'/login'} className={`${(isLoginPage || isRegisterPage) ? 'hidden' : ''}`} isGradient>Sign In</Button>
+                    <Button type={'link'} href={'/login'} className={`${(isLoginPage || isRegisterPage) ? 'hidden' : ''}`} isGradient>Login</Button>
                 )
         }else{
             const username = auth.dataUser.username.slice(0,1).toUpperCase() + auth.dataUser.username.slice(1)
@@ -35,7 +35,7 @@ import "./css/navbar.css"
                 <Button className="font-bold text-2xl text-center text-primary-300 py-2 px-8 hover:underline" type={'button'}>
                     {username}
                 </Button>
-                <Button type={'button'} onClick={handleLogout} isGradient>LogOut</Button>
+                <Button type={'button'} onClick={handleLogout} isGradient>Logout</Button>
                 </>
             )
         }
@@ -73,7 +73,7 @@ import "./css/navbar.css"
 
     return (
         <>
-        <header className={`${(isLoginPage || isRegisterPage) ?'':'bg-transparent'} top-0 left-0 w-full flex items-center z-40 ${isNavbarFixed?'fixed shadow-md':''}`}>
+        <header className={`${(isLoginPage || isRegisterPage) ?'':'bg-white'} top-0 left-0 w-full flex items-center z-40 ${isNavbarFixed?'fixed shadow-md':''}`}>
             <div className="flex item-center justify-between relative w-full ">
                 <Button type={'link'} href={'/'} className={'ml-8 mt-8 md:mt-10 md:ml-14'}>
                     <img src="/logo.svg" alt="Logo" />
@@ -93,7 +93,7 @@ import "./css/navbar.css"
                     <nav
                         className={`${
                             isMenuOpen ? '' : 'hidden'
-                        } absolute py-3 z-30 bg-white bg-opacity-95 shadow-lg duration-300 ease-in-out rounded-lg max-w-[250px] w-full right-4 top-full md:block md:bg-transparent md:max-w-full md:rounded-none md:shadow-none md:static md:mb-4 md:left-4 md:ml-14`}
+                        } ${(isLoginPage || isRegisterPage)? 'hidden' : ''} absolute py-3 z-30 bg-white bg-opacity-95 shadow-lg duration-300 ease-in-out rounded-lg max-w-[250px] w-full right-4 top-full md:block md:bg-transparent md:max-w-full md:rounded-none md:shadow-none md:static md:mb-4 md:left-4 md:ml-14`}
                     >
                         <ul className={`block md:flex md:items-center`}>
                             {menuItems.map((menuItem, index) => (
