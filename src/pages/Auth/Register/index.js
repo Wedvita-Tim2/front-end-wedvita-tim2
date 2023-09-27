@@ -48,8 +48,8 @@ const Register = () =>{
     }
     
     return(
-        <div className='bg-gradient-to-tr from-[#62DDEF6B] from-15% via-[#FF8CED9A] via-35% to-[#3C64F0B2] to-75%' style={{ minHeight: '100vh' }}>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mt-8'>
+        <div className='absolute inset-0 -z-10 bg-gradient-to-tr from-[#62DDEF6B] from-15% via-[#FF8CED9A] via-35% to-[#3C64F0B2] to-75%' style={{minHeight: '100vh', top: '0', left: '0', overflowY: 'auto', overflowX: 'hidden', minWidth: '100vh'}}>
+            <div className='grid mt-32 grid-cols-1 md:grid-cols-2 gap-8'>
                 <div className='flex justify-center'>
                     <AuthImage />
                 </div>
