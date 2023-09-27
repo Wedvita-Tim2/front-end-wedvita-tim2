@@ -1,11 +1,13 @@
 import React from 'react';
-import Navbar from '../parts/Navbar';
 import Hero from '../parts/Hero';
+import { useRecoilValue } from 'recoil';
+import { authState } from '../recoils/AuthState';
 
 const LandingPage = ()=>{
+    const auth = useRecoilValue(authState)
+    console.log(auth)
     return(
         <div className=''>
-            <Navbar/>
             <Hero/>
         </div>
     )

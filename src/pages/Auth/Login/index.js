@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import Button from '../../../elements/Buttons';
 import { InputText } from '../../../elements/Forms';
 import AuthImage from '../AuthImage';
+import { useRecoilState } from 'recoil';
+import { authState } from '../../../recoils/AuthState';
 const Login = () =>{
     const [text, setText] = useState({username : '', password: ''})
     const [isInputValid, setInputValid] = useState({username: true, password: true});
+    const [isLoginSucces, setLoginSucces] = useState(true);
+    const [auth, setAuth] = useRecoilState(authState)
     const handleTextChanged = (e) =>{
         const {name, value} = e.target
-
+        setLoginSucces(true)
         setText({
             ...text,
             [name]: value,
@@ -20,7 +24,7 @@ const Login = () =>{
 
     }
 
-    const handleSignInClick = () =>{
+    const handleSignInClick = async () =>{
         const isValidation = Object.values(isInputValid).every((isValid) => isValid);
 
         setInputValid({
@@ -28,7 +32,34 @@ const Login = () =>{
             password: text.password !== '',
         });
         if (isValidation) {
-            console.log(text); 
+            try {
+                const response = await fetch('http://localhost:8000/api/login', {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(text),
+                });
+          
+                if (response.ok) {
+                    const data = await response.json();
+                    if(data.response !== 200){
+                        console.error(data.message)
+                        setLoginSucces(false)
+                    } 
+                    else{
+                        const updatedAuth = { isAuthenticated: true, dataUser: data.dataUser };
+                        setAuth(updatedAuth);
+                        
+                        localStorage.setItem('auth', JSON.stringify(updatedAuth));
+                        window.location.href = "/";
+                    }
+                } else {
+                console.error('Login gagal');
+                }
+            } catch (error) {
+                console.error('Terjadi kesalahan:', error);
+            }
         }
     }
     
@@ -49,6 +80,7 @@ const Login = () =>{
                 <div className='flex justify-center mt-0 md:mt-24'>
                     <div className='mr-0 mt-0'>
                         <h1 className='text-3xl text-white font-bold text-center'>Halaman Login</h1>
+                        {!isLoginSucces && <div className='text-red-500 font-md block mt-2 text-center'>Username atau Password Salah</div>}
                         <InputText 
                         element={'input'} 
                         type={ 'text' } 
