@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Button from "../elements/Buttons";
 import { useRecoilValue } from "recoil";
 import { authState } from "../recoils/AuthState";
+import { useLocation } from "react-router-dom";
+import "./css/navbar.css"
 
 
  const Navbar = ()=>{
@@ -9,6 +11,12 @@ import { authState } from "../recoils/AuthState";
     const [isNavbarFixed, setIsNavbarFixed] = useState(false);
     const auth = useRecoilValue(authState)
     const isLogin = auth.isAuthenticated
+
+
+    const location = useLocation();
+    let isLoginPage = location.pathname === '/login';
+    let isRegisterPage = location.pathname === '/register';
+
 
     const handleLogout = () => {
         localStorage.removeItem("auth");
@@ -18,7 +26,7 @@ import { authState } from "../recoils/AuthState";
     const UserAccount = ()=>{
         if(!isLogin){
             return(
-                    <Button type={'link'} href={'/login'} isGradient>Sign In</Button>
+                    <Button type={'link'} href={'/login'} className={`${(isLoginPage || isRegisterPage) ? 'hidden' : ''}`} isGradient>Sign In</Button>
                 )
         }else{
             const username = auth.dataUser.username.slice(0,1).toUpperCase() + auth.dataUser.username.slice(1)
@@ -27,11 +35,12 @@ import { authState } from "../recoils/AuthState";
                 <Button className="font-bold text-2xl text-center text-primary-300 py-2 px-8 hover:underline" type={'button'}>
                     {username}
                 </Button>
-                <Button type={'button'} onClick={handleLogout} isGradient>Log Out</Button>
+                <Button type={'button'} onClick={handleLogout} isGradient>LogOut</Button>
                 </>
             )
         }
     }
+
 
     const hamburgerClick =()=>{
         setIsMenuOpen(!isMenuOpen)
@@ -64,13 +73,13 @@ import { authState } from "../recoils/AuthState";
 
     return (
         <>
-        <header className={`bg-transparent top-0 left-0 w-full flex items-center z-40 ${isNavbarFixed?'fixed bg-opacity-80 shadow-md backdrop-blur-sm':''}`}>
+        <header className={`${(isLoginPage || isRegisterPage) ?'':'bg-transparent'} top-0 left-0 w-full flex items-center z-40 ${isNavbarFixed?'fixed shadow-md':''}`}>
             <div className="flex item-center justify-between relative w-full ">
                 <Button type={'link'} href={'/'} className={'ml-8 mt-8 md:mt-10 md:ml-14'}>
                     <img src="/logo.svg" alt="Logo" />
                 </Button>
-                <div className="flex items-center">
-                    <Button  className="block absolute right-4 mr-9 md:hidden" type={'button'} onClick={hamburgerClick}>
+                <div className={`flex items-center`}>
+                    <Button  className={`${(isLoginPage || isRegisterPage) ? 'hidden' : 'block'} absolute right-4 mr-9 md:hidden`} type={'button'} onClick={hamburgerClick}>
                        <span className={`w-6 h-1 my-1 block bg-primary-300 duration-300 ease-in-out origin-top-left ${
                                 isMenuOpen ? 'rotate-45 ' : ''
                             }`}></span>
@@ -86,9 +95,9 @@ import { authState } from "../recoils/AuthState";
                             isMenuOpen ? '' : 'hidden'
                         } absolute py-3 z-30 bg-white bg-opacity-95 shadow-lg duration-300 ease-in-out rounded-lg max-w-[250px] w-full right-4 top-full md:block md:bg-transparent md:max-w-full md:rounded-none md:shadow-none md:static md:mb-4 md:left-4 md:ml-14`}
                     >
-                        <ul className="block md:flex md:items-center">
+                        <ul className={`block md:flex md:items-center`}>
                             {menuItems.map((menuItem, index) => (
-                                <li className="group md:py-2" key={index}>
+                                <li className={`${(isLoginPage || isRegisterPage) ? 'hidden' : ''} group md:py-2 `} key={index}>
                                 <Button type={'link'} href={menuItem.href}>
                                     <p className="mt-2 ml-6 font-bold text-primary-300 text-lg hover:underline">
                                     {menuItem.text}
@@ -96,7 +105,7 @@ import { authState } from "../recoils/AuthState";
                                 </Button>
                                 </li>
                             ))}
-                            <li className="group ml-20 my-4 md:mt-4 md:mx-20 md:py-2">
+                            <li className={`group my-4 ml-20 md:mt-4 md:mr-20 md:py-2`}>
                                 {UserAccount(false)}
                             </li>
                         </ul>
