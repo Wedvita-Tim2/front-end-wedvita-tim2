@@ -2,6 +2,9 @@ import React from 'react';
 import Hero from '../parts/Hero';
 import { useRecoilValue } from 'recoil';
 import { authState } from '../recoils/AuthState';
+import Gallery from '../parts/Gallery';
+
+
 
 const LandingPage = ()=>{
     const auth = useRecoilValue(authState)
@@ -9,6 +12,7 @@ const LandingPage = ()=>{
     return(
         <div className=''>
             <Hero/>
+            <Gallery/>
         </div>
     )
 }
