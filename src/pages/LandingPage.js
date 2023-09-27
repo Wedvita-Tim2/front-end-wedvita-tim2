@@ -1,12 +1,13 @@
 import React from 'react';
-import Button from '../elements/Buttons';
+import Navbar from '../parts/Navbar';
+import Hero from '../parts/Hero';
 
 const LandingPage = ()=>{
     return(
-        <>
-            <h1 className='mb-2'>Ini Landing Page</h1>
-            <Button type={'link'} href={'/login'} isPrimary>Login</Button>
-        </>
+        <div className=''>
+            <Navbar/>
+            <Hero/>
+        </div>
     )
 }
 
