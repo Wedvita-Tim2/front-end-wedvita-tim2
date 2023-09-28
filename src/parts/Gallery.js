@@ -3,10 +3,12 @@ import Button from "../elements/Buttons";
 import img1 from '../assets/img/img-1.png'
 import img2 from '../assets/img/img-2.png'
 import img3 from '../assets/img/img-3.png'
-import AuthImage from "../pages/Auth/AuthImage";
+import ImageSlider from "./ImageSlider";
+import Star from "../elements/Star";
 
 const Gallery = () => {
     const [isSmallScreen, setSmallScreen] = useState(false)
+    const images = [img1, img2, img3]
 
     useEffect(
         () => {
@@ -27,14 +29,14 @@ const Gallery = () => {
 
     const galleryStatic = () => {
         return (
-            <div className="grid md: grid-cols-3">
-                <div className="flex justfy-center">
+            <div className="flex flex-wrap">
+                <div className="">
                     <img src={img1} alt="" className="scale-75"></img>
                 </div>
-                <div className="flex justfy-center">
+                <div className="">
                     <img src={img2} alt="" className="scale-75"></img>
                 </div>
-                <div className="flex justfy-center ">
+                <div className="">
                     <img src={img3} alt="" className="scale-75"></img>
                 </div>
             </div>
@@ -44,21 +46,22 @@ const Gallery = () => {
     const galleryDinamic = () => {
         return (
             <div className='flex justify-center'>
-                <AuthImage
-                    className="w-auto"
-                />
+                <ImageSlider count = {images.length}>
+                    {images.map((s, index) => (
+                        <img src={s} alt={`img${index}`} className="ml-11 w-64 h-80" key={index} />
+                    ))}
+                </ImageSlider>
             </div>
         )
     }
 
     return(
-        <div className="grid grid-cols-1">
-            <p className="mx-auto font-bold text-4xl text-center md:text-7xl">Pilihan Template</p>
-            <p className="mx-auto text-center mt-5 md:mt-10">Mudahkan hari spesialmu dengan membuat <br/>undangan sesuai dengan template pilihanmu</p>
+        <div className="grid grid-cols-1 justify-items-center">
+            <p className="mx-auto font-bold text-4xl text-primary-300 text-center md:text-6xl">Pilihan Template</p>
+            <p className="mx-auto text-center text-primary-300 mt-5 md:mt-10">Mudahkan hari spesialmu dengan membuat <br/>undangan sesuai dengan template pilihanmu</p>
             {isSmallScreen? galleryDinamic() : galleryStatic()}
-            <div className="flex justify-center">
-                <Button isGradient type={'link'} href={''}>Lihat Lebih Banyak</Button>
-            </div>
+            <Button isGradient type={'link'} href={''}>Lihat Lebih Banyak</Button>
+            <Star rating={3}/>
         </div>
     )
 }

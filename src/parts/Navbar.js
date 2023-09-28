@@ -3,12 +3,12 @@ import Button from "../elements/Buttons";
 import { useRecoilValue } from "recoil";
 import { authState } from "../recoils/AuthState";
 import { useLocation } from "react-router-dom";
-import "./css/navbar.css"
 
 
  const Navbar = ()=>{
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isNavbarFixed, setIsNavbarFixed] = useState(false);
+    const [activePage, setActivePage] = useState('/');
     const auth = useRecoilValue(authState)
     const isLogin = auth.isAuthenticated
 
@@ -17,25 +17,29 @@ import "./css/navbar.css"
     let isLoginPage = location.pathname === '/login';
     let isRegisterPage = location.pathname === '/register';
 
-
-    const handleLogout = () => {
-        localStorage.removeItem("auth");
-        window.location.href = "/";
-      };
+    useEffect(()=>{
+        setActivePage(location.pathname)
+    },[location])
 
     const UserAccount = ()=>{
         if(!isLogin){
             return(
-                    <Button type={'link'} href={'/login'} className={`${(isLoginPage || isRegisterPage) ? 'hidden' : ''}`} isGradient>Login</Button>
+                    <Button type={'link'} href={'/login'} className={`${(isLoginPage || isRegisterPage) ? 'hidden' : ''} mx-auto`} isGradient>Login</Button>
                 )
         }else{
             const username = auth.dataUser.username.slice(0,1).toUpperCase() + auth.dataUser.username.slice(1)
             return(
                 <>
-                <Button className="font-bold text-2xl text-center text-primary-300 py-2 px-8 hover:underline" type={'button'}>
-                    {username}
+                <Button className={`font-bold text-2xl mx-auto text-center ${activePage === '/myaccount'?'text-light-pink':'text-primary-300'} py-2 px-8 hover:underline`} type={'link'} href={'/myaccount'}>
+                    <div className="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 mt-1 mr-1">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+
+                        {username}
+                    </div>   
                 </Button>
-                <Button type={'button'} onClick={handleLogout} isGradient>Logout</Button>
+                
                 </>
             )
         }
@@ -59,7 +63,7 @@ import "./css/navbar.css"
         };
     
         window.addEventListener('scroll', handleScroll);
-    
+
         return () => {
           window.removeEventListener('scroll', handleScroll);
         };
@@ -73,7 +77,7 @@ import "./css/navbar.css"
 
     return (
         <>
-        <header className={`${(isLoginPage || isRegisterPage) ?'':'bg-white'} top-0 left-0 w-full flex items-center z-40 ${isNavbarFixed?'fixed shadow-md':''}`}>
+        <header className={`${(isLoginPage || isRegisterPage) ?'':'bg-white'} top-0 left-0 w-full flex items-center z-[100] ${isNavbarFixed && !(isLoginPage||isRegisterPage)?'fixed shadow-md':''}`}>
             <div className="flex item-center justify-between relative w-full ">
                 <Button type={'link'} href={'/'} className={'ml-8 mt-8 md:mt-10 md:ml-14'}>
                     <img src="/logo.svg" alt="Logo" />
@@ -97,15 +101,15 @@ import "./css/navbar.css"
                     >
                         <ul className={`block md:flex md:items-center`}>
                             {menuItems.map((menuItem, index) => (
-                                <li className={`${(isLoginPage || isRegisterPage) ? 'hidden' : ''} group md:py-2 `} key={index}>
+                                <li className={`${(isLoginPage || isRegisterPage) ? 'hidden' : ''} group md:py-2 ${menuItem.href === activePage ? 'text-light-pink' : 'text-primary-300'} `} key={index}>
                                 <Button type={'link'} href={menuItem.href}>
-                                    <p className="mt-2 ml-6 font-bold text-primary-300 text-lg hover:underline">
+                                    <p className="mt-2 mx-3 font-bold text-lg hover:underline">
                                     {menuItem.text}
                                     </p>
                                 </Button>
                                 </li>
                             ))}
-                            <li className={`group my-4 ml-20 md:mt-4 md:mr-20 md:py-2`}>
+                            <li className={`group mx-7 flex md:mr-20`}>
                                 {UserAccount(false)}
                             </li>
                         </ul>

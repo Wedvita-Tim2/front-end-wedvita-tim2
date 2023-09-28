@@ -32,20 +32,20 @@ const ImageSlider = ({ children: images }) => {
     const smallScreen = `translateX(-${currentIndex * 130}%)`
     const largeScreen = `translateX(-${currentIndex * 100}%)`
 
+
     return (
-        <div className="relative w-[360px] h-140 md:w-115 overflow-hidden">
+        <div className='relative w-[360px] md:w-115 overflow-hidden'>
             <div
-                className="transition-transform duration-700 ease-in-out"
+                className="flex justify-items-end transition-transform duration-700 ease-in-out"
                 style={{
                     transform: `${isSmallScreen?smallScreen:largeScreen}`,
-                    display: 'flex',
                     transition: 'transform 0.5s ease-in-out',
                 }}
             >
                 {images.map((image, index) => (
                     <div
                         key={index}
-                        className="w-115 h-140 flex-shrink-0 scale-75 md:scale-75 lg:scale-85"
+                        className="w-115 mx-auto flex-shrink-0 scale-75 md:scale-75 lg:scale-85"
                     >
                         {image}
                     </div>

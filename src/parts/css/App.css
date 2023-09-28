@@ -1,3 +1,3 @@
-.auth-bg-navbar{
+.bg-gradient{
     @apply bg-gradient-to-tr from-[#FF8CED9A] from-5% to-[#3C64F0B2] to-60%
 }

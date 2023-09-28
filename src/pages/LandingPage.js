@@ -6,7 +6,7 @@ import MakeInvitation from '../parts/MakeInvitaion';
 
 const LandingPage = ()=>{
     return(
-        <div className='px-10 md:px-16'>
+        <div className=''>
             <Hero/>
             <MakeInvitation/>
             <Gallery/>
