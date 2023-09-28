@@ -2,6 +2,7 @@ import React from 'react';
 import Hero from '../parts/Hero';
 import Gallery from '../parts/Gallery';
 import MakeInvitation from '../parts/MakeInvitaion';
+import Testimoni from '../parts/Testimoni';
 
 
 const LandingPage = ()=>{
@@ -10,6 +11,7 @@ const LandingPage = ()=>{
             <Hero/>
             <MakeInvitation/>
             <Gallery/>
+            <Testimoni/>
         </div>
     )
 }

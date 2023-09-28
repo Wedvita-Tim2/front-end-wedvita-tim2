@@ -11,7 +11,7 @@ const ImageStack = () => {
             {images.map((image, index) => (
                 <div
                     key={index}
-                    className={`w-56 h-64 md:w-80 md:h-96 my-4 mx-auto absolute inset-0 z-${40 - index*10}`}
+                    className={`w-48 h-56 md:w-80 md:h-96 my-4 mx-auto absolute inset-0 z-${40 - index*10}`}
                 >
                     <img 
                         src={image}

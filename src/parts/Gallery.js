@@ -4,7 +4,6 @@ import img1 from '../assets/img/img-1.png'
 import img2 from '../assets/img/img-2.png'
 import img3 from '../assets/img/img-3.png'
 import ImageSlider from "./ImageSlider";
-import Star from "../elements/Star";
 
 const Gallery = () => {
     const [isSmallScreen, setSmallScreen] = useState(false)
@@ -61,7 +60,6 @@ const Gallery = () => {
             <p className="mx-auto text-center text-primary-300 mt-5 md:mt-10">Mudahkan hari spesialmu dengan membuat <br/>undangan sesuai dengan template pilihanmu</p>
             {isSmallScreen? galleryDinamic() : galleryStatic()}
             <Button isGradient type={'link'} href={''}>Lihat Lebih Banyak</Button>
-            <Star rating={3}/>
         </div>
     )
 }
