@@ -5,7 +5,7 @@ import AppRouter from './router';
 function App() {
   
   return (
-    <div className="App font-sans max-w-sm md:max-w-full">
+    <div className="App font-sans">
       <Navbar/>
       <AppRouter/>
     </div>

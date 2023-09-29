@@ -26,7 +26,7 @@ const Testimoni = () =>{
     const cardTestimoni = () => {
         if (!testimoni.DataRate || testimoni.DataRate.length === 0) {
             return Array.from({ length: 3 }, (_, id) =>(
-                <div className='bg-slate-200 shadow-md pt-4 px-4 rounded-br-3xl mx-4 mt-4 w-96 h-44 lg:w-115 animate-pulse ' key={id}>
+                <div className='bg-slate-200 shadow-md pt-4 px-4 rounded-br-3xl mx-4 mt-4 w-72 h-44 lg:w-115 animate-pulse ' key={id}>
                     
                 </div>
             ))

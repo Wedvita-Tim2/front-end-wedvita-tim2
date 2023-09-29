@@ -1,5 +1,5 @@
 import img1 from '../assets/img/img-1.png'
-import img2 from '../assets/img/img-2.png'
+import img2 from '../assets/img/img-4.png'
 import img3 from '../assets/img/img-3.png'
 
 const ImageStack = () => {
@@ -16,6 +16,7 @@ const ImageStack = () => {
                     <img 
                         src={image}
                         alt={image}
+                        className='rounded-md'
                         style={{marginLeft:-35+index*35,}}
                     />
                 </div>
