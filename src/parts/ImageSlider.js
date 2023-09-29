@@ -29,12 +29,12 @@ const ImageSlider = ({ children: images }) => {
         };
     }, [images.length]);
 
-    const smallScreen = `translateX(-${currentIndex * 130}%)`
+    const smallScreen = `translateX(-${currentIndex * 65}%)`
     const largeScreen = `translateX(-${currentIndex * 100}%)`
 
 
     return (
-        <div className='relative w-[360px] md:w-115 overflow-hidden'>
+        <div className='relative w-[368px] md:w-115 overflow-hidden'>
             <div
                 className="flex justify-items-end transition-transform duration-700 ease-in-out"
                 style={{
@@ -45,7 +45,7 @@ const ImageSlider = ({ children: images }) => {
                 {images.map((image, index) => (
                     <div
                         key={index}
-                        className="w-115 mx-auto flex-shrink-0 scale-75 md:scale-75 lg:scale-85"
+                        className="w-64 md:w-115 mx-auto flex-shrink-0 scale-75 md:scale-75 lg:scale-85"
                     >
                         {image}
                     </div>

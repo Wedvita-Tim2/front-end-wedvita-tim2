@@ -13,7 +13,7 @@ const Button = (props) =>{
     if(props.isLarge) className.push("bg-primary-100", "text-xl",
                                     "py-2.5", "px-4", 
                                     "hover:bg-primary-200")
-    if(props.isGradient) className.push("bg-gradient-to-tr", "from-[#0087E8]",
+    if(props.isGradient) className.push("bg-gradient-to-tr", "from-[#0087E8]", "hover:shadow-blue-500/50 hover:shadow-lg",
                                         "from-35%", "to-[#1200DD]", "to-85%", "text-white",
                                         "font-medium", "py-2 px-8", "rounded-full","md:py-3 md:px-12")
     

@@ -57,7 +57,7 @@ const Gallery = () => {
     return(
         <div className="grid grid-cols-1 justify-items-center">
             <p className="mx-auto font-bold text-4xl text-primary-300 text-center md:text-6xl">Pilihan Template</p>
-            <p className="mx-auto text-center text-primary-300 mt-5 md:mt-10">Mudahkan hari spesialmu dengan membuat <br/>undangan sesuai dengan template pilihanmu</p>
+            <p className="mx-auto text-center md:text-xl w-64 md:w-115 text-primary-300 mt-5 md:mt-10">Mudahkan hari spesialmu dengan membuat <br/>undangan sesuai dengan template pilihanmu</p>
             {isSmallScreen? galleryDinamic() : galleryStatic()}
             <Button isGradient type={'link'} href={''}>Lihat Lebih Banyak</Button>
         </div>

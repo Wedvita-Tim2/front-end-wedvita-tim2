@@ -9,7 +9,7 @@ const AuthImage = () => {
     return (
         <ImageSlider count = {images.length}>
             {images.map((s, index) => (
-                <img src={s} alt={`img${index}`} key={index} className=' w-72 h-96 md:w-115 md:h-140' />
+                <img src={s} alt={`img${index}`} key={index} className=' w-64 h-96 md:w-115 md:h-140' />
             ))}
         </ImageSlider>
     )

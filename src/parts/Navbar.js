@@ -79,11 +79,11 @@ import { useLocation } from "react-router-dom";
         <>
         <header className={`${(isLoginPage || isRegisterPage) ?'':'bg-white'} top-0 left-0 w-full flex items-center z-[100] ${isNavbarFixed && !(isLoginPage||isRegisterPage)?'fixed shadow-md':''}`}>
             <div className="flex item-center justify-between relative w-full ">
-                <Button type={'link'} href={'/'} className={'ml-8 mt-8 md:mt-10 md:ml-14'}>
-                    <img src="/logo.svg" alt="Logo" />
+                <Button type={'link'} href={'/'} className={'ml-1 mt-8 md:mt-10 md:ml-14'}>
+                    <img src="/logo.svg" alt="Logo" className="scale-75 md:scale-100" />
                 </Button>
                 <div className={`flex items-center`}>
-                    <Button  className={`${(isLoginPage || isRegisterPage) ? 'hidden' : 'block'} absolute right-4 mr-9 md:hidden`} type={'button'} onClick={hamburgerClick}>
+                    <Button  className={`${(isLoginPage || isRegisterPage) ? 'hidden' : 'block'} absolute right-3 mr-9 md:hidden`} type={'button'} onClick={hamburgerClick}>
                        <span className={`w-6 h-1 my-1 block bg-primary-300 duration-300 ease-in-out origin-top-left ${
                                 isMenuOpen ? 'rotate-45 ' : ''
                             }`}></span>
