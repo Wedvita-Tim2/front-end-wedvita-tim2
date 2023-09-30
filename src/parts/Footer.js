@@ -4,7 +4,7 @@ import Button from "../elements/Buttons";
 const Footer = () =>{
 
     const location = useLocation();
-    let isShow = location.pathname === '/login' || location.pathname ==='/register'
+    let isShow = location.pathname === '/login' || location.pathname ==='/register' || location.pathname === '/adminpanel'
 
     return(
     <footer className={`${isShow?'hidden':''} bg-slate-50 px-1 py-3 md:py-6 md:px-16`}>

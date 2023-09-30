@@ -1,4 +1,5 @@
 import AccountProfile from "../pages/AccountProfile";
+import Dashboard from "../pages/Admin/Dashboard";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import FindTemplatePage from "../pages/FindTemplatePage";
@@ -22,6 +23,9 @@ const routes = [{
   {
     path: '/template',
     element: <FindTemplatePage/>
+  },{
+    path:'/adminpanel',
+    element: <Dashboard/>
   }
 ]
 
