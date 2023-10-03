@@ -15,8 +15,8 @@ const InputText = (props) =>{
          className={className.join(" ") } {...additionalProps}
        />
     ):(
-        <textarea name={props.name} rows= "4" value={props.value} 
-        onChange={props.onChange}
+        <textarea name={props.name} rows= "6" value={props.value} 
+        onChange={props.onChange} placeholder={props.placeholder}
         className={className.join(" ")} {...additionalProps}
         />
     )

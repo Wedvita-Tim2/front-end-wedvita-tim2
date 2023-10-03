@@ -60,3 +60,28 @@ export const buildingEvent = atom({
     key: 'buildingEvent',
     default: '',
 });
+
+export const quotesEvent = atom({
+    key: 'quotesEvent',
+    default: '',
+});
+
+export const guestEvent = atom({
+    key: 'guestEvent',
+    default: '',
+});
+
+export const accountNumberEvent = atom({
+    key: 'accountNumberEvent',
+    default: '',
+});
+
+export const accountHolderNameEvent = atom({
+    key: 'accountHolderNameEvent',
+    default: '',
+});
+
+export const GalleryEvent = atom({
+    key: 'GalleryEvent',
+    default: [],
+});

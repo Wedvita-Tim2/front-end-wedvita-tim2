@@ -3,16 +3,16 @@ import ReactEasyCrop from "react-easy-crop";
 import getCroppedImg from "../../elements/Forms/CropImage/getCropImg";
 import Button from "../../elements/Buttons";
 import { useRecoilState } from "recoil";
-import { coverImage } from "../../recoils/OrderData";
+import { GalleryEvent } from "../../recoils/OrderData";
 
-function CoverImagePart() {
+const GalleryPart = ({ index, onImageCrop }) => {
   const [image, setImage] = useState(null);
   const [show, setShow] = useState(true);
   const [preview, setPreview] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-  const [result, setResult] = useRecoilState(coverImage);
+  const [result,] = useRecoilState(GalleryEvent);
 
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
@@ -38,7 +38,7 @@ function CoverImagePart() {
     if (image && croppedAreaPixels) {
       const croppedImage = await getCroppedImg(image, croppedAreaPixels);
       setPreview(URL.createObjectURL(croppedImage));
-      setResult(croppedImage);
+      onImageCrop(index, croppedImage); // Panggil fungsi onImageCrop dengan indeks dan hasil cropping
       setShow(false);
     }
   };
@@ -48,10 +48,10 @@ function CoverImagePart() {
   };
 
   return (
-    <div className="md:absolute md:right-48">
+    <div className="">
       <div className="flex flex-wrap justify-center md:flex-col">
-        <p className="text-normal md:text-left text-primary-300 text-center my-4 mx-5 ">
-          Pilih gambar cover untuk pernikahan anda
+        <p className="text-normal md:text-left text-primary-300 text-center my-4 mx-5">
+          Pilih gambar ke {index+1} untuk pernikahan anda
         </p>
         <div className="image-cropper relative">
           <input
@@ -60,7 +60,7 @@ function CoverImagePart() {
             onChange={handleImageUpload}
             className="ml-12"
           />
-          {image && show && (
+          {(image && show) && (
             <div className="w-[340px] h-[340px]  md:w-[450px] md:h-[450px] absolute">
               <ReactEasyCrop
                 image={image}
@@ -71,8 +71,8 @@ function CoverImagePart() {
                 onZoomChange={setZoom}
                 onCropComplete={onCropComplete}
                 classes={{
-                  containerClassName: "absolute z-[99999]", // Menambahkan class "relative" untuk mengatur posisi relatif
-                  cropAreaClassName: "border-2 border-blue-500", // Menambahkan border biru pada area crop
+                  containerClassName: "absolute z-[99999]",
+                  cropAreaClassName: "border-2 border-blue-500",
                 }}
               />
               <Button
@@ -91,9 +91,9 @@ function CoverImagePart() {
               </Button>
             </div>
           )}
-          {preview && result && (
-            <div className="relative h-28 w-48 md:h-48 md:w-80 rounded-md mt-2">
-              <img src={preview} alt="preview"></img>
+          {(preview && result) && (
+            <div className="relative h-28 w-48 mx-auto md:mx-3 md:h-48 md:w-80 rounded-md mt-2">
+              <img src={preview} alt="preview" />
               <Button
                 type={"button"}
                 onClick={() => {
@@ -123,6 +123,6 @@ function CoverImagePart() {
       </div>
     </div>
   );
-}
+};
 
-export default CoverImagePart;
+export default GalleryPart;

@@ -19,23 +19,26 @@ const EventLocation = () => {
 
   return (
     <div className="flex flex-col justify-center px-7 md:px-0 mt-4 md:justify-start">
-      <InputText
-          element={'input'}
-          type={'text'}
-          value={alamat}
-          placeholder={'Masukkan alamat acara'}
-          onChange={(e) => setAlamat(e.target.value)}
-          className='border border-light-pink w-72 my-2 md:w-[360px] lg:w-[512px] rounded-md'
-        />
+      <p className="text-normal md:text-left text-primary-300 font-semibold text-center md:text-2xl ">Form Lokasi Acara</p>
+      <div className="flex flex-wrap justify-center md:flex md:flex-row md:justify-between md:pr-24">
         <InputText
-          element={'input'}
-          type={'text'}
-          value={building}
-          placeholder={'Masukkan nama gedung acara'}
-          onChange={(e) => setBuilding(e.target.value)}
-          className='border border-light-pink w-72 md:w-[360px] lg:w-[512px] rounded-md'
-        />
-        <p className="text-norma md:text-left text-primary-300 font-semibold text-center md:text-2xl ">Pilih koordinat lokasi acara melalui maps</p>
+            element={'input'}
+            type={'text'}
+            value={alamat}
+            placeholder={'Masukkan alamat acara'}
+            onChange={(e) => setAlamat(e.target.value)}
+            className='border border-light-pink w-72 my-2 md:w-[360px] lg:w-[512px] rounded-md'
+          />
+          <InputText
+            element={'input'}
+            type={'text'}
+            value={building}
+            placeholder={'Masukkan nama gedung acara'}
+            onChange={(e) => setBuilding(e.target.value)}
+            className='border border-light-pink w-72 md:my-2 md:w-[360px] lg:w-[512px] rounded-md'
+          />
+      </div>
+        
       <div className="flex flex-wrap justify-center md:justify-start my-2">
         <div className="flex flex-col">
           <p className="text-primary-400">Latitude Lokasi</p>
@@ -61,8 +64,8 @@ const EventLocation = () => {
         </div>
       </div>
 
-      <div className="">
-        <MapContainer center={[-6.871461776598065, 107.57360083862629]} zoom={16} scrollWheelZoom={false} className="w-72 h-72">
+      <div className="mx-auto md:mx-0">
+        <MapContainer center={[-6.871461776598065, 107.57360083862629]} zoom={16} scrollWheelZoom={false} className="w-72 h-72 md:w-96 md:h-96">
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
