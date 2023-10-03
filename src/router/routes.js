@@ -4,6 +4,8 @@ import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import FindTemplatePage from "../pages/FindTemplatePage";
 import LandingPage from "../pages/LandingPage";
+import TemplateWedvita1 from "../template/TemplateWedvita1";
+
 const routes = [{
     path: '/',
     element: <LandingPage/>,
@@ -26,6 +28,10 @@ const routes = [{
   },{
     path:'/adminpanel',
     element: <Dashboard/>
+  },
+  {
+    path: '/template/template-wedvita1',
+    element: <TemplateWedvita1/>
   }
 ]
 

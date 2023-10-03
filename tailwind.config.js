@@ -16,7 +16,9 @@ module.exports = {
         'light-pink' : '#FF4EB8',
         'medium-blue' : '#59A3E8B2',
         'dark-blue' : '#3C64F0B2',
-        'primary' : {100 :'#1B2F57', 200 : '#142442', 300:'#004AAD', 400:"#1200DD"}
+        'primary' : {100 :'#1B2F57', 200 : '#142442', 300:'#004AAD', 400:"#1200DD"},
+        'dark-brown' : '#5A4739',
+        'light-brown' : '#997E6B'
       },
       width :{
         '115' : '460px'
