@@ -4,10 +4,10 @@ import Button from "../elements/Buttons";
 const Footer = () =>{
 
     const location = useLocation();
-    let isShow = location.pathname === '/login' || location.pathname ==='/register' || location.pathname === '/adminpanel'
+    let isShow = location.pathname ==='/' || location.pathname ==='/template'|| location.pathname ==='/myaccount' || location.pathname ==='/order'
 
     return(
-    <footer className={`${isShow?'hidden':''} bg-slate-50 px-1 py-3 md:py-6 md:px-16`}>
+    <footer className={`${isShow?'':'hidden'} bg-slate-50 px-1 py-3 md:py-6 md:px-16`}>
         <div className="flex item-center justify-between relative w-full mt-6 md:mt-8">
             <div className="w-1/2">
                 <Button type={'link'} href={'/'} className={''}>

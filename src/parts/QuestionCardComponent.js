@@ -9,8 +9,8 @@ const QuestionCardComponent = ({question, answer}) =>{
   };
 
   return (
-    <div className="relative mt-4 mx-2 py-2 px-2 md:py-4 md:px-4 bg-white shadow-md rounded-md">
-      <div>
+    <div className="relative mt-2 mx-2 py-2 px-2 md:py-4 md:px-4 ">
+      <div className="bg-white shadow-md rounded-top-md">
         <p className="text-primary-300 font-medium text-lg">{question}</p>
         <Button
           className={`absolute right-3 top-0 mt-3 md:mt-6`}
@@ -38,10 +38,11 @@ const QuestionCardComponent = ({question, answer}) =>{
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
           </svg>
         </Button>
-        <div className={`${isMinimize ? 'hidden' : ''} duration-300 ease-in-out delay-200 mt-3`}>
+      
+      </div>
+        <div className={`${isMinimize ? 'hidden' : ''} duration-300 ease-in-out delay-200 bg-white shadow-md rounded-b-md`}>
           <p className="text-primary-200 font-light text-base">{answer}</p>
         </div>
-      </div>
     </div>
   );
 }

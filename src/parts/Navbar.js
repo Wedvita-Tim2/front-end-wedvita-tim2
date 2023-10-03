@@ -16,7 +16,7 @@ import { useLocation } from "react-router-dom";
     const location = useLocation();
     let isLoginPage = location.pathname === '/login';
     let isRegisterPage = location.pathname === '/register';
-    let isAdminPage = location.pathname ==='/adminpanel'
+    let isShow = location.pathname ==='/' || location.pathname ==='/template'|| location.pathname ==='/myaccount' || location.pathname ==='/order' ||location.pathname ==='/login' || location.pathname ==='/register'
 
     useEffect(()=>{
         setActivePage(location.pathname)
@@ -78,7 +78,7 @@ import { useLocation } from "react-router-dom";
 
     return (
         <>
-        <header className={`${(isLoginPage || isRegisterPage) ?'':'bg-white'} ${isAdminPage?'hidden':''} top-0 left-0 w-full flex items-center z-[100] ${isNavbarFixed && !(isLoginPage||isRegisterPage)?'fixed shadow-md':''}`}>
+        <header className={`${(isLoginPage || isRegisterPage) ?'':'bg-white'} ${!isShow?'hidden':''} top-0 left-0 w-full flex items-center z-[99999] ${isNavbarFixed && !(isLoginPage||isRegisterPage)?'fixed shadow-md':''}`}>
             <div className="flex item-center justify-between relative w-full ">
                 <Button type={'link'} href={'/'} className={'ml-1 mt-8 md:mt-10 md:ml-14'}>
                     <img src="/logo.svg" alt="Logo" className="scale-75 md:scale-100" />

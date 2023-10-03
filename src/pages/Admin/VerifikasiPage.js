@@ -21,6 +21,16 @@ const VerifikasiPage = () =>{
         orderData()
     }, [])
 
+    const onButtonVerifClick = (id) =>{
+        console.log(id)
+
+    }
+
+    const onButtonDeleteClick = (id) =>{
+        console.log(id)
+
+    }
+
     const dataTables = orders.map((order, id)=>(
         <tr key={id}>
             <td className="border border-slate-600 px-4 py-1 w-44 text-center">{id+1}</td>
@@ -28,9 +38,9 @@ const VerifikasiPage = () =>{
             <td className="border border-slate-600 px-4 py-1 w-44">{order.user.username}</td>
             <td className="border border-slate-600 px-4 py-1 w-44">{order.template.template_name}</td>
             <td className="border border-slate-600 px-4 py-1 w-44">{order.order_verification}</td>
-            <td className="border border-slate-600 px-4 py-1 w-64 flex flex-wrap">
-                <Button type={'button'} className={'bg-green-400 rounded-lg px-3 py-1 mr-3'}>Verifikasi</Button>
-                <Button type={'button'} className={'bg-red-600 rounded-lg px-3 py-1'}>Delete</Button>
+            <td className="border px-4 py-1 w-64 flex flex-wrap">
+                <Button type={'button'} className={'bg-green-400 rounded-lg px-3 py-1 mr-3'} onClick={() => onButtonVerifClick(order.id)}>Verifikasi</Button>
+                <Button type={'button'} className={'bg-red-600 rounded-lg px-3 py-1'} onClick={() => onButtonDeleteClick(order.id)}>Delete</Button>
             </td>
         </tr>
     ))
@@ -50,7 +60,7 @@ const VerifikasiPage = () =>{
                 </tr>
                 </thead>
                 <tbody>
-                    {!orders || orders.length === 0?'':dataTables}
+                    {!orders || orders.length === 0?<tr></tr>:dataTables}
                 </tbody>
             </table>
         </div>
