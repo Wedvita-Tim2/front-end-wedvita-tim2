@@ -4,6 +4,7 @@ import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import FindTemplatePage from "../pages/FindTemplatePage";
 import LandingPage from "../pages/LandingPage";
+import MainOrderForm from "../pages/OrderForm/MainOrderForm";
 const routes = [{
     path: '/',
     element: <LandingPage/>,
@@ -26,6 +27,9 @@ const routes = [{
   },{
     path:'/adminpanel',
     element: <Dashboard/>
+  },{
+    path:'/order',
+    element: <MainOrderForm/>
   }
 ]
 

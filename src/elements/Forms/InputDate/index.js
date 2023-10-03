@@ -2,23 +2,16 @@ import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import propTypes from 'prop-types'
-import { useRecoilState } from "recoil";
-import { dateState } from "../../../recoils/FormRecoil";
 
-const InputDate = ()=>{
-  const [date, setDate] = useRecoilState(dateState)
-
-  const handleDateChanged = (selectedDate) =>{
-    setDate(selectedDate)
-  }
+const InputDate = (props)=>{
 
   return (
       <DatePicker
-        selected= {date}
-        onChange={handleDateChanged}
+        selected= {props.selected}
+        onChange={props.onChange}
         dateFormat='dd/MM/yyyy'
         dateFormatCalendar="dd/MM/yyyy"
-        className="border border-blue-900 p-1 text-sm rounded-md"
+        className={props.className}
         showYearDropdown
         scrollableYearDropdown
       />
@@ -28,6 +21,6 @@ const InputDate = ()=>{
 export default InputDate
 
 InputDate.propTypes ={
-    value: propTypes.any,
+    selected: propTypes.instanceOf(Date),
     onChange : propTypes.func
 }
