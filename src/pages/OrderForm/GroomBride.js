@@ -16,7 +16,7 @@ const GroomBride = () => {
         }
         name={"groom_name"}
         placeholder={"Nama pengantin pria"}
-        onChange={(e) => setBrideName(e.target.value)}
+        onChange={(e) => setGroomName(e.target.value)}
       />
 
       <InputText
@@ -27,7 +27,7 @@ const GroomBride = () => {
         }
         name={"bride_name"}
         placeholder={"Nama pengantin wanita"}
-        onChange={(e) => setGroomName(e.target.value)}
+        onChange={(e) => setBrideName(e.target.value)}
       />
     </div>
   );
