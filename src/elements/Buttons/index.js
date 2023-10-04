@@ -7,7 +7,7 @@ const Button = (props) =>{
     className.push("text-center")
     if(props.isPrimary) className.push("bg-primary-100", "text-md" ,
                                         "rounded-md", "shadow-md", 
-                                        "text-white", "py-2.5 px-3", "md:px-12", 
+                                        "text-white", "py-2.5 px-3", "sm:px-12", 
                                         "font-normal", 
                                         "hover:bg-primary-200")
     if(props.isLarge) className.push("bg-primary-100", "text-xl",

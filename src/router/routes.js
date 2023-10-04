@@ -6,6 +6,7 @@ import FindTemplatePage from "../pages/FindTemplatePage";
 import LandingPage from "../pages/LandingPage";
 import TemplateWedvita1 from "../template/TemplateWedvita1";
 import MainOrderForm from "../pages/OrderForm/MainOrderForm";
+import OrderPreviewTemplatePage from "../pages/OrderPreviewTemplatePage";
 
 const routes = [{
     path: '/',
@@ -37,6 +38,10 @@ const routes = [{
   {
     path:'/order',
     element: <MainOrderForm/>
+  },
+  {
+    path:'/template/preview/template-wedvita1',
+    element: <OrderPreviewTemplatePage/>
   }
 ]
 
