@@ -1,15 +1,11 @@
 import { useRecoilState } from "recoil"
 import { TemplatesRecoil } from "../recoils/TemplatesRecoil"
 import { useEffect } from "react"
-import img1 from '../assets/img/img-1.png'
-import img2 from '../assets/img/img-4.png'
-import img3 from '../assets/img/img-3.png'
 import Button from "../elements/Buttons"
 
 const TemplatesRendering = () =>{
 
     const [templates, setTemplates] = useRecoilState(TemplatesRecoil)
-    const images = [img1, img2, img3]
 
     const getTemplates = async ()=>{
         try{
@@ -35,7 +31,7 @@ const TemplatesRendering = () =>{
     const templateCard = templates.map((template, id) => (
         <div className="bg-slate-50 rounded-md shadow-lg mx-auto mt-5 hover:scale-110 delay-100 duration-200 ease-in-out" key={id}>
           <Button type="link" href={`/template/${template.id}`}>
-            <img src={images[id]} alt={`Template ${template.id}`} className="w-36 h-52 md:w-72 md:h-[426px] rounded-t-lg" />
+            <img src={`http://localhost:8000${template.thumbnail}`} alt={`Template ${template.id}`} className="w-36 h-52 md:w-72 md:h-[426px] rounded-t-lg" />
           </Button>
           <div className="w-36 h-14 px-3 pt-2 md:w-72 md:h-20 rounded-b-lg">
             <p className="text-bs font-light md:text-lg md:font-normal text-primary-200">{template.template_name}</p>

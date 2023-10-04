@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddOns from "./AddOns";
 import CoverImagePart from "./CoverImagePart";
 import EventDate from "./EventDate";
@@ -7,13 +7,27 @@ import GalleryPart from "./GalleryPart";
 import GroomBride from "./GroomBride";
 import GroomBrideParent from "./GroomBrideParent";
 import QuotesPart from "./QuotesPart";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { GalleryEvent } from "../../recoils/OrderData";
 import Button from "../../elements/Buttons";
+import SubmitHandling from "./SubmitHandling";
+import { authState } from "../../recoils/AuthState";
+import { useNavigate } from "react-router-dom";
 
 const MainOrderForm = () => {
   const [images, setImages] = useState([]);
   const [result, setResult] = useRecoilState(GalleryEvent);
+  const [isShow, setShow] = useState(true)
+  const auth = useRecoilValue(authState)
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    setShow(true)
+    if (!auth.isAuthenticated) {
+        navigate('/login')
+    }
+  }, []);
 
   const onImageCrop = (index, croppedImage) => {
     const newImages = [...images];
@@ -27,9 +41,14 @@ const MainOrderForm = () => {
   const clearAllImages = () => {
     setImages([]);
     setResult([]);
+    setShow(true)
   };
 
-  console.log(result);
+  const handleSimpan = ()=>{
+    setResult([...result, ...images])
+    setShow(false)
+  }
+
 
   return (
     <div className="p-4 md:p-12">
@@ -82,14 +101,15 @@ const MainOrderForm = () => {
           ))}
         </div>
         <Button
-          onClick={() => setResult([...result, ...images])}
+          onClick={handleSimpan}
           className={
-            "bg-primary-100 w-56 rounded-md mx-auto p-1 text-sm mt-2 text-white md:mx-0 md:text-lg"
+            `${isShow?' ':'hidden'}bg-primary-100 w-56 rounded-md mx-auto p-1 text-sm mt-2 text-white md:mx-0 md:text-lg`
           }
         >
           Simpan Semua Gambar
         </Button>
       </div>
+      <SubmitHandling data={auth}/>
     </div>
   );
 };

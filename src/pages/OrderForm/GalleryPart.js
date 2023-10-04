@@ -24,7 +24,6 @@ const GalleryPart = ({ index, onImageCrop }) => {
 
     if (file) {
       const reader = new FileReader();
-      console.log(reader);
 
       reader.onload = () => {
         setImage(reader.result);

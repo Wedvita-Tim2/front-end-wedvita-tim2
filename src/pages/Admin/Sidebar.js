@@ -13,6 +13,7 @@ const Sidebar = () =>{
     const handleLogout = () => {
         localStorage.removeItem("auth");
 
+
         setAuth('')
         navigate('/');
     };
@@ -20,8 +21,17 @@ const Sidebar = () =>{
     return(
         <aside className="bg-slate-300 h-full w-52 px-4 py-4 shadow-lg flex flex-col">
             <div className="text-center text-2xl mt-4 ">
-                <p className="text-light-pink text-2xl font-bold">Admin, <span className="text-primary-300">{username}</span> </p>
+                <p className="text-light-pink text-2xl font-bold pb-3">Admin, <span className="text-primary-300">{username}</span> </p>
+            <div className="pb-5">
                 <p className="text-lg text-primary-200 font-light">{auth.dataUser.email}</p>
+            </div>
+            </div>
+            <svg width={190} height={10}>
+                <line x1="0" y1="1" x2="100%" y2="1" stroke="black" strokeWidth="2" /> 
+            </svg>
+            <div className="text-center text-2x1 flex flex-col">
+                <Button type={'link'} href={'/adminpanel'} className={'text-light-pink text-2xl font-bold pb-5'}>Halaman Verifikasi</Button>
+                <Button type={'link'} href={'/adminpanel/design'} className={'text-primary-300 text-2xl font-bold pb-3'}>Halaman Upload Design</Button>
             </div>
             <div className="absolute bottom-0 mb-7">
                 <Button type={'button'} onClick={handleLogout} isPrimary>Logout</Button>
