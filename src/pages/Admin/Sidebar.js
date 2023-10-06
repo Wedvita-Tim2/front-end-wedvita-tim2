@@ -30,8 +30,8 @@ const Sidebar = () =>{
                 <line x1="0" y1="1" x2="100%" y2="1" stroke="black" strokeWidth="2" /> 
             </svg>
             <div className="text-center text-2x1 flex flex-col">
-                <Button type={'link'} href={'/adminpanel'} className={'text-light-pink text-2xl font-bold pb-5'}>Halaman Verifikasi</Button>
-                <Button type={'link'} href={'/adminpanel/design'} className={'text-primary-300 text-2xl font-bold pb-3'}>Halaman Upload Design</Button>
+                <Button type={'link'} href={'/adminpanel'} className={'text-light-pink text-lg pb-5'}>Halaman Verifikasi</Button>
+                <Button type={'link'} href={'/adminpanel/design'} className={'text-primary-300 text-lg pb-3'}>Halaman Upload Design</Button>
             </div>
             <div className="absolute bottom-0 mb-7">
                 <Button type={'button'} onClick={handleLogout} isPrimary>Logout</Button>

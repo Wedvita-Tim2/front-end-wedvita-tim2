@@ -3,6 +3,7 @@ import Button from "../../elements/Buttons";
 import { GalleryEvent, accountHolderNameEvent, accountNumberEvent, addressEvent, brideFatherName, brideMotherName, brideName, buildingEvent, coverImage, dateEvent, groomFatherName, groomMotherName, groomName, guestEvent, latEvent, lngEvent, quotesEvent } from "../../recoils/OrderData";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { selectedTemplate } from "../../recoils/SelectedTemplate";
 
 
 const SubmitHandling = ({data}) =>{
@@ -23,6 +24,10 @@ const SubmitHandling = ({data}) =>{
     const buildingData = useRecoilValue(buildingEvent)
     const attachmentsData = useRecoilValue(GalleryEvent)
     const quotesData = useRecoilValue(quotesEvent)
+
+
+    //get template id
+    const templateId = useRecoilValue(selectedTemplate)
 
     const navigate = useNavigate()
 
@@ -57,7 +62,7 @@ const SubmitHandling = ({data}) =>{
             headers: { 'content-type': 'multipart/form-data' }
         }
         
-        axios.post('http://localhost:8000/api/postOrder/3', formData, config)
+        axios.post(`http://localhost:8000/api/postOrder/${templateId}`, formData, config)
             .then(response => {
                 if (response.data.response === 200) {
                     navigate('/');

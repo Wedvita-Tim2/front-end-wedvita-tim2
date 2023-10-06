@@ -13,12 +13,14 @@ import Button from "../../elements/Buttons";
 import SubmitHandling from "./SubmitHandling";
 import { authState } from "../../recoils/AuthState";
 import { useNavigate } from "react-router-dom";
+import { selectedTemplateName } from "../../recoils/SelectedTemplate";
 
 const MainOrderForm = () => {
   const [images, setImages] = useState([]);
   const [result, setResult] = useRecoilState(GalleryEvent);
   const [isShow, setShow] = useState(true)
   const auth = useRecoilValue(authState)
+  const templateName = useRecoilValue(selectedTemplateName)
 
   const navigate = useNavigate()
 
@@ -55,6 +57,7 @@ const MainOrderForm = () => {
       <p className="text-2xl md:text-left text-light-pink font-bold text-center mb-6 md:mb-8 md:text-4xl">
         Form Order Wedvita
       </p>
+      <p>Template yang dipilih : {templateName}</p>
       <p className="text-lg md:text-left text-primary-300 font-bold text-center md:text-2xl ">
         Form Mempelai
       </p>
