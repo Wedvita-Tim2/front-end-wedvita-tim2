@@ -19,8 +19,17 @@ const MainOrderForm = () => {
   const [images, setImages] = useState([]);
   const [result, setResult] = useRecoilState(GalleryEvent);
   const [isShow, setShow] = useState(true)
+  const [imageCount, setImageCount] = useState(0);
   const auth = useRecoilValue(authState)
   const templateName = useRecoilValue(selectedTemplateName)
+  const [isPromptRequired,] = useState(true);
+
+  const handleBeforeUnload = (event) => {
+    if (isPromptRequired) {
+      event.preventDefault();
+      event.returnValue = "Anda yakin ingin meninggalkan halaman ini?";
+    }
+  };
 
   const navigate = useNavigate()
 
@@ -29,6 +38,13 @@ const MainOrderForm = () => {
     if (!auth.isAuthenticated) {
         navigate('/login')
     }
+    if(templateName===''){
+      navigate(-1)
+    }
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
   }, []);
 
   const onImageCrop = (index, croppedImage) => {
@@ -38,11 +54,15 @@ const MainOrderForm = () => {
   };
 
   const addGalleryPart = () => {
-    setImages([...images, null]);
+    if (imageCount < 4) {
+      setImages([...images, null]);
+      setImageCount(imageCount + 1);
+    }
   };
   const clearAllImages = () => {
     setImages([]);
     setResult([]);
+    setImageCount(0);
     setShow(true)
   };
 
@@ -57,7 +77,7 @@ const MainOrderForm = () => {
       <p className="text-2xl md:text-left text-light-pink font-bold text-center mb-6 md:mb-8 md:text-4xl">
         Form Order Wedvita
       </p>
-      <p>Template yang dipilih : {templateName}</p>
+      <p className="text-light-pink text-lg mx-auto text-center md:text-left md:mb-4 md:font-semibold md:text-2xl">Template yang dipilih : {templateName}</p>
       <p className="text-lg md:text-left text-primary-300 font-bold text-center md:text-2xl ">
         Form Mempelai
       </p>
@@ -81,11 +101,14 @@ const MainOrderForm = () => {
           Gallery Pernikahan
         </p>
         <div className="flex flex-wrap justify-around text-white md:justify-start">
-          <Button
+         <Button
             onClick={addGalleryPart}
             className={
-              "bg-primary-100 rounded-md p-1 text-sm md:text-lg md:px-2"
+              imageCount < 4
+                ? "bg-primary-100 rounded-md p-1 text-sm md:text-lg md:px-2"
+                : "bg-white border border-primary-100 text-primary-100 rounded-md p-1 text-sm md:text-lg md:px-2 cursor-not-allowed"
             }
+            disabled={imageCount >= 4}
           >
             Tambah Gambar
           </Button>
