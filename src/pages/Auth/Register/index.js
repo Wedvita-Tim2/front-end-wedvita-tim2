@@ -5,9 +5,10 @@ import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import AuthImage from '../AuthImage';
 import '../Auth.css'
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import { authState } from '../../../recoils/AuthState';
+import { apiBackend } from '../../../recoils/Api';
 
 const Register = () =>{
     const [text, setText] = useState({username : '', password: '',phone_number:'', email:''})
@@ -18,6 +19,7 @@ const Register = () =>{
     const [isRegisterSucces, setRegisterSucces] = useState(true);
     const [isVisible, setVisible] = useState(false)
     const [auth, setAuth] = useRecoilState(authState)
+    const apiAddress = useRecoilValue(apiBackend)
 
     const navigate = useNavigate()
     useEffect(() => {
@@ -72,7 +74,7 @@ const Register = () =>{
             password: text.password
         }
         try {
-            const response = await fetch('http://localhost:8000/api/login', {
+            const response = await fetch(apiAddress+'api/login', {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',

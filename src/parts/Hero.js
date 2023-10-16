@@ -8,64 +8,6 @@ const Hero = () => {
   const [showModal, setShowModal] = useState(false);
   const auth = useRecoilValue(authState);
 
-  const modalElement = showModal && (
-    <Modal>
-      <div className="flex flex-col">
-        <div className="flex border-b-slate-200 border-b-2 mb-2">
-          <p className="text-primary text-md font-bold md:text-2xl">
-            Selamat Datang di Wedvita !!
-          </p>
-          <Button
-            type={"button"}
-            onClick={() => setShowModal(false)}
-            className={"absolute right-0 mr-6"}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </Button>
-        </div>
-        <div className="md:text-lg mt-3">
-          <p className="block font-semibold mb-2">
-            Tunggu Sebentar,
-          </p>
-          <p>
-            Sebelum melanjutkan, Ayo bergabung bersama kami dengan Login terlebih dahulu. Dengan login,
-            Anda dapat melakukan order pemesanan undangan digital anda.
-            Bersama-sama, kita akan membuat momen istimewa anda lebih berkesan.
-          </p>
-        </div>
-        <div className="flex justify-end gap-4 mx-4 mt-12">
-          <Button
-            type={"button"}
-            onClick={() => setShowModal(false)}
-            className={"px-2 py-1 md:px-6 md:py-1.5 rounded-full border-2 border-primary-400 hover:bg-primary-400 hover:text-white"}
-          >
-            Cancel
-          </Button>
-          <Button
-            type={"link"}
-            href={'/login'}
-            className={"px-4 py-1.5 md:px-12 md:py-2 rounded-full bg-primary-400 text-white hover:bg-primary-300"}
-          >
-            Login
-          </Button>
-        </div>
-      </div>
-    </Modal>
-  );
-
   return (
     <>
       <div className="grid relative md:grid-cols-2 md:mt-12">
@@ -94,7 +36,43 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      {modalElement}
+      <Modal
+        show={showModal}
+        title={"Selamat Datang di Wedvita"}
+        onModalToggle={(newShowModalValue) => {
+          setShowModal(newShowModalValue);
+        }}
+      >
+        <div className="md:text-lg mt-3">
+          <p className="block font-semibold mb-2">Tunggu Sebentar,</p>
+          <p>
+            Sebelum melanjutkan, Ayo bergabung bersama kami dengan Login
+            terlebih dahulu. Dengan login, Anda dapat melakukan order pemesanan
+            undangan digital anda. Bersama-sama, kita akan membuat momen
+            istimewa anda lebih berkesan.
+          </p>
+        </div>
+        <div className="flex justify-end gap-4 mx-4 mt-12">
+          <Button
+            type={"button"}
+            onClick={() => setShowModal(false)}
+            className={
+              "px-2 py-1 md:px-6 md:py-1.5 rounded-full border-2 border-primary-400 hover:bg-primary-400 hover:text-white"
+            }
+          >
+            Cancel
+          </Button>
+          <Button
+            type={"link"}
+            href={"/login"}
+            className={
+              "px-4 py-1.5 md:px-12 md:py-2 rounded-full bg-primary-400 text-white hover:bg-primary-300"
+            }
+          >
+            Login
+          </Button>
+        </div>
+      </Modal>
     </>
   );
 };

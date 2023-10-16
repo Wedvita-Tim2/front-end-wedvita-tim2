@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Button from '../../../elements/Buttons';
 import { InputText } from '../../../elements/Forms';
 import AuthImage from '../AuthImage';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { authState } from '../../../recoils/AuthState';
 import { useNavigate } from 'react-router-dom';
 import '../Auth.css'
+import { apiBackend } from '../../../recoils/Api';
 
 const Login = () =>{
 
@@ -14,6 +15,7 @@ const Login = () =>{
     const [isLoginSucces, setLoginSucces] = useState(true)
     const [auth, setAuth] = useRecoilState(authState)
     const [isVisible, setVisible] = useState(false)
+    const apiAddress = useRecoilValue(apiBackend)
 
     const navigate = useNavigate()
     useEffect(() => {
@@ -49,7 +51,7 @@ const Login = () =>{
         });
         if (isValidation) {
             try {
-                const response = await fetch('http://localhost:8000/api/login', {
+                const response = await fetch(apiAddress+'api/login', {
                     method: 'POST',
                     headers: {
                     'Content-Type': 'application/json',

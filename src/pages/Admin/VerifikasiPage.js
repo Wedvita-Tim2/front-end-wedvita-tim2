@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import Button from "../../elements/Buttons";
 import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { apiBackend } from "../../recoils/Api";
 
 const VerifikasiPage = () => {
   const [orders, setOrders] = useState([]);
+  const apiAddress = useRecoilValue(apiBackend)
 
   const orderData = async () => {
     try {
-      const datas = await fetch("http://localhost:8000/api/orders");
+      const datas = await fetch(apiAddress+"api/orders");
       const value = await datas.json();
       if (value.response === 200) {
         setOrders(value.Data);
@@ -25,7 +28,7 @@ const VerifikasiPage = () => {
     const status = window.confirm(`Yakin ingin memverifikasi order dengan order code ${order_code}?`);
     if (status) {
       axios
-        .post(`http://localhost:8000/api/Verification/${id}`)
+        .post(`${apiAddress}api/Verification/${id}`)
         .then(function (response) {
           console.log(response);
           orderData();
@@ -42,7 +45,7 @@ const VerifikasiPage = () => {
     );
     if(status){
         axios
-        .post(`http://localhost:8000/api/AddEventInformationsDelete/${id}`)
+        .post(`${apiAddress}api/AddEventInformationsDelete/${id}`)
         .then(function (response) {
           console.log(response);
           orderData();
