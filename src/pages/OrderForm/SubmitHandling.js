@@ -1,4 +1,4 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Button from "../../elements/Buttons";
 import {
   GalleryEvent,
@@ -27,25 +27,48 @@ import { useState } from "react";
 import Modal from "../../component/Modal";
 
 const SubmitHandling = ({ data }) => {
-  const coverImageData = useRecoilValue(coverImage);
-  const brideNameData = useRecoilValue(brideName);
-  const groomNameData = useRecoilValue(groomName);
-  const brideFatherData = useRecoilValue(brideFatherName);
-  const groomFatherData = useRecoilValue(groomFatherName);
-  const brideMotherData = useRecoilValue(brideMotherName);
-  const groomMotherData = useRecoilValue(groomMotherName);
-  const dateEventData = useRecoilValue(dateEvent);
-  const guestsData = useRecoilValue(guestEvent);
-  const accountNumberData = useRecoilValue(accountNumberEvent);
-  const accounNameData = useRecoilValue(accountHolderNameEvent);
-  const latData = useRecoilValue(latEvent);
-  const lngData = useRecoilValue(lngEvent);
-  const addressData = useRecoilValue(addressEvent);
-  const buildingData = useRecoilValue(buildingEvent);
-  const attachmentsData = useRecoilValue(GalleryEvent);
-  const quotesData = useRecoilValue(quotesEvent);
-  const gmapsData = useRecoilValue(linkGmapsEvent);
+  const [coverImageData, setCoverImageData] = useRecoilState(coverImage);
+  const [brideNameData, setBrideNameData] = useRecoilState(brideName);
+  const [groomNameData, setGroomNameData] = useRecoilState(groomName);
+  const [brideFatherData, setBrideFatherData] = useRecoilState(brideFatherName);
+  const [groomFatherData, setGroomFatherData] = useRecoilState(groomFatherName);
+  const [brideMotherData, setBrideMotherData] = useRecoilState(brideMotherName);
+  const [groomMotherData, setGroomMotherData] = useRecoilState(groomMotherName);
+  const [dateEventData, setDateEventData] = useRecoilState(dateEvent);
+  const [guestsData, setGuestsData] = useRecoilState(guestEvent);
+  const [accountNumberData, setAccountNumberData] =
+    useRecoilState(accountNumberEvent);
+  const [accounNameData, setAccountNameData] = useRecoilState(
+    accountHolderNameEvent
+  );
+  const [latData, setLatData] = useRecoilState(latEvent);
+  const [lngData, setLngData] = useRecoilState(lngEvent);
+  const [addressData, setAddressData] = useRecoilState(addressEvent);
+  const [buildingData, setBuildingData] = useRecoilState(buildingEvent);
+  const [attachmentsData, setAttachmentsData] = useRecoilState(GalleryEvent);
+  const [quotesData, setQuotesData] = useRecoilState(quotesEvent);
+  const [gmapsData, setGmapsData] = useRecoilState(linkGmapsEvent);
 
+  const resetData = () => {
+    setCoverImageData("");
+    setBrideNameData("");
+    setGroomNameData("");
+    setBrideFatherData("");
+    setGroomFatherData("");
+    setBrideMotherData("");
+    setGroomMotherData("");
+    setDateEventData(new Date());
+    setGuestsData("");
+    setAccountNumberData("");
+    setAccountNameData("");
+    setLatData(-6.871461776598065);
+    setLngData(107.57360083862629);
+    setAddressData("");
+    setBuildingData("");
+    setAttachmentsData([]);
+    setQuotesData("");
+    setGmapsData("");
+  };
   //apiAddress
   const apiAddress = useRecoilValue(apiBackend);
 
@@ -102,6 +125,7 @@ const SubmitHandling = ({ data }) => {
       .then((response) => {
         if (response.data.response === 200) {
           setVisible(true);
+          resetData()
         } else {
           console.log("Failed to navigate. Response status is not 200.");
         }
@@ -129,7 +153,12 @@ const SubmitHandling = ({ data }) => {
               clipRule="evenodd"
             />
           </svg>
-            <p className="text-center text-primary-200">Selamat, Order Undangan Digital Anda Berhasil Dibuat. Langkah selanjutnya adalah anda dapat melihat rincinan order di profile account anda, lalu tunggu hingga status menjadi active dan anda mendapatkan link undangan digital anda.</p>
+          <p className="text-center text-primary-200">
+            Selamat, Order Undangan Digital Anda Berhasil Dibuat. Langkah
+            selanjutnya adalah anda dapat melihat rincinan order di profile
+            account anda, lalu tunggu hingga status menjadi active dan anda
+            mendapatkan link undangan digital anda.
+          </p>
           <Button type={"link"} href={"/"} isPrimary className={"mt-3"}>
             Kembali Ke Home
           </Button>
