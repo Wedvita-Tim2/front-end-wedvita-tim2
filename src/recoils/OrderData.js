@@ -88,5 +88,5 @@ export const GalleryEvent = atom({
 
 export const linkGmapsEvent = atom({
     key: 'linkGmapsEvent',
-    default: [],
+    default: '',
 });

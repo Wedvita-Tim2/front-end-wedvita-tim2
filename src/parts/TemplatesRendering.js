@@ -98,6 +98,7 @@ const TemplatesRendering = () => {
       <Modal
         show={showModal}
         title={"Sepertinya Anda Belum Bergabung Dengan Kami"}
+        isCancelButton
         onModalToggle={(newShowModalValue) => {
           setShowModal(newShowModalValue);
         }}

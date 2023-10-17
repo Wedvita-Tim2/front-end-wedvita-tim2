@@ -2,11 +2,11 @@ import { useRecoilValue } from "recoil";
 import Button from "../elements/Buttons";
 import { selectedTemplateName } from "../recoils/SelectedTemplate";
 
-const OrderBar = () => {
+const OrderBar = (props) => {
   const namaTemplate = useRecoilValue(selectedTemplateName);
   const hargaTemplate = "Rp.79.000";
   return (
-    <div className="flex justify-center w-full relative z-[99]">
+    <div className={`${!props.visible?'hidden': 'flex'} justify-center w-full relative z-[99]`}>
       <div className="fixed bottom-8 rounded-lg bg-slate-100 w-3/4  shadow-xl md:w-1/2 p-4">
         <ul className="flex gap-3 md:gap-12 items-center justify-around">
           <li className="sm:text-xl">{namaTemplate}</li>

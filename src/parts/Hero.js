@@ -39,6 +39,7 @@ const Hero = () => {
       <Modal
         show={showModal}
         title={"Selamat Datang di Wedvita"}
+        isCancelButton
         onModalToggle={(newShowModalValue) => {
           setShowModal(newShowModalValue);
         }}
