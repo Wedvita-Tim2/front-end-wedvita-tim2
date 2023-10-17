@@ -116,7 +116,7 @@ const Register = () =>{
         setIsPasswordValid(text.password === passwordConfirmation)
         if (isValidation && text.password === passwordConfirmation) {
             try {
-                const response = await fetch('http://localhost:8000/api/register', {
+                const response = await fetch(apiAddress+'api/registers', {
                     method: 'POST',
                     headers: {
                     'Content-Type': 'application/json',
@@ -127,7 +127,7 @@ const Register = () =>{
                 if (response.ok) {
                     const data = await response.json();
                     if(data.response !== 200){
-                        console.error(data.message)
+                        console.error(data.errors)
                         setRegisterSucces(false)
                     } 
                     else{
