@@ -2,11 +2,31 @@ import img1 from '../assets/img/template-bg1.jpg'
 import img2 from '../assets/img/template-bg2.jpg'
 import img3 from '../assets/img/template-bg3.png'
 import Button from '../elements/Buttons/index'
+import { useEffect, useState } from 'react'
 
 
 const TemplateWedvita1 = () => {
-    const pria = "Sodiq"
-    const wanita = "Sarah"
+    const [isSmallScreen, setSmallScreen] = useState(false)
+    useEffect(
+        () => {
+            const changeScreenContent =  () => {
+                setSmallScreen(window.innerWidth < 768)
+            }
+            changeScreenContent()
+
+            window.addEventListener('resize', changeScreenContent)
+
+            return() => {
+                window.removeEventListener('resize', changeScreenContent)
+            }
+        },[]
+    )
+    
+    const smallScreen = `url(${img2})`
+    const largeScreen = `url(${img1})`
+
+    const pria = "Stefen"
+    const wanita = "Stefany"
     const hariPernikahan = "Sabtu"
     const tglPernikahan = "24 September 2023"
     const inisialPria = pria[0]
@@ -19,66 +39,66 @@ const TemplateWedvita1 = () => {
     return(
         <div>
             {/* ini adalah konten 1 */}
-            <div className='grid grid-flow-row auto-rows-max relative h-auto z-10' style={{backgroundImage: `url(${img1})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}}>
+            <div className='grid grid-flow-row auto-rows-max relative h-auto z-10' style={{backgroundImage: isSmallScreen?smallScreen:largeScreen, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}}>
                 <div className='absolute inset-0 bg-dark-brown/10 backdrop-brightness-50 z-0'></div>
-                <p className='text-center text-white text-xl pb-16 pt-8 tracking-[.5rem] relative z-30'>Wedding Invitation</p>
-                <div className='relative mb-44 mt-28'>
-                    <p className='left-1/2 -translate-x-1/2 text-9xl text-white text-center absolute'>{inisialPria}</p>
-                    <p className='left-1/2 -translate-x-1/2 ml-4 text-9xl top-10 text-white text-center absolute'>{inisialWanita}</p>
+                <p className='text-center text-white text-lg pt-60 md:text-xl md:pb-16 md:pt-8 tracking-[.5rem] relative z-30'>Wedding Invitation</p>
+                <div className='relative mb-32 mt-8 md:mb-44 md:mt-28'>
+                    <p className='left-1/2 -translate-x-1/2 text-7xl md:text-9xl text-white text-center absolute font-kaushan'>{inisialPria}</p>
+                    <p className='left-1/2 -translate-x-1/2 text-7xl top-[2vh] ml-2 md:ml-4 md:text-9xl md:top-10 text-white text-center absolute font-kaushan'>{inisialWanita}</p>
                 </div>
-                <p className='text-center text-white text-7xl mt-16 tracking-[1rem] relative z-30 font-kaushan'>{pria.toUpperCase() +' & '+ wanita.toUpperCase()}</p>
+                <p className='text-center text-white text-3xl md:text-7xl md:pt-20 tracking-[0.75rem] md:tracking-[1rem] relative z-30 font-kaushan'>{pria.toUpperCase() +' & '+ wanita.toUpperCase()}</p>
                 <div className='relative mt-4 mb-64'>
-                    <span className='bg-white w-80 h-8 absolute inset-0 left-1/2 -translate-x-1/2 z-20'></span>
-                    <p className={`relative text-2xl text-center z-30 text-dark-brown tracking-[.25rem]`}>{tglPernikahan}</p>
+                    <span className='bg-white w-80 md:w-115 md:h-8 absolute inset-0 left-1/2 -translate-x-1/2 z-20'></span>
+                    <p className={`relative text-lg md:text-2xl text-center z-30 text-dark-brown tracking-[.25rem]`}>{tglPernikahan.toUpperCase()}</p>
                 </div>
             </div>
 
             {/* ini adalah konten-2 */}
 
-            <div className='grid grid-cols-6'>
-                <div className='col-span-4 relative'>
-                    <div className='relative mt-16 mb-64 font-kaushan'>
-                        <p className={`left-1/2 -translate-x-1/2 text-9xl text-dark-brown text-center absolute`}>{inisialPria}</p>
-                        <p className={`left-1/2 -translate-x-1/2 ml-4 text-9xl top-10 text-dark-brown text-center absolute`}>{inisialWanita}</p>
+            <div className='grid grid-cols-1 md:grid-cols-6'>
+                <div className='md:col-span-4 relative'>
+                    <div className='relative mt-10 mb-40 md:mt-16 md:mb-64 font-kaushan'>
+                        <p className={`left-1/2 -translate-x-1/2 text-7xl md:text-9xl text-dark-brown text-center absolute`}>{inisialPria}</p>
+                        <p className={`left-1/2 -translate-x-1/2 text-7xl top-[2vh] ml-2 md:ml-4 md:text-9xl md:top-10 text-dark-brown text-center absolute`}>{inisialWanita}</p>
                     </div>
-                    <p className='text-center text-4xl mt-16 tracking-[.5rem] text-dark-brown font-kaushan'>Lorem Ipsum</p>
-                    <p className='text-center text-xl mt-8 mx-44 mb-16 text-dark-brown'>{teksKonten2}</p>
-                    <hr className='mx-16' style={{borderBottom: '2px solid #5A4739'}}/>
+                    <p className='text-center text-4xl md:mt-16 tracking-[1rem] md:tracking-[.5rem] text-dark-brown font-kaushan'>Lorem Ipsum</p>
+                    <p className='text-center text-xl py-12 md:py-8 px-24 md:px-40 pb-20 md:pb-8 text-dark-brown'>{teksKonten2}</p>
+                    <hr className='md:mx-16' style={{borderBottom: '2px solid #5A4739'}}/>
                     <p className={`text-center text-dark-brown text-xl my-4 tracking-widest font-kaushan`}>{pria.toUpperCase() +' & '+ wanita.toUpperCase()}</p>
                 </div>
-                <div className='col-span-2' style={{backgroundImage: `url(${img2})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}}>
+                <div className='h-[75vh] md:col-span-2 md:h-auto rounded-lg' style={{backgroundImage: `url(${img2})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}}>
                 </div>
             </div>
 
             {/* ini adalah konten-3 */}
 
             <div className='bg-gradient-to-r from-dark-brown to-light-brown'>
-                <div className='grid sm:grid-cols-5 '>
-                    <div className='sm: col-span-6 pt-32 relative font-kaushan'>
+                <div className='grid grid-cols-1 md:grid-cols-5 relative font-kaushan'>
+                    <p className={`left-[43vw] md:left-[35vw] text-8xl top-[8rem] md:top-[4rem] text-white absolute inset-y-0`}>{inisialPria}</p>
+                    <p className={`left-[45vw] md:left-[36vw] text-8xl top-[10rem] md:top-[6rem] text-white absolute inset-y-0`}>{inisialWanita}</p>
+                    <div className='md:col-span-5 pt-72 md:pt-32 relative font-kaushan'>
                         <p className='text-white text-xl tracking-widest text-center'>{pria.toUpperCase() + " & " + wanita.toUpperCase()}</p>
-                        <p className={`left-[37vw] text-8xl top-[4rem] text-white absolute inset-y-0`}>{inisialPria}</p>
-                        <p className={`left-[38vw] text-8xl top-[6rem] text-white absolute inset-y-0`}>{inisialWanita}</p>
                     </div>
-                    <div className='sm:col-span-2 relative sm:py-32 font-kaushan'>
-                        <hr className='sm:mx-28' style={{borderBottom: '2px white'}}/>
-                        <div className='pl-32'>
-                            <p className='text-white text-7xl tracking-wide font-light sm:py-2 sm:pt-4'>{pria.toUpperCase()} S.T</p>
-                            <p className='text-white text-xl py-2'>PUTRA DARI</p>
-                            <p className='text-white text-2xl font-semibold pb-8'>{namaOrtuPria.toUpperCase()}</p>
+                    <div className='md:col-span-2 relative pt-40 pb-12 md:py-32 font-kaushan'>
+                        <hr className='ml-20 mr-80 md:mx-28' style={{borderBottom: '2px white'}}/>
+                        <div className='pl-20 md:pl-32 py-8 md:py-4'>
+                            <p className='text-white text-5xl md:text-7xl tracking-wide font-light md:py-2'>{pria.toUpperCase()} S.T</p>
+                            <p className='text-white text-lg md:text-xl py-2'>PUTRA DARI</p>
+                            <p className='text-white text-xl md:text-2xl font-semibold md:py-2'>{namaOrtuPria.toUpperCase()}</p>
                         </div>
-                        <hr className='sm:mx-28 sm:py-4' style={{borderBottom: '2px white'}}/>
+                        <hr className='ml-20 mr-80 md:mx-28 md:py-8' style={{borderBottom: '2px white'}}/>
                     </div>
-                    <div className='sm:col-span-1 sm:py-20 font-kaushan'>
-                        <p className='text-[146px] text-center text-white'>&</p>
+                    <div className='grid md:col-span-1 place-content-center font-kaushan'>
+                        <p className='text-[120px] md:text-[180px] text-center text-white'>&</p>
                     </div>
-                    <div className='sm:col-span-2 relative sm:py-32 font-kaushan'>
-                        <hr className='sm:mx-28' style={{borderBottom: '2px white'}}/>
-                        <div className='pr-32'>
-                            <p className='text-white text-7xl text-right tracking-wide font-light sm:py-2 sm:pt-4'>{wanita.toUpperCase()} S.T</p>
-                            <p className='text-white text-xl text-right py-2'>PUTRI DARI</p>
-                            <p className='text-white text-2xl text-right font-semibold pb-8'>{namaOrtuWanita.toUpperCase()}</p>
+                    <div className='md:col-span-2 relative pt-12 pb-40 md:py-32 font-kaushan'>
+                        <hr className='ml-80 mr-20 md:mx-28' style={{borderBottom: '2px white'}}/>
+                        <div className='pr-20 md:pr-32 py-8 md:py-4'>
+                            <p className='text-white text-5xl md:text-7xl text-right tracking-wide font-light md:py-2'>{wanita.toUpperCase()} S.T</p>
+                            <p className='text-white text-lg md:text-xl text-right py-2'>PUTRI DARI</p>
+                            <p className='text-white text-xl md:text-2xl text-right font-semibold md:py-2'>{namaOrtuWanita.toUpperCase()}</p>
                         </div>
-                        <hr className='sm:mx-28 sm:py-4' style={{borderBottom: '2px white'}}/>
+                        <hr className='ml-80 mr-20 md:mx-28 md:py-8' style={{borderBottom: '2px white'}}/>
                     </div>
                 </div>
                 <hr className='' style={{borderBottom: '2px white'}}/>
