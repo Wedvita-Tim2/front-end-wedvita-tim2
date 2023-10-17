@@ -5,7 +5,8 @@ import Button from '../elements/Buttons/index'
 import { useEffect, useState } from 'react'
 
 
-const TemplateWedvita1 = () => {
+const TemplateWedvitaTest = (props) => {
+    
     const [isSmallScreen, setSmallScreen] = useState(false)
     useEffect(
         () => {
@@ -21,25 +22,39 @@ const TemplateWedvita1 = () => {
             }
         },[]
     )
-    
-    const smallScreen = `url(${img2})`
-    const largeScreen = `url(${img1})`
+    const cover_image = `http://localhost:8000${props.data[0].cover_image}`
+    const smallScreen = `url(${cover_image})`
+    const largeScreen = `url(${cover_image})`
 
-    const pria = "Stefen"
-    const wanita = "Stefany"
-    const hariPernikahan = "Sabtu"
-    const tglPernikahan = "24 September 2023"
+    const pria = props.data[0].groom_name
+    const wanita = props.data[0].bride_name
+
+    const dateEvent = props.data[0].date_event
+    const [year, month, day] = dateEvent.split('-').map(Number)
+    const date = new Date(year, month -1, day)
+    let options = { weekday: 'long' }; // 'long' mengembalikan nama hari lengkap (misalnya, "Senin")
+    const dayName = new Intl.DateTimeFormat('id-ID', options).format(date);
+
+    const hariPernikahan = dayName
+
+    options = { year: 'numeric', month: 'short', day: 'numeric' };
+    const formattedDate = new Intl.DateTimeFormat('id-ID', options).format(date);
+    const tglPernikahan = formattedDate
     const inisialPria = pria[0]
     const inisialWanita = wanita[0]
-    const namaOrtuPria = "Bpk. Jas & Ibu Jus"
-    const namaOrtuWanita = "Bpk. Ale & Ibu Ale"
-    const alamatGedung = "Jl. Politeknik Negeri Bandung, kab. Bandung Barat, Jawa Barat, Indonesia"
-    const teksKonten4 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    const teksKonten2 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-    const imgGallery1 = img1
-    const imgGallery2 = img2
-    const imgGallery3 = img3
-    const imgGallery4 = img1
+    const namaIbuPria = props.data[0].groom_mother_name
+    const namaBapaPria = props.data[0].groom_father_name
+    const namaOrtuPria = "Bpk. " + namaBapaPria + " & Ibu " + namaIbuPria
+    const namaIbuWanita = props.data[0].bride_mother_name
+    const namaBapaWanita = props.data[0].bride_father_name
+    const namaOrtuWanita = "Bpk. " + namaBapaWanita + " & Ibu " + namaIbuWanita
+    const alamatGedung = props.data[0].address
+    const teksKonten4 = props.data[0].quotes
+    const teksKonten2 = props.data[0].guests
+    const imgGallery1 = `http://localhost:8000${props.data[0].attachment_name[0]}`
+    const imgGallery2 = `http://localhost:8000${props.data[0].attachment_name[1]}`
+    const imgGallery3 = `http://localhost:8000${props.data[0].attachment_name[2]}`
+    const imgGallery4 = `http://localhost:8000${props.data[0].attachment_name[3]}`
     return(
         <div>
             {/* ini adalah konten 1 */}
@@ -70,7 +85,7 @@ const TemplateWedvita1 = () => {
                     <hr className='md:mx-16' style={{borderBottom: '2px solid #5A4739'}}/>
                     <p className={`text-center text-dark-brown text-xl my-4 tracking-widest font-kaushan`}>{pria.toUpperCase() +' & '+ wanita.toUpperCase()}</p>
                 </div>
-                <div className='h-[75vh] md:col-span-2 md:h-auto rounded-lg' style={{backgroundImage: `url(${img2})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}}>
+                <div className='h-[75vh] md:col-span-2 md:h-auto rounded-lg' style={{backgroundImage: `url(${imgGallery1})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}}>
                 </div>
             </div>
 
@@ -111,7 +126,7 @@ const TemplateWedvita1 = () => {
             
             {/* ini adalah konten-4 */}
             <div className='grid grid-cols-6'>
-                <div className='col-span-4' style={{backgroundImage: `url(${img3})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}}></div>
+                <div className='col-span-4' style={{backgroundImage: `url(${cover_image})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}}></div>
                 <div className='col-span-2'>
                     <div className='relative font-kaushan'>
                     <p className={`left-[12rem] text-8xl top-[4rem] text-dark-brown absolute inset-y-0`}>{inisialPria}</p>
@@ -160,4 +175,4 @@ const TemplateWedvita1 = () => {
     )
 }
 
-export default TemplateWedvita1
+export default TemplateWedvitaTest
