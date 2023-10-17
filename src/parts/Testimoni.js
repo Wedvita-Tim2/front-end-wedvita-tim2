@@ -1,17 +1,19 @@
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import Star from '../elements/Star';
 import './css/App.css'
 import { RateTemplate } from '../recoils/RateTemplate';
 import { useEffect } from 'react';
 import Button from '../elements/Buttons';
+import { apiBackend } from '../recoils/Api';
 
 const Testimoni = () =>{
 
     const [testimoni, setTestimoni] = useRecoilState(RateTemplate)
+    const apiAddress = useRecoilValue(apiBackend)
 
     const rateData = async() =>{
         try{
-            const datas = await fetch("http://localhost:8000/api/rating")
+            const datas = await fetch(apiAddress+"api/rating")
             const value = await datas.json()
             setTestimoni(value)
         }catch(err){
