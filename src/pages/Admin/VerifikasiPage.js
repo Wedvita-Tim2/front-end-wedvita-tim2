@@ -10,6 +10,8 @@ const VerifikasiPage = () =>{
             const datas = await fetch("http://localhost:8000/api/orders")
             const value = await datas.json()
             if(value.response === 200){
+                const verifiedOrders = value.Data.filter(order => order.verified);
+                setOrders(verifiedOrders);                    
                 setOrders(value.Data)
             }
         }catch(err){
@@ -52,8 +54,25 @@ const VerifikasiPage = () =>{
     return (
         <div className="px-5 py-6">
             <p className="text-3xl text-light-pink font-bold">Halaman Verifikasi</p>
-            <table className="table-fix border-collapse border border-slate-500 font-light mt-12">
-            <thead>
+            <table className=" border-slate-500 font-light mt-6">
+            <div className="flex justify-between mt-7">
+            <div>
+                <button className="border border-slate-900 bg-white hover:bg-white text-sm text-black font-bold h-10 w-32 rounded mb-4">
+            Order Belum Terverifikasi
+                </button>
+            </div>
+            <div className="ml-10"></div>
+            <div>
+        <button className="border border-slate-900 bg-white hover:bg-white text-sm text-black font-bold h-10 w-32 rounded mb-4">
+            Berdasarkan Data Terbaru
+        </button>
+        <div className="ml-10"></div>
+        </div>
+            <table className="border-collapse border border-white font-light">
+            <tbody>
+        </tbody>
+        </table>
+    </div>
                 <tr className="text-white bg-slate-400 font-bold ">
                     <th className="border border-slate-600 px-4 py-1 w-44">No</th>
                     <th className="border border-slate-600 px-4 py-1 w-44">Order Code</th>
@@ -62,7 +81,6 @@ const VerifikasiPage = () =>{
                     <th className="border border-slate-600 px-4 py-1 w-44">Status Verifikasi</th>
                     <th className="border border-slate-600 px-4 py-1 w-64">Aksi</th>
                 </tr>
-                </thead>
                 <tbody>
                     {!orders || orders.length === 0?
                     <tr>
