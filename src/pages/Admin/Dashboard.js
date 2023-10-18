@@ -11,7 +11,7 @@ const Dashboard = () =>{
 
     useEffect(() => {
         if (auth.isAuthenticated) {
-            if(!auth.dataUser.role_id === 1){
+            if(auth.dataUser.role_id !== 1){
                 navigate('/')
             }
         }else{

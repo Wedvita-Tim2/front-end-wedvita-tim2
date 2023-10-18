@@ -49,7 +49,7 @@ const GalleryPart = ({ index, onImageCrop }) => {
   return (
     <div className="">
       <div className="flex flex-wrap justify-center md:flex-col">
-        <p className="text-normal md:text-left text-primary-300 text-center my-4 mx-5">
+        <p className="text-normal md:text-left text-primary-300 text-center md:text-lg md:font-semibold my-4 mx-5">
           Pilih gambar ke {index+1} untuk pernikahan anda
         </p>
         <div className="image-cropper relative">

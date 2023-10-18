@@ -1,55 +1,128 @@
-import { useEffect, useState } from "react"
-import Button from "../../elements/Buttons"
+import { useEffect, useState } from "react";
+import Button from "../../elements/Buttons";
+import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { apiBackend } from "../../recoils/Api";
 
-const VerifikasiPage = () =>{
+const VerifikasiPage = () => {
+  const [orders, setOrders] = useState([]);
+  const apiAddress = useRecoilValue(apiBackend)
 
-    const [orders, setOrders] = useState([])
-
-    const orderData = async() =>{
-        try{
-            const datas = await fetch("http://localhost:8000/api/orders")
-            const value = await datas.json()
-            if(value.response === 200){
-                const verifiedOrders = value.Data.filter(order => order.verified);
-                setOrders(verifiedOrders);                    
-                setOrders(value.Data)
-            }
-        }catch(err){
-            console.error(err)
-        }
+  const orderData = async () => {
+    try {
+      const datas = await fetch(apiAddress+"api/orders");
+      const value = await datas.json();
+      if (value.response === 200) {
+            setOrders(value.Data);
+      }
+    } catch (err) {
+      console.error(err);
     }
+  };
 
-    useEffect(()=>{
-        orderData()
-    }, [])
+  useEffect(() => {
+    orderData();
+  }, []);
 
-    const onButtonVerifClick = (id) =>{
-        console.log(id)
+  
 
+  const onButtonVerifClick = (id, order_code) => {
+    const status = window.confirm(`Yakin ingin memverifikasi order dengan order code ${order_code}?`);
+    if (status) {
+      axios
+        .post(`${apiAddress}api/Verification/${id}`)
+        .then(function (response) {
+          console.log(response);
+          orderData();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
+  };
 
-    const onButtonDeleteClick = (id) =>{
-        console.log(id)
-
+  const onButtonDeleteClick = (id, order_code) => {
+    const status = window.confirm(
+      `Yakin ingin hapus order dengan order code ${order_code} ?`
+    );
+    if(status){
+        axios
+        .delete(`${apiAddress}api/orders/${id}`)
+        .then(function (response) {
+          console.log(response);
+          orderData();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
+  };
 
-    const dataTables = orders.map((order, id)=>(
-        <tr key={id}>
-            <td className="border border-slate-600 px-4 py-1 w-44 text-center">{id+1}</td>
-            <td className="border border-slate-600 px-4 py-1 w-44">{order.order_code}</td>
-            <td className="border border-slate-600 px-4 py-1 w-44">{order.user.username}</td>
-            <td className="border border-slate-600 px-4 py-1 w-44">{order.template.template_name}</td>
-            <td className="border border-slate-600 px-4 py-1 w-44">{order.order_verification}</td>
-            <td className="border px-4 py-1 w-64 flex flex-wrap">
-                <Button type={'button'} className={'bg-green-400 rounded-lg px-3 py-1 mr-3'} onClick={() => onButtonVerifClick(order.id)}>Verifikasi</Button>
-                <Button type={'button'} className={'bg-red-600 rounded-lg px-3 py-1'} onClick={() => onButtonDeleteClick}>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                </svg>
-                </Button>
-            </td>
-        </tr>
-    ))
+  const dataTables = orders.map((order, id) => (
+    <tr key={id}>
+      <td className="border border-slate-600 px-4 py-1 w-44 text-center">
+        {id + 1}
+      </td>
+      <td className="border border-slate-600 px-4 py-1 w-44">{order.id}</td>
+      <td className="border border-slate-600 px-4 py-1 w-44">
+        {order.order_code}
+      </td>
+      <td className="border border-slate-600 px-4 py-1 w-44">
+        {order.user.username}
+      </td>
+      <td className="border border-slate-600 px-4 py-1 w-44">
+        {order.template.template_name}
+      </td>
+      <td className="border border-slate-600 px-4 py-1 w-44">
+        {order.order_verification}
+      </td>
+      <td className="border px-4 py-1 w-64 flex flex-wrap">
+        <Button
+          type={"button"}
+          className={`${
+            order.order_verification !== 1 ? "" : "hidden"
+          } bg-green-400 text-white rounded-lg px-3 py-1 mr-3`}
+          onClick={() => onButtonVerifClick(order.id, order.order_code)}
+        >
+          Verifikasi
+        </Button>
+        <span
+          className={`${
+            order.order_verification !== 1 ? "hidden" : ""
+          } border border-green-400 rounded-lg px-3 py-1 mr-3`}
+        >
+          Verified
+        </span>
+        <Button
+          type={"button"}
+          className={"hover:border hover:border-red-500 rounded-md p-1"}
+          onClick={() =>
+            onButtonDeleteClick(order.id, order.order_code)
+          }
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6 stroke-red-500"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+            />
+          </svg>
+        </Button>
+      </td>
+    </tr>
+  ));
+
+  const OrderBelumTerverifikasi = () => {
+    const filteredOrders = orders.filter(order => order.order_verification !== 1);
+    console.log(filteredOrders)
+  }
 
     return (
         <div className="px-5 py-6">
@@ -57,13 +130,13 @@ const VerifikasiPage = () =>{
             <table className=" border-slate-500 font-light mt-6">
             <div className="flex justify-between mt-7">
             <div>
-                <button className="border border-slate-900 bg-white hover:bg-white text-sm text-black font-bold h-10 w-32 rounded mb-4">
+                <button className="border border-slate-900 bg-white hover:bg-slate-400 text-sm text-black font-bold h-10 w-32 rounded mb-4" onClick={OrderBelumTerverifikasi()}>
             Order Belum Terverifikasi
                 </button>
             </div>
             <div className="ml-10"></div>
             <div>
-        <button className="border border-slate-900 bg-white hover:bg-white text-sm text-black font-bold h-10 w-32 rounded mb-4">
+        <button className="border border-slate-900 bg-white hover:bg-slate-400 text-sm text-black font-bold h-10 w-32 rounded mb-4">
             Berdasarkan Data Terbaru
         </button>
         <div className="ml-10"></div>
@@ -72,19 +145,23 @@ const VerifikasiPage = () =>{
             <tbody>
         </tbody>
         </table>
+    {
+
+    }
     </div>
                 <tr className="text-white bg-slate-400 font-bold ">
-                    <th className="border border-slate-600 px-4 py-1 w-44">No</th>
-                    <th className="border border-slate-600 px-4 py-1 w-44">Order Code</th>
-                    <th className="border border-slate-600 px-4 py-1 w-44">Username</th>
-                    <th className="border border-slate-600 px-4 py-1 w-44">Template Name</th>
-                    <th className="border border-slate-600 px-4 py-1 w-44">Status Verifikasi</th>
-                    <th className="border border-slate-600 px-4 py-1 w-64">Aksi</th>
+                    <th className="border border-slate-600 px-4 py-1 w-44 text-center">No</th>
+                    <th className="border border-slate-600 px-4 py-1 w-44 text-center">Id</th>
+                    <th className="border border-slate-600 px-4 py-1 w-44 text-center">Order Code</th>
+                    <th className="border border-slate-600 px-4 py-1 w-44 text-center">Username</th>
+                    <th className="border border-slate-600 px-4 py-1 w-44 text-center">Template Name</th>
+                    <th className="border border-slate-600 px-4 py-1 w-44 text-center">Status Verifikasi</th>
+                    <th className="border border-slate-600 px-4 py-1 w-44 text-center">Aksi</th>
                 </tr>
                 <tbody>
                     {!orders || orders.length === 0?
                     <tr>
-                        <td className="border border-slate-600 px-4 py-1 w-full text-center text-light-pink font-bold" colSpan="6">
+                        <td className="border border-slate-600 px-4 py-1 w-full text-center text-light-pink font-bold" colSpan="7">
                         Belum ada data
                         </td>
                     </tr>:dataTables}
@@ -94,4 +171,4 @@ const VerifikasiPage = () =>{
     )
 }
 
-export default VerifikasiPage
+export default VerifikasiPage;
