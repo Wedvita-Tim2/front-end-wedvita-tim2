@@ -1,6 +1,3 @@
-import img1 from '../assets/img/template-bg1.jpg'
-import img2 from '../assets/img/template-bg2.jpg'
-import img3 from '../assets/img/template-bg3.png'
 import Button from '../elements/Buttons/index'
 import { useEffect, useState } from 'react'
 
@@ -49,12 +46,32 @@ const TemplateWedvitaTest = (props) => {
     const namaBapaWanita = props.data[0].bride_father_name
     const namaOrtuWanita = "Bpk. " + namaBapaWanita + " & Ibu " + namaIbuWanita
     const alamatGedung = props.data[0].address
+    const buildingName = props.data[0].building_name
     const teksKonten4 = props.data[0].quotes
     const teksKonten2 = props.data[0].guests
-    const imgGallery1 = `http://localhost:8000${props.data[0].attachment_name[0]}`
-    const imgGallery2 = `http://localhost:8000${props.data[0].attachment_name[1]}`
-    const imgGallery3 = `http://localhost:8000${props.data[0].attachment_name[2]}`
-    const imgGallery4 = `http://localhost:8000${props.data[0].attachment_name[3]}`
+    const imageUrls = [];
+
+    for (let i = 0; i < props.data[0].attachment_name.length; i++) {
+        const imageUrl = `http://localhost:8000${props.data[0].attachment_name[i]}`;
+        imageUrls.push(imageUrl);
+    }
+    
+    const galleryComponents = imageUrls.map((imageUrl, index) => (
+        <div
+            key={index}
+            className='col-span-1 h-[400px] relative z-10'
+            style={{
+                backgroundImage: `url(${imageUrl})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center'
+            }}
+        >
+            <div className='absolute inset-0 bg-dark-brown/10 backdrop-brightness-50 z-0'></div>
+        </div>
+    ));
+    
+    
     return(
         <div>
             {/* ini adalah konten 1 */}
@@ -80,12 +97,12 @@ const TemplateWedvitaTest = (props) => {
                         <p className={`left-1/2 -translate-x-1/2 text-7xl md:text-9xl text-dark-brown text-center absolute`}>{inisialPria}</p>
                         <p className={`left-1/2 -translate-x-1/2 text-7xl top-[2vh] ml-2 md:ml-4 md:text-9xl md:top-10 text-dark-brown text-center absolute`}>{inisialWanita}</p>
                     </div>
-                    <p className='text-center text-4xl md:mt-16 tracking-[1rem] md:tracking-[.5rem] text-dark-brown font-kaushan'>Lorem Ipsum</p>
-                    <p className='text-center text-xl py-12 md:py-8 px-24 md:px-40 pb-20 md:pb-8 text-dark-brown'>{teksKonten2}</p>
+                    <p className='text-center text-4xl md:mt-16 tracking-[1rem] md:tracking-[.5rem] text-dark-brown font-kaushan'>{teksKonten4}</p>
+                    <p className='text-center text-xl py-12 md:py-8 px-24 md:px-40 pb-20 md:pb-8 text-dark-brown'></p>
                     <hr className='md:mx-16' style={{borderBottom: '2px solid #5A4739'}}/>
                     <p className={`text-center text-dark-brown text-xl my-4 tracking-widest font-kaushan`}>{pria.toUpperCase() +' & '+ wanita.toUpperCase()}</p>
                 </div>
-                <div className='h-[75vh] md:col-span-2 md:h-auto rounded-lg' style={{backgroundImage: `url(${imgGallery1})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}}>
+                <div className='h-[75vh] md:col-span-2 md:h-auto rounded-lg' style={{backgroundImage: `url(${imageUrls[0]})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}}>
                 </div>
             </div>
 
@@ -136,14 +153,15 @@ const TemplateWedvitaTest = (props) => {
                     <hr className='mx-32' style={{borderBottom: '2px solid #5A4739'}}/>
                     <div className='my-8 mx-14 bg-dark-brown'>
                         <p className='text-white text-center text-xl py-2'>{hariPernikahan + ", " + tglPernikahan}</p>
-                        <p className='text-white text-center text-xl py-2'>9.00AM - 5.00PM</p>
+                        <p className='text-white text-center text-xl py-2'>{buildingName}</p>
                         <p className='text-white text-center text-xl px-8 py-2'>{alamatGedung}</p>
                         <div className='text-center py-4 pb-8'>
                             <Button isPrimary type={'link'} href={''}>LIHAT LOKASI </Button>
                         </div>
                     </div>
+                    <p className='text-center text-dark-brown text-2xl font-bold text-md px-24 py-4 pb-4 font-kaushan'>Turut Mengundang :</p>
                     <p className='text-center text-dark-brown text-light text-md px-24 py-4 pb-16 font-kaushan'>
-                        {teksKonten4} 
+                        {teksKonten2} 
                     </p>
                 </div>
             </div>
@@ -151,25 +169,14 @@ const TemplateWedvitaTest = (props) => {
             {/* ini adalah konten-5 */}
             <div className='bg-gradient-to-r from-dark-brown to-light-brown'>
                 <p className='text-white text-center text-[200px] pt-16 leading-[10rem] font-kaushan'>"</p>
-                <p className='text-white text-center text-6xl tracking-[.5rem] font-kaushan'>LOREM IPSUM</p>
+                <p className='text-white text-center text-6xl tracking-[.5rem] font-kaushan'>{teksKonten4}</p>
                 <p className='text-white text-center text-lg pt-8 px-32 pb-36'>{teksKonten2}</p>
                 <p className={`text-center text-white text-xl my-4 tracking-[.75rem] pb-32 font-kaushan`}>{pria.toUpperCase() +'  &  '+ wanita.toUpperCase()}</p>
             </div>
 
             {/* ini adalah konten-6 */}
             <div className='grid grid-cols-2 inset-0'>
-                <div className='col-span-1 h-[400px] relative z-10' style={{backgroundImage: `url(${imgGallery1})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}}>
-                    <div className='absolute inset-0 bg-dark-brown/10 backdrop-brightness-50 z-0'></div>
-                </div>
-                <div className='col-span-1 h-[400px] relative z-10' style={{backgroundImage: `url(${imgGallery2})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}}>
-                    <div className='absolute inset-0 bg-dark-brown/10 backdrop-brightness-50 z-0'></div>
-                </div>
-                <div className='col-span-1 h-[400px] relative z-10' style={{backgroundImage: `url(${imgGallery3})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}}>
-                    <div className='absolute inset-0 bg-dark-brown/10 backdrop-brightness-50 z-0'></div>
-                </div>
-                <div className='col-span-1 h-[400px] relative z-10' style={{backgroundImage: `url(${imgGallery4})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}}>
-                    <div className='absolute inset-0 bg-dark-brown/10 backdrop-brightness-50 z-0'></div>
-                </div>
+                {galleryComponents}
             </div>
         </div>
     )

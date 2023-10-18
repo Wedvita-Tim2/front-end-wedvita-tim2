@@ -42,6 +42,7 @@ const VerifikasiPage = () => {
   };
 
   const onButtonDeleteClick = (id, order_code) => {
+    console.log(id)
     const status = window.confirm(
       `Yakin ingin hapus order dengan order code ${order_code} ?`
     );

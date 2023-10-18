@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 import TemplateWedvita1 from "../template/TemplateWedvita1";
 import TemplateWedvita2 from "../template/TemplateWedvita2";
 import TemplateWedvita3 from "../template/TemplateWedvita3";
@@ -9,50 +9,49 @@ import { apiBackend } from "../recoils/Api";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import NotFoundPage from "./NotFoundPage";
+import LoadingPage from "./LoadingPage";
 
 const UserPreviewOrderedTemplate = () => {
-    let {templateId, orderCode} = useParams();
-    const viewTemplate = (data) => {
-        switch (templateId) {
-          case "1":
-            if (data === null){
-                return <NotFoundPage />;
-            }else{
-                return <TemplateWedvitaTest data={data}/>;
-            }
-          case "2":
-            return <TemplateWedvita2 />;
-          case "3":
-            return <TemplateWedvita3 />;
-          default:
-            return <NotFoundPage />;
-        }
-      };
+  let { templateId, orderCode } = useParams();
+  const viewTemplate = (data) => {
+    if (data === null) {
+      return <LoadingPage />;
+    } else {
+      switch (templateId) {
+        case "1":
+          return <TemplateWedvitaTest data={data} />;
+        case "2":
+          return <TemplateWedvita2 />;
+        case "3":
+          return <TemplateWedvita3 />;
+        default:
+          return <NotFoundPage />;
+      }
+    }
+  };
 
-      let apiAddress = useRecoilValue(apiBackend);
-      const [orderDetail, setOrderDetail] = useState(null); // State untuk menyimpan data
-      
-      useEffect(() => {
-          const fetchData = async () => {
-          try {
-              const response = await axios.get(`${apiAddress}api/showOrderDetail/${orderCode}`);
-              const data = response.data.Data;
-              setOrderDetail(data); // Menyimpan data ke state
-          } catch (error) {
-              console.error('Terjadi kesalahan:', error);
-          }
-          };
-      
-          fetchData();
-      }, []); // useEffect hanya dijalankan saat komponen dimount
+  let apiAddress = useRecoilValue(apiBackend);
+  const [orderDetail, setOrderDetail] = useState(null); // State untuk menyimpan data
 
-    //   console.log(orderDetail)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${apiAddress}api/showOrderDetail/${orderCode}`
+        );
+        const data = response.data.Data;
+        setOrderDetail(data); // Menyimpan data ke state
+      } catch (error) {
+        console.error("Terjadi kesalahan:", error);
+      }
+    };
 
-    return(
-        <div>
-            {viewTemplate(orderDetail)}
-        </div>
-    )
-}
+    fetchData();
+  }, []); // useEffect hanya dijalankan saat komponen dimount
 
-export default UserPreviewOrderedTemplate
+  //   console.log(orderDetail)
+
+  return <div>{viewTemplate(orderDetail)}</div>;
+};
+
+export default UserPreviewOrderedTemplate;
