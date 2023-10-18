@@ -40,12 +40,13 @@ const VerifikasiPage = () => {
   };
 
   const onButtonDeleteClick = (id, order_code) => {
+    console.log(id)
     const status = window.confirm(
       `Yakin ingin hapus order dengan order code ${order_code} ?`
     );
     if(status){
         axios
-        .post(`${apiAddress}api/AddEventInformationsDelete/${id}`)
+        .delete(`${apiAddress}api/orders/${id}`)
         .then(function (response) {
           console.log(response);
           orderData();
@@ -95,7 +96,7 @@ const VerifikasiPage = () => {
           type={"button"}
           className={"hover:border hover:border-red-500 rounded-md p-1"}
           onClick={() =>
-            onButtonDeleteClick(order.event_information_id, order.order_code)
+            onButtonDeleteClick(order.id, order.order_code)
           }
         >
           <svg
