@@ -1,5 +1,4 @@
 import React from "react";
-import propTypes from 'prop-types'
 
 const InputText = (props) =>{
 
@@ -29,12 +28,3 @@ const InputText = (props) =>{
 }
 
 export default InputText
-
-InputText.propTypes={
-    name: propTypes.string,
-    element: propTypes.oneOf(["input", "textarea"]),
-    placeholder: propTypes.string,
-    type: propTypes.string,
-    onChange: propTypes.func,
-    isRequired: propTypes.bool
-}

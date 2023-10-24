@@ -1,5 +1,4 @@
 import React from 'react'
-import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 const Button = (props) =>{
@@ -54,19 +53,3 @@ const Button = (props) =>{
 
 export default Button
 
-
-Button.propTypes ={
-    type: propTypes.oneOf(["button", "link", "submit"]),
-    onClick: propTypes.func,
-    target: propTypes.string,
-    href: propTypes.string,
-    className: propTypes.string,
-    isDisabled: propTypes.bool,
-    isPrimary: propTypes.bool,
-    isExternal: propTypes.bool,
-    isLoading: propTypes.bool,
-    isGradient: propTypes.bool,
-    isLarge: propTypes.bool,
-    isBlock: propTypes.bool,
-    hasShadow: propTypes.bool,
-}

@@ -1,4 +1,3 @@
-import propTypes from 'prop-types'
 import { useMemo } from 'react'
 import Button from '../Buttons'
 
@@ -31,15 +30,5 @@ const Star = ({count, rating, onRating, isButton})=>{
     )
 }
 
-Star.propTypes = {
-    count : propTypes.number,
-    rating : propTypes.number,
-    onChange: propTypes.func,
-}
-
-Star.defaultProps ={
-    count : 5,
-    rating : 0,
-}
 
 export default Star
