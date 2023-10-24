@@ -123,7 +123,7 @@ const Navbar = () => {
             href={"/"}
             className={"ml-1 mt-8 md:mt-10 md:ml-14"}
           >
-            <img src="/logo.svg" alt="Logo" className="scale-75 md:scale-100" />
+            <img src="./logo.svg" alt="Logo" className="scale-75 md:scale-100" />
           </Button>
           <div className={`flex items-center`}>
             <Button

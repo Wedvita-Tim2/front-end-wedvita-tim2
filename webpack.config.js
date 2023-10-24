@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV == "production";
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const stylesHandler = "style-loader";
 
@@ -21,7 +22,7 @@ const config = {
     new HtmlWebpackPlugin({
       template: "./public/index.html",
     }),
-    
+    new MiniCssExtractPlugin(),
 
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
