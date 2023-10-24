@@ -36,6 +36,13 @@ const config = {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
         type: "asset",
       },
+      {
+        test: /\.jsx?$/, // Match both .js and .jsx files
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      }
 
       // Add your rules for custom modules here
       // Learn more about loaders from https://webpack.js.org/loaders/
