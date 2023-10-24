@@ -181,12 +181,14 @@ const Register = () =>{
                         defaultCountry="id"
                         value={text.phone}
                         name={'phone'}
-                        className='block mt-6'
+                        className='mt-6'
                         placeholder={'Phone'}
-                        inputStyle={{paddingTop : 23, paddingBottom:23, fontSize:18., width:isSmallScreen?275:339}}
+                        inputStyle={{paddingTop : 23, paddingBottom:23, fontSize:18, width:isSmallScreen?275:339}}
                         countrySelectorStyleProps={{
                             buttonStyle : {
-                                height:48
+                                height:48,
+                                width : 44,
+                                backgroundColor:"white"
                             },
                         }}
                         onChange={(phone) =>{setPhone(phone)}}/>
