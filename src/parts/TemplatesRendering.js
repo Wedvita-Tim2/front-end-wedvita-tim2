@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import {
   selectedTemplate,
   selectedTemplateName,
+  selectedTemplatePrice,
 } from "../recoils/SelectedTemplate";
 import { authState } from "../recoils/AuthState";
 import Modal from "../component/Modal";
@@ -15,6 +16,7 @@ const TemplatesRendering = () => {
   const [templates, setTemplates] = useRecoilState(TemplatesRecoil);
   const [, setSelectTemplate] = useRecoilState(selectedTemplate);
   const [, setSelectTemplateName] = useRecoilState(selectedTemplateName);
+  const [, setSelectTemplatePrice] = useRecoilState(selectedTemplatePrice)
   const [showModal, setShowModal] = useState(false);
   const auth = useRecoilValue(authState);
   const navigate = useNavigate();
@@ -34,9 +36,11 @@ const TemplatesRendering = () => {
     getTemplates();
   }, []);
 
-  const handleSelectTemplate = (id, nama, type) => {
+  const handleSelectTemplate = (id, nama, type, price) => {
+    console.log(price)
     setSelectTemplate(id);
     setSelectTemplateName(nama);
+    setSelectTemplatePrice(price);
     if (type === "order") {
       if (auth.isAuthenticated) {
         navigate(`/order`);
@@ -63,7 +67,7 @@ const TemplatesRendering = () => {
       <Button
         type="button"
         onClick={() =>
-          handleSelectTemplate(template.id, template.template_name, "preview")
+          handleSelectTemplate(template.id, template.template_name, "preview",template.price)
         }
       >
         <img

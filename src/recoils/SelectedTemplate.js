@@ -10,3 +10,8 @@ export const selectedTemplateName = atom({
     key: 'selectedTemplateName',
     default: '',
 });
+
+export const selectedTemplatePrice = atom({
+    key: 'selectedTemplatePrice',
+    default: '',
+})
