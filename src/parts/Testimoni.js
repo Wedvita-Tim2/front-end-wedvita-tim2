@@ -33,7 +33,7 @@ const Testimoni = () =>{
                 </div>
             ))
         }else{
-
+            
             return Array.from({ length: 3 }, (_, id) => (
                 <div className='grid align-middle bg-white shadow-md pt-4 px-2 md:px-4 rounded-br-3xl mx-4 mt-4 w-72 h-44 md:w-80 md:h-52 lg:h-48 lg:w-115 ' key={id}>
                     <p className='text-primary-200 ml-1 mt-2'>{testimoni.DataRate[id].comment}</p>
