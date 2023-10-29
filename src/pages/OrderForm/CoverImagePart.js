@@ -92,7 +92,7 @@ function CoverImagePart() {
             </div>
           )}
           {preview && result && (
-            <div className="relative h-28 w-48 md:h-48 md:w-80 rounded-md mt-2">
+            <div className="relative h-28 w-48 md:h-48 md:w-80 rounded-md mt-2 mx-auto">
               <img src={preview} alt="preview"></img>
               <Button
                 type={"button"}

@@ -114,6 +114,8 @@ const SubmitHandling = ({ data }) => {
   formData.append("id", data.dataUser.id);
 
   const [visible, setVisible] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const [message, setMessage] = useState("");
 
   const handleSubmit = () => {
     const config = {
@@ -125,13 +127,18 @@ const SubmitHandling = ({ data }) => {
       .then((response) => {
         if (response.data.response === 200) {
           setVisible(true);
-          resetData()
+          resetData();
         } else {
           console.log("Failed to navigate. Response status is not 200.");
         }
       })
       .catch((error) => {
-        console.log(error);
+        setFailed(true)
+        if (error.response) {
+          setMessage(error.response.data.message);
+        } else {
+          console.log(error);
+        }
       });
   };
   return (
@@ -161,6 +168,45 @@ const SubmitHandling = ({ data }) => {
           </p>
           <Button type={"link"} href={"/"} isPrimary className={"mt-3"}>
             Kembali Ke Home
+          </Button>
+        </div>
+      </Modal>
+      <Modal
+        show={failed}
+        title={"Gagal Membuat Undangan"}
+        onModalToggle={(newShowModalValue) => {
+          setFailed(newShowModalValue);
+        }}
+      >
+        <div className="flex items-center flex-col gap-5 justify-items-center text-red-600">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-36 h-36"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+
+          <p className="text-center text-primary-200">
+            {message.includes("validation")
+              ? "Semua data dalam form harus diisi, periksa kembali form isian anda."
+              : null}
+          </p>
+
+          <Button
+            type={"button"}
+            onClick={() => setFailed(false)}
+            isPrimary
+            className={"mt-3"}
+          >
+            Tutup
           </Button>
         </div>
       </Modal>

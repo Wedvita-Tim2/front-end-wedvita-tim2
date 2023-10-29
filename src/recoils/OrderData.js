@@ -36,9 +36,10 @@ export const groomFatherName = atom({
     default: '',
 });
 
+const selectedDate = new Date()
 export const dateEvent = atom({
     key: 'dateEvent',
-    default: new Date(),
+    default: `${selectedDate.getDate()}/${selectedDate.getMonth() + 1}/${selectedDate.getFullYear()}`,
 });
 
 export const addressEvent = atom({

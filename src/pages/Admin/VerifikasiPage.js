@@ -6,14 +6,14 @@ import { apiBackend } from "../../recoils/Api";
 
 const VerifikasiPage = () => {
   const [orders, setOrders] = useState([]);
-  const apiAddress = useRecoilValue(apiBackend)
+  const apiAddress = useRecoilValue(apiBackend);
 
   const orderData = async () => {
     try {
-      const datas = await fetch(apiAddress+"api/orders");
+      const datas = await fetch(apiAddress + "api/orders");
       const value = await datas.json();
       if (value.response === 200) {
-            setOrders(value.Data);
+        setOrders(value.Data);
       }
     } catch (err) {
       console.error(err);
@@ -24,10 +24,10 @@ const VerifikasiPage = () => {
     orderData();
   }, []);
 
-  
-
   const onButtonVerifClick = (id, order_code) => {
-    const status = window.confirm(`Yakin ingin memverifikasi order dengan order code ${order_code}?`);
+    const status = window.confirm(
+      `Yakin ingin memverifikasi order dengan order code ${order_code}?`
+    );
     if (status) {
       axios
         .post(`${apiAddress}api/Verification/${id}`)
@@ -42,12 +42,12 @@ const VerifikasiPage = () => {
   };
 
   const onButtonDeleteClick = (id, order_code) => {
-    console.log(id)
+    console.log(id);
     const status = window.confirm(
       `Yakin ingin hapus order dengan order code ${order_code} ?`
     );
-    if(status){
-        axios
+    if (status) {
+      axios
         .delete(`${apiAddress}api/orders/${id}`)
         .then(function (response) {
           console.log(response);
@@ -97,9 +97,7 @@ const VerifikasiPage = () => {
         <Button
           type={"button"}
           className={"hover:border hover:border-red-500 rounded-md p-1"}
-          onClick={() =>
-            onButtonDeleteClick(order.id, order.order_code)
-          }
+          onClick={() => onButtonDeleteClick(order.id, order.order_code)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -121,55 +119,76 @@ const VerifikasiPage = () => {
   ));
 
   const OrderBelumTerverifikasi = () => {
-    const filteredOrders = orders.filter(order => order.order_verification !== 1);
-    console.log(filteredOrders)
-  }
+    const filteredOrders = orders.filter(
+      (order) => order.order_verification !== 1
+    );
+    console.log(filteredOrders);
+  };
 
-    return (
-        <div className="px-5 py-6">
-            <p className="text-3xl text-light-pink font-bold">Halaman Verifikasi</p>
-            <table className=" border-slate-500 font-light mt-6">
-            <div className="flex justify-between mt-7">
-            <div>
-                <button className="border border-slate-900 bg-white hover:bg-slate-400 text-sm text-black font-bold h-10 w-32 rounded mb-4" onClick={OrderBelumTerverifikasi()}>
-            Order Belum Terverifikasi
-                </button>
-            </div>
+  return (
+    <div className="px-5 py-6">
+      <p className="text-3xl text-light-pink font-bold">Halaman Verifikasi</p>
+        <div className="flex justify-between mt-7">
+          <div>
+            <button
+              className="border border-slate-900 bg-white hover:bg-slate-400 text-sm text-black font-bold h-10 w-32 rounded mb-4"
+              onClick={OrderBelumTerverifikasi()}
+            >
+              Order Belum Terverifikasi
+            </button>
+          </div>
+          <div className="ml-10"></div>
+          <div>
+            <button className="border border-slate-900 bg-white hover:bg-slate-400 text-sm text-black font-bold h-10 w-32 rounded mb-4">
+              Berdasarkan Data Terbaru
+            </button>
             <div className="ml-10"></div>
-            <div>
-        <button className="border border-slate-900 bg-white hover:bg-slate-400 text-sm text-black font-bold h-10 w-32 rounded mb-4">
-            Berdasarkan Data Terbaru
-        </button>
-        <div className="ml-10"></div>
+          </div>
         </div>
-            <table className="border-collapse border border-white font-light">
-            <tbody>
-        </tbody>
-        </table>
-    {
+      <table className=" border-slate-500 font-light mt-6">
+        <thead>
 
-    }
+          <tr className="text-white bg-slate-400 font-bold ">
+            <th className="border border-slate-600 px-4 py-1 w-44 text-center">
+              No
+            </th>
+            <th className="border border-slate-600 px-4 py-1 w-44 text-center">
+              Id
+            </th>
+            <th className="border border-slate-600 px-4 py-1 w-44 text-center">
+              Order Code
+            </th>
+            <th className="border border-slate-600 px-4 py-1 w-44 text-center">
+              Username
+            </th>
+            <th className="border border-slate-600 px-4 py-1 w-44 text-center">
+              Template Name
+            </th>
+            <th className="border border-slate-600 px-4 py-1 w-44 text-center">
+              Status Verifikasi
+            </th>
+            <th className="border border-slate-600 px-4 py-1 w-44 text-center">
+              Aksi
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {!orders || orders.length === 0 ? (
+            <tr>
+              <td
+                className="border border-slate-600 px-4 py-1 w-full text-center text-light-pink font-bold"
+                colSpan="7"
+              >
+                Belum ada data
+              </td>
+            </tr>
+          ) : (
+            dataTables
+          )}
+        </tbody>
+      </table>
     </div>
-                <tr className="text-white bg-slate-400 font-bold ">
-                    <th className="border border-slate-600 px-4 py-1 w-44 text-center">No</th>
-                    <th className="border border-slate-600 px-4 py-1 w-44 text-center">Id</th>
-                    <th className="border border-slate-600 px-4 py-1 w-44 text-center">Order Code</th>
-                    <th className="border border-slate-600 px-4 py-1 w-44 text-center">Username</th>
-                    <th className="border border-slate-600 px-4 py-1 w-44 text-center">Template Name</th>
-                    <th className="border border-slate-600 px-4 py-1 w-44 text-center">Status Verifikasi</th>
-                    <th className="border border-slate-600 px-4 py-1 w-44 text-center">Aksi</th>
-                </tr>
-                <tbody>
-                    {!orders || orders.length === 0?
-                    <tr>
-                        <td className="border border-slate-600 px-4 py-1 w-full text-center text-light-pink font-bold" colSpan="7">
-                        Belum ada data
-                        </td>
-                    </tr>:dataTables}
-                </tbody>
-            </table>
-        </div>
-    )
-}
+  );
+};
 
 export default VerifikasiPage;

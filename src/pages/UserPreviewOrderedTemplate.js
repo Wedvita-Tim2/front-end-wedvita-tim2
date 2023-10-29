@@ -12,11 +12,15 @@ import NotFoundPage from "./NotFoundPage";
 import LoadingPage from "./LoadingPage";
 
 const UserPreviewOrderedTemplate = () => {
+  const auth = useRecoilValue(authState);
+  const userId = auth.dataUser.id;
   let { templateId, orderCode } = useParams();
   const viewTemplate = (data) => {
     if (data === null) {
       return <LoadingPage />;
-    } else {
+    } else if (data !== null && data[0].user_id !== userId) {
+      return <NotFoundPage />;
+    } else if (data[0].template_id == templateId) {
       switch (templateId) {
         case "1":
           return <TemplateWedvitaTest data={data} />;
@@ -27,6 +31,9 @@ const UserPreviewOrderedTemplate = () => {
         default:
           return <NotFoundPage />;
       }
+    }
+     else {
+      return <NotFoundPage/>;
     }
   };
 
@@ -49,6 +56,9 @@ const UserPreviewOrderedTemplate = () => {
     fetchData();
   }, []); // useEffect hanya dijalankan saat komponen dimount
 
+  if (auth === "") {
+    return <NotFoundPage />;
+  }
   //   console.log(orderDetail)
 
   return <div>{viewTemplate(orderDetail)}</div>;
