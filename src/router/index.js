@@ -18,6 +18,7 @@ function AppRouter() {
         <Route path=":templateId" element={<OrderPreviewTemplatePage/>} />
       </Route>
       <Route path="/preview/:templateId/:orderCode" element={<UserPreviewOrderedTemplate/>} />
+      <Route path='/invitation/:templateId/:orderCode' element={<UserPreviewOrderedTemplate/>}/>
       </Routes>
   );
 }

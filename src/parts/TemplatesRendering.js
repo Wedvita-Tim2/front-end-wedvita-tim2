@@ -71,18 +71,21 @@ const TemplatesRendering = () => {
         }
       >
         <img
-          src={`http://localhost:8000${template.thumbnail}`}
+          src={apiAddress + template.thumbnail}
           alt={`Template ${template.id}`}
           className="z-10"
         />
       </Button>
-      <div className="absolute bottom-0 inset-x-0 h-12 md:h-24 group-hover:h-32 px-3 py-4 text-center bg-gradient-to-b from-transparent to-black opacity-40 group-hover:opacity-50 backdrop-opacity-30" />
+      <div className="absolute bottom-0 inset-x-0 h-12 md:h-24 group-hover:h-32 px-3 py-4 text-center bg-gradient-to-b from-transparent to-black opacity-40 group-hover:opacity-70 backdrop-opacity-30" />
       <div
-        className="absolute bottom-0 inset-x-0 px-3 py-2 md:py-4 text-center group-hover:backdrop-blur-sm"
+        className="absolute bottom-0 inset-x-0 px-3 py-2 md:py-4 text-center group-hover:backdrop-blur-lg"
         style={{ backdropFilter: "blur(2px)" }}
       >
-        <p className="text-xs font-semibold md:text-lg text-white mb-2 md:mb-3 ">
+        <p className="text-xs font-semibold md:text-lg text-white mb-1 md:mb-1 group-hover:font-bold ">
           {template.template_name}
+        </p>
+        <p className="hidden text-xs md:text-lg text-white mb-2 md:mb-3 group-hover:block group-hover:font-semibold">
+        {"Rp."+ template.price.toLocaleString('id-ID')}
         </p>
         <Button
           type="button"
