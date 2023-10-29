@@ -118,7 +118,7 @@ const TemplateWedvitaTest = (props) => {
                     <div className='md:col-span-2 relative pt-40 pb-12 md:py-32 font-kaushan'>
                         <hr className='ml-20 mr-80 md:mx-28' style={{borderBottom: '2px white'}}/>
                         <div className='pl-20 md:pl-32 py-8 md:py-4'>
-                            <p className='text-white text-5xl md:text-7xl tracking-wide font-light md:py-2'>{pria.toUpperCase()} S.T</p>
+                            <p className='text-white text-5xl md:text-7xl tracking-wide font-light md:py-2'>{pria.toUpperCase()}</p>
                             <p className='text-white text-lg md:text-xl py-2'>PUTRA DARI</p>
                             <p className='text-white text-xl md:text-2xl font-semibold md:py-2'>{namaOrtuPria.toUpperCase()}</p>
                         </div>
@@ -130,7 +130,7 @@ const TemplateWedvitaTest = (props) => {
                     <div className='md:col-span-2 relative pt-12 pb-40 md:py-32 font-kaushan'>
                         <hr className='ml-80 mr-20 md:mx-28' style={{borderBottom: '2px white'}}/>
                         <div className='pr-20 md:pr-32 py-8 md:py-4'>
-                            <p className='text-white text-5xl md:text-7xl text-right tracking-wide font-light md:py-2'>{wanita.toUpperCase()} S.T</p>
+                            <p className='text-white text-5xl md:text-7xl text-right tracking-wide font-light md:py-2'>{wanita.toUpperCase()}</p>
                             <p className='text-white text-lg md:text-xl text-right py-2'>PUTRI DARI</p>
                             <p className='text-white text-xl md:text-2xl text-right font-semibold md:py-2'>{namaOrtuWanita.toUpperCase()}</p>
                         </div>

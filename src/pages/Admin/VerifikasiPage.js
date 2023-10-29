@@ -7,7 +7,7 @@ import { apiBackend } from "../../recoils/Api";
 const VerifikasiPage = () => {
   const [orders, setOrders] = useState([]);
   const apiAddress = useRecoilValue(apiBackend);
-
+  
   const orderData = async () => {
     try {
       const datas = await fetch(apiAddress + "api/orders");
@@ -122,28 +122,39 @@ const VerifikasiPage = () => {
     const filteredOrders = orders.filter(
       (order) => order.order_verification !== 1
     );
-    console.log(filteredOrders);
+    setOrders(filteredOrders)
   };
 
+  // Bug ketika memilih order berdasarkan waktu setelah filter berdasarkan order status verif
+  const OrderBerdasarkanWaktu = async() => {
+    await orderData()
+    const sortedOrders = [...orders].sort((a,b) => {
+      return new Date(b.created_at) - new Date(a.created_at)
+    })
+    setOrders(sortedOrders)
+  }
+
+  const handleFilterSelection = (element) => {
+      let selectedOption = element.target.value 
+      if (selectedOption == "verif_status_order"){
+        OrderBelumTerverifikasi()
+      }else if (selectedOption == "date_order"){
+        OrderBerdasarkanWaktu()
+      }else{
+        orderData()
+      }
+  }
   return (
     <div className="px-5 py-6">
       <p className="text-3xl text-light-pink font-bold">Halaman Verifikasi</p>
-        <div className="flex justify-between mt-7">
-          <div>
-            <button
-              className="border border-slate-900 bg-white hover:bg-slate-400 text-sm text-black font-bold h-10 w-32 rounded mb-4"
-              onClick={OrderBelumTerverifikasi()}
-            >
-              Order Belum Terverifikasi
-            </button>
-          </div>
-          <div className="ml-10"></div>
-          <div>
-            <button className="border border-slate-900 bg-white hover:bg-slate-400 text-sm text-black font-bold h-10 w-32 rounded mb-4">
-              Berdasarkan Data Terbaru
-            </button>
-            <div className="ml-10"></div>
-          </div>
+
+        <div className="flex mt-7">
+          <p className="pr-10">Filter :</p>
+          <select onChange={handleFilterSelection}>
+              <option value={"default"}>Default</option>
+              <option value={"verif_status_order"}>Berdasarkan Status Belum Terverifikasi</option>
+              <option value={"date_order"}>Berdasarkan Data Terbaru</option>
+          </select>
         </div>
       <table className=" border-slate-500 font-light mt-6">
         <thead>
