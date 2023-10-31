@@ -67,7 +67,7 @@ const AccountProfile = () => {
   const dataTables =
     orderData !== null ? (
       orderData.map((order, id) => (
-        <div className="py-2 px-2 md:px-6 rounded-xl shadow-lg bg-white" key={id}>
+        <div className="py-2 px-2 md:px-6 rounded-xl shadow-lg bg-zinc-50" key={id}>
           <div className="flex flex-row gap-8 md:gap-12 relative">
             <p className="font-bold text-sm text-primary-400 md:text-lg">
               {order.event_information.groom_name} &{" "}
@@ -100,21 +100,21 @@ const AccountProfile = () => {
           </div>
           <p className="text-xs text-gray-600 md:text-base mb-1 md:mb-2">{order.order_code}</p>
           <div className="flex flex-row gap-2">
-            <Button
+            {!order.invitation_url?(<Button
                 type={"link"}
                 href={`/preview/${order.template_id}/${order.order_code}`}
                 className={'rounded-md px-2 py-1 mt-1 bg-light-pink text-white text-xs md:text-base'}
             >
                 Lihat Preview
-            </Button>
-            {order.invitation_url &&(
-            <Button
+            </Button>):(<Button
                 type={"link"}
                 href={order.invitation_url}
                 className={'rounded-md px-4 md:px-6 py-1 mt-1 bg-light-pink text-white text-xs md:text-base'}
             >
                 Visit
             </Button>)}
+            
+            
           </div>
           {console.log(order)}
         </div>
@@ -132,7 +132,7 @@ const AccountProfile = () => {
       <p>{auth.dataUser.phone_number}</p>
       <div className="flex flex-col gap-2 py-2 px-2 border-double border-primary-300 rounded-md border-[1px]">
         <p className="text-lg text-light-pink px-2 font-bold md:text-2xl">Order Anda</p>
-        <div className="grid grid-cols-1 md:grid-cols-2">{dataTables}</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6">{dataTables}</div>
       </div>
       <Button type={"button"} onClick={handleLogout} isGradient>
         Logout

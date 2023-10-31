@@ -1,9 +1,8 @@
 import { useParams } from "react-router-dom";
-import TemplateWedvita1 from "../template/TemplateWedvita1";
 import TemplateWedvita2 from "../template/TemplateWedvita2";
 import TemplateWedvita3 from "../template/TemplateWedvita3";
 import TemplateWedvitaTest from "../template/templateWedvitaTest";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { authState } from "../recoils/AuthState";
 import { apiBackend } from "../recoils/Api";
 import axios from "axios";
@@ -11,14 +10,14 @@ import { useEffect, useState } from "react";
 import NotFoundPage from "./NotFoundPage";
 import LoadingPage from "./LoadingPage";
 
-const UserPreviewOrderedTemplate = () => {
+const UserPreviewOrderedTemplate = (props) => {
   const auth = useRecoilValue(authState);
   const userId = auth.dataUser.id;
   let { templateId, orderCode } = useParams();
   const viewTemplate = (data) => {
     if (data === null) {
       return <LoadingPage />;
-    } else if (data !== null && data[0].user_id !== userId) {
+    } else if (props.preview === true && data !== null && data[0].user_id !== userId) {
       return <NotFoundPage />;
     } else if (data[0].template_id == templateId) {
       switch (templateId) {

@@ -17,8 +17,8 @@ function AppRouter() {
       <Route path="/template/preview/template-wedvita">
         <Route path=":templateId" element={<OrderPreviewTemplatePage/>} />
       </Route>
-      <Route path="/preview/:templateId/:orderCode" element={<UserPreviewOrderedTemplate/>} />
-      <Route path='/invitation/:templateId/:orderCode' element={<UserPreviewOrderedTemplate/>}/>
+      <Route path="/preview/:templateId/:orderCode" element={<UserPreviewOrderedTemplate preview={true}/>} />
+      <Route path='/invitation/:templateId/:orderCode' element={<UserPreviewOrderedTemplate preview={false}/>}/>
       </Routes>
   );
 }

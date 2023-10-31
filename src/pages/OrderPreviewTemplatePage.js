@@ -1,10 +1,10 @@
 import OrderBar from "./OrderBar";
-import TemplateWedvita1 from "../template/TemplateWedvita1";
 import { useParams } from "react-router-dom";
 import TemplateWedvita2 from "../template/TemplateWedvita2";
 import TemplateWedvita3 from "../template/TemplateWedvita3";
 import NotFoundPage from "./NotFoundPage";
 import { useEffect, useState } from "react";
+import TemplateWedvitaTest from "../template/templateWedvitaTest";
 
 const OrderPreviewTemplatePage = () => {
   let { templateId } = useParams();
@@ -22,7 +22,7 @@ const OrderPreviewTemplatePage = () => {
   const viewTemplate = () => {
     switch (templateId) {
       case "1":
-        return <TemplateWedvita1 />;
+        return <TemplateWedvitaTest data={[null]} />;
       case "2":
         return <TemplateWedvita2 />;
       case "3":
