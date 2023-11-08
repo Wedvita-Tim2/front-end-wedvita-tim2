@@ -130,10 +130,13 @@ const SubmitHandling = ({ data }) => {
           resetData();
         } else {
           console.log("Failed to navigate. Response status is not 200.");
+          setFailed(true)
+          setMessage(response.data.message);
         }
       })
       .catch((error) => {
         setFailed(true)
+        console.log("woii")
         if (error.response) {
           setMessage(error.response.data.message);
         } else {
