@@ -2,13 +2,16 @@ import { useNavigate } from "react-router-dom";
 import Button from "../elements/Buttons";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { authState } from "../recoils/AuthState";
-import { apiBackend } from "../recoils/Api";
+import { apiBackend, urlFront } from "../recoils/Api";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const AccountProfile = () => {
   const navigate = useNavigate();
   const [auth, setAuth] = useRecoilState(authState);
+  const url = useRecoilValue(urlFront);
+  const urlRef = useRef(null);
+  const [copied, setCopied] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("auth");
@@ -16,6 +19,23 @@ const AccountProfile = () => {
     setAuth("");
     navigate("/");
   };
+
+  const copyToClipboard = () => {
+    if (urlRef.current) {
+      navigator.clipboard
+        .writeText(urlRef.current.innerText)
+        .then(() => {
+          setCopied(!copied)
+          setTimeout(() => {
+            setCopied(false);
+          }, 1500);
+        })
+        .catch((error) => {
+          alert("Gagal menyalin link: " + error);
+        });
+    }
+  };
+
   const tableData = [
     {
       no: 1,
@@ -64,19 +84,35 @@ const AccountProfile = () => {
     fetchData();
   }, []); // useEffect hanya dijalankan saat komponen dimount
 
+  
   const dataTables =
     orderData !== null ? (
       orderData.map((order, id) => (
-        <div className="py-2 px-2 md:px-6 rounded-xl shadow-lg bg-zinc-50" key={id}>
+        <div
+          className="py-2 px-2 md:px-6 rounded-xl shadow-lg bg-zinc-50"
+          key={id}
+        >
           <div className="flex flex-row gap-8 md:gap-12 relative">
             <p className="font-bold text-sm text-primary-400 md:text-lg">
               {order.event_information.groom_name} &{" "}
               {order.event_information.bride_name}
             </p>
-            <span className={`rounded-md bg-white px-2 border-[1px] ${order.order_verification!==1?'border-yellow-400':'border-green-500'}`}>
-                <p className={`${order.order_verification!==1?'text-yellow-400': ' text-green-500'} text-xs md:text-base`}>
-                    {order.order_verification!==1?'Pending':'Active'}
-                </p>
+            <span
+              className={`rounded-md bg-white px-2 border-[1px] ${
+                order.order_verification !== 1
+                  ? "border-yellow-400"
+                  : "border-green-500"
+              }`}
+            >
+              <p
+                className={`${
+                  order.order_verification !== 1
+                    ? "text-yellow-400"
+                    : " text-green-500"
+                } text-xs md:text-base`}
+              >
+                {order.order_verification !== 1 ? "Pending" : "Active"}
+              </p>
             </span>
             <Button
               type={"button"}
@@ -98,23 +134,55 @@ const AccountProfile = () => {
               </svg>
             </Button>
           </div>
-          <p className="text-xs text-gray-600 md:text-base mb-1 md:mb-2">{order.order_code}</p>
+          <p className="text-xs text-gray-600 md:text-base mb-1 md:mb-2">
+            {order.event_information.date_event}
+          </p>
           <div className="flex flex-row gap-2">
-            {!order.invitation_url?(<Button
+            {!order.invitation_url ? (
+              <Button
                 type={"link"}
                 href={`/preview/${order.template_id}/${order.order_code}`}
-                className={'rounded-md px-2 py-1 mt-1 bg-light-pink text-white text-xs md:text-base'}
-            >
+                className={
+                  "rounded-md px-2 py-1 mt-1 bg-light-pink text-white text-xs md:text-base"
+                }
+              >
                 Lihat Preview
-            </Button>):(<Button
-                type={"link"}
-                href={order.invitation_url}
-                className={'rounded-md px-4 md:px-6 py-1 mt-1 bg-light-pink text-white text-xs md:text-base'}
-            >
-                Visit
-            </Button>)}
-            
-            
+              </Button>
+            ) : (
+              <div className="flex flex-wrap gap-1 md:gap-2">
+                <Button
+                  type={"link"}
+                  href={order.invitation_url}
+                  className={
+                    "rounded-md px-4 md:px-6 py-1 mt-1 bg-light-pink text-white text-xs md:text-base"
+                  }
+                >
+                  Visit
+                </Button>
+              
+                  <p ref={urlRef} className="text-xs hidden">
+                    {url + order.invitation_url}
+                  </p>
+                  <Button type={"button"} onClick={copyToClipboard} className={`flex flex-wrap mt-1 border-[1px] ${!copied?'text-gray-600 border-gray-400': 'text-light-pink border-light-pink'} rounded-md px-2 py-1 text-gray-600`}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-4 h-4 md:w-5 md:h-5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
+                      />
+                    </svg>
+                    <p className={`text-xs ${!copied?'text-gray-600':'text-light-pink'} md:text-sm`}>{!copied?'Copy Link':'Copied !'}</p>
+                  </Button>
+                
+              </div>
+            )}
           </div>
           {console.log(order)}
         </div>
@@ -126,15 +194,24 @@ const AccountProfile = () => {
     );
 
   return (
-    <div className="px-4 py-2">
-      <p>{auth.dataUser.username}</p>
+    <div className="px-4 py-2 md:px-12">
+      {/* <p>{auth.dataUser.username}</p>
       <p>{auth.dataUser.email}</p>
-      <p>{auth.dataUser.phone_number}</p>
-      <div className="flex flex-col gap-2 py-2 px-2 border-double border-primary-300 rounded-md border-[1px]">
-        <p className="text-lg text-light-pink px-2 font-bold md:text-2xl">Order Anda</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6">{dataTables}</div>
+      <p>{auth.dataUser.phone_number}</p> */}
+      <div className="flex flex-col gap-2 py-2 px-2">
+        <p className="text-lg text-light-pink px-2 font-bold md:text-2xl">
+          Order Anda
+        </p>
+        <div className="grid grid-cols-1 px-2 py-2 md:grid-cols-2 gap-2 md:gap-6 border-double border-primary-300 rounded-md border-[1px]">
+          {dataTables}
+        </div>
       </div>
-      <Button type={"button"} onClick={handleLogout} isGradient>
+      <Button
+        type={"button"}
+        onClick={handleLogout}
+        isGradient
+        className={"mt-4"}
+      >
         Logout
       </Button>
       <div className="w-full flex justify-center">
