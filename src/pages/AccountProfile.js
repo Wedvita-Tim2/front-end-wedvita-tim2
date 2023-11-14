@@ -12,6 +12,8 @@ const AccountProfile = () => {
   const url = useRecoilValue(urlFront);
   const urlRef = useRef(null);
   const [copied, setCopied] = useState(false);
+  const [show, setShow] = useState(false);
+  const [transactionToken, setTransactionToken] = useState("");
 
   const handleLogout = () => {
     localStorage.removeItem("auth");
@@ -25,7 +27,7 @@ const AccountProfile = () => {
       navigator.clipboard
         .writeText(urlRef.current.innerText)
         .then(() => {
-          setCopied(!copied)
+          setCopied(!copied);
           setTimeout(() => {
             setCopied(false);
           }, 1500);
@@ -36,57 +38,72 @@ const AccountProfile = () => {
     }
   };
 
-  const tableData = [
-    {
-      no: 1,
-      orderCode: "ABC123",
-      statusVerifikasi: "Verified",
-      link: "http://example.com",
-    },
-    {
-      no: 2,
-      orderCode: "DEF456",
-      statusVerifikasi: "Pending",
-      link: "http://example.com",
-    },
-    {
-      no: 3,
-      orderCode: "ABC123",
-      statusVerifikasi: "Verified",
-      link: "http://example.com",
-    },
-    {
-      no: 4,
-      orderCode: "DEF456",
-      statusVerifikasi: "Pending",
-      link: "http://example.com",
-    },
-  ];
-  const tableData1 = {
-    banyakUndangan: "4",
-  };
   let apiAddress = useRecoilValue(apiBackend);
-  const [orderData, setOrderData] = useState(null); // State untuk menyimpan data
+  const [orderData, setOrderData] = useState([]); // State untuk menyimpan data
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `${apiAddress}api/orders/${auth.dataUser.id}`
+      );
+      const data = response.data.Data;
+      setOrderData(data); // Menyimpan data ke state
+    } catch (error) {
+      console.error("Terjadi kesalahan:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${apiAddress}api/orders/${auth.dataUser.id}`
-        );
-        const data = response.data.Data;
-        setOrderData(data); // Menyimpan data ke state
-      } catch (error) {
-        console.error("Terjadi kesalahan:", error);
-      }
-    };
-
     fetchData();
   }, []); // useEffect hanya dijalankan saat komponen dimount
 
-  
+  const handlePayClick = (token) => {
+    let transToken = token.replace(
+      "https://app.sandbox.midtrans.com/snap/v3/redirection/",
+      ""
+    );
+    setTransactionToken(transToken);
+    if (!transactionToken) {
+      return;
+    }
+    window.snap.pay(transactionToken, {
+      onSuccess: function (result) {
+        alert("Pembayaran berhasil!");
+        fetchData()
+        console.log(result);
+      },
+      onPending: function (result) {
+        alert("Menunggu pembayaran Anda!");
+        fetchData()
+        console.log(result);
+      },
+      onError: function (result) {
+        alert("Pembayaran gagal!");
+        console.log(result);
+      },
+    });
+  };
+
+  const onButtonDeleteClick = (id) => {
+    const status = window.confirm(
+      `Yakin ingin hapus order ini ?`
+    );
+    if (status) {
+      axios
+        .delete(`${apiAddress}api/orders/${id}`)
+        .then(function (response) {
+          console.log(response);
+          fetchData();
+        })
+        .catch(function (error) {
+          console.log(error);
+          fetchData();
+        });
+    }
+    
+  };
   const dataTables =
-    orderData !== null ? (
+  orderData.length !==0? (
       orderData.map((order, id) => (
         <div
           className="py-2 px-2 md:px-6 rounded-xl shadow-lg bg-zinc-50"
@@ -114,9 +131,33 @@ const AccountProfile = () => {
                 {order.order_verification !== 1 ? "Pending" : "Active"}
               </p>
             </span>
+            <div
+              className={`rounded-md absolute top-0 bg-white right-0 pt-6 pb-4 pr-16 pl-4 ${
+                !show ? "hidden" : "flex"
+              } flex-col gap-4`}
+            >
+              <Button
+                type="button"
+                onClick={() => handlePayClick(order.checkout_url)}
+                className={`text-center text-sm text-primary-400 font-semibold hover:underline md:text-base ${
+                  order.order_verification !== 1 ? "" : "hidden"
+                }`}
+              >
+                Bayar
+              </Button>
+
+              <Button
+                type={"button"}
+                className={"text-center text-sm text-red-500 md:text-base"}
+                onClick={() => onButtonDeleteClick(order.id)}
+              >
+                Hapus
+              </Button>
+            </div>
             <Button
               type={"button"}
-              className={"absolute top-0 right-0 text-primary-400"}
+              className={"absolute top-0 right-1 text-primary-400"}
+              onClick={() => setShow(!show)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -159,28 +200,41 @@ const AccountProfile = () => {
                 >
                   Visit
                 </Button>
-              
-                  <p ref={urlRef} className="text-xs hidden">
-                    {url + order.invitation_url}
+
+                <p ref={urlRef} className="text-xs hidden">
+                  {url + order.invitation_url}
+                </p>
+                <Button
+                  type={"button"}
+                  onClick={copyToClipboard}
+                  className={`flex flex-wrap mt-1 border-[1px] ${
+                    !copied
+                      ? "text-gray-600 border-gray-400"
+                      : "text-light-pink border-light-pink"
+                  } rounded-md px-2 py-1 text-gray-600`}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-4 h-4 md:w-5 md:h-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
+                    />
+                  </svg>
+                  <p
+                    className={`text-xs ${
+                      !copied ? "text-gray-600" : "text-light-pink"
+                    } md:text-sm`}
+                  >
+                    {!copied ? "Copy Link" : "Copied !"}
                   </p>
-                  <Button type={"button"} onClick={copyToClipboard} className={`flex flex-wrap mt-1 border-[1px] ${!copied?'text-gray-600 border-gray-400': 'text-light-pink border-light-pink'} rounded-md px-2 py-1 text-gray-600`}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-4 h-4 md:w-5 md:h-5"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
-                      />
-                    </svg>
-                    <p className={`text-xs ${!copied?'text-gray-600':'text-light-pink'} md:text-sm`}>{!copied?'Copy Link':'Copied !'}</p>
-                  </Button>
-                
+                </Button>
               </div>
             )}
           </div>
@@ -214,7 +268,7 @@ const AccountProfile = () => {
       >
         Logout
       </Button>
-      <div className="w-full flex justify-center">
+      {/* <div className="w-full flex justify-center">
         <table className="shadow-lg w-180">
           <thead>
             <tr>
@@ -279,7 +333,7 @@ const AccountProfile = () => {
             ))}
           </tbody>
         </table>
-      </div>
+      </div> */}
     </div>
   );
 };

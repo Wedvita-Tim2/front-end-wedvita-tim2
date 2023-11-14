@@ -136,7 +136,7 @@ const SubmitHandling = ({ data }) => {
       })
       .catch((error) => {
         setFailed(true)
-        console.log("woii")
+        console.log(error)
         if (error.response) {
           setMessage(error.response.data.message);
         } else {
