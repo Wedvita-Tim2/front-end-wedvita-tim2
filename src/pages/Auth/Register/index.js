@@ -207,7 +207,10 @@ const Register = () =>{
                         placeholder={'Email'} isRequired/>
                         {!isInputValid.email && <div className='text-red-500 font-md block'>*This fill is required</div>}
 
-                        <div className='flex mt-6'>
+                        <div className='mt-4 ml-3 w-[280px] md:w-[342px]'>
+                            <p className='text-primary-100 font-light text-sm text-center md:text-right '>Password 8 Karakter dan Mengandung Huruf Besar, Huruf Kecil, Angka, dan Simbol</p>
+                        </div>
+                        <div className='flex mt-4'>
                             <InputText 
                             element={'input'} 
                             type={ !isVisible?'password':'text' } 
