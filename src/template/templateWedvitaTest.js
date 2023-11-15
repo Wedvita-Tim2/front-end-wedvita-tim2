@@ -5,11 +5,18 @@ import { apiBackend } from "../recoils/Api";
 import img1 from "../assets/img/template-bg1.jpg";
 import img2 from "../assets/img/template-bg2.jpg";
 import img3 from "../assets/img/template-bg3.png";
+import FormWish from "../component/FormWish";
+import ListWish from "../component/ListWish";
 
 const TemplateWedvitaTest = (props) => {
   const apiAddress = useRecoilValue(apiBackend);
-
+  const [reloadData, setReloadData] = useState(false);
   const [isSmallScreen, setSmallScreen] = useState(false);
+
+  const handleReloadData = () => {
+    setReloadData(!reloadData);
+  };
+
   useEffect(() => {
     const changeScreenContent = () => {
       setSmallScreen(window.innerWidth < 768);
@@ -336,6 +343,17 @@ const TemplateWedvitaTest = (props) => {
 
       {/* ini adalah konten-6 */}
       <div className="grid grid-cols-2 inset-0">{galleryComponents}</div>
+        <p className="text-lg md:text-center text-black text-center md:text-2xl">
+          Ucapan & Doa
+        </p>
+        <div className="sm:flex pb-20">
+          <div className="w-full sm:w-1/2">
+              <FormWish data={!data ? '' : (props.data ? props.data[0]?.event_information_id : '')} reloadData={handleReloadData}/>
+          </div>
+          <div className="w-full sm:w-1/2">
+              <ListWish data={!data ? '' : (props.data ? props.data[0]?.event_information_id : '')} reloadData={reloadData}/>
+          </div>
+      </div>
     </div>
   );
 };
