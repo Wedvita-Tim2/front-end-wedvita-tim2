@@ -12,8 +12,8 @@ const AccountProfile = () => {
   const url = useRecoilValue(urlFront);
   const urlRef = useRef(null);
   const [copied, setCopied] = useState(false);
-  const [show, setShow] = useState(false);
   const [transactionToken, setTransactionToken] = useState("");
+  
 
   const handleLogout = () => {
     localStorage.removeItem("auth");
@@ -41,6 +41,13 @@ const AccountProfile = () => {
   let apiAddress = useRecoilValue(apiBackend);
   const [orderData, setOrderData] = useState([]); // State untuk menyimpan data
 
+  const [showStates, setShowStates] = useState(Array(orderData.length).fill(false));
+
+  const handleToggleShow = (index) => {
+    const newShowStates = [...showStates];
+    newShowStates[index] = !newShowStates[index];
+    setShowStates(newShowStates);
+  };
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -133,7 +140,7 @@ const AccountProfile = () => {
             </span>
             <div
               className={`rounded-md absolute top-0 bg-white right-0 pt-6 pb-4 pr-16 pl-4 ${
-                !show ? "hidden" : "flex"
+                !showStates[id] ? "hidden" : "flex"
               } flex-col gap-4`}
             >
               <Button
@@ -157,7 +164,7 @@ const AccountProfile = () => {
             <Button
               type={"button"}
               className={"absolute top-0 right-1 text-primary-400"}
-              onClick={() => setShow(!show)}
+              onClick={() => handleToggleShow(id)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
