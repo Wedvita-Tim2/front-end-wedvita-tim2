@@ -35,7 +35,7 @@ const TemplateWedvita2 = ()=>{
     return(
         <div>
             {/* konten 1 */}
-            <div className="konten-1" 
+            <div className="konten-1"
             style={{
                 backgroundImage: `url(${img1})`,
                 backgroundSize: "cover",
