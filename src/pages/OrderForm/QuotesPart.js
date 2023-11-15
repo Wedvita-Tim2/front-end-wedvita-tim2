@@ -12,6 +12,7 @@ const QuotesPart = () =>{
                 className='border border-light-pink rounded-md w-72 md:w-[360px]'
                 onChange={(e)=> setQuotes(e.target.value)}
                 value = {quotes}
+                maxLength={200}
             />
         </div>
     )

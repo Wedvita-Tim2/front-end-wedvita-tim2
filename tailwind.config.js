@@ -13,12 +13,21 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Poppins', ...defaultTheme.fontFamily.sans],
-        kaushan: ['"Kaushan Script"', 'cursive']
+        kaushan: ['"Kaushan Script"', 'cursive'],
+        niconne: ['Niconne']
       },
       colors :{
         'light-blue' : '#62DDEF6B',
         'light-pink' : '#FF4EB8',
         'medium-blue' : '#59A3E8B2',
+        'LightBlue' : '#428EBA',
+        'HijauGrad' : '#CDFFD8',
+        'BiruGrad' :'#94B9FF',
+        'HijauGrad2' : '#A4F1B5',
+        'BiruGrad2' :'#719FF6',
+        'HijauGrad3' :'#8AE5F1',
+        'BiruGrad3' :'#719FF6',
+        'BiruBg' :'#80B8E3',
         'dark-blue' : '#3C64F0B2',
         'primary' : {100 :'#1B2F57', 200 : '#142442', 300:'#004AAD', 400:"#1200DD"},
         'dark-brown' : '#5A4739',

@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
 
 body {
   margin: 0;
@@ -15,3 +16,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.container-transparan {
+  background: rgba(255, 255, 255, 0.3); /* Nilai alpha (0.3) mengatur tingkat transparansi */
+  border: 1px solid white; /* Border tipis putih */
+  padding: 10px; /* Atur padding sesuai kebutuhan */
+}
+
+.kotak-kecil {
+  position: absolute;
+  bottom: 100px; /* Mengatur jarak dari bawah */
+  right: 20; /* Kotak akan di sebelah kanan teks */
+  width: 100px; /* Lebar kotak */
+  height: 50px; /* Tinggi kotak */
+  background-color: linear-gradient(to right, #ff0000, #00ff00); /* Warna latar belakang gradient */
+  border-radius: 15px; /* Mengatur sudut kotak */
+}
+
+
