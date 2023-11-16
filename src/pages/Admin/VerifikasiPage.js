@@ -150,7 +150,7 @@ const VerifikasiPage = () => {
 
         <div className="flex mt-7">
           <p className="pr-10">Filter :</p>
-          <select onChange={handleFilterSelection}>
+          <select onChange={handleFilterSelection} className="border border-light-pink rounded-md">
               <option value={"default"}>Default</option>
               <option value={"verif_status_order"}>Berdasarkan Status Belum Terverifikasi</option>
               <option value={"date_order"}>Berdasarkan Data Terbaru</option>

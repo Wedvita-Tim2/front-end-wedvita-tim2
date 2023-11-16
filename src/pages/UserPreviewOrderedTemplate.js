@@ -9,6 +9,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import NotFoundPage from "./NotFoundPage";
 import LoadingPage from "./LoadingPage";
+import TemplateWedvita4 from "../template/TemplateWedvita4";
 
 const UserPreviewOrderedTemplate = (props) => {
   const auth = useRecoilValue(authState);
@@ -24,9 +25,11 @@ const UserPreviewOrderedTemplate = (props) => {
         case "1":
           return <TemplateWedvitaTest data={data} />;
         case "2":
-          return <TemplateWedvita2 />;
+          return <TemplateWedvita2 data={data}/>;
         case "3":
           return <TemplateWedvita3 />;
+        case "4":
+          return <TemplateWedvita4 />;
         default:
           return <NotFoundPage />;
       }

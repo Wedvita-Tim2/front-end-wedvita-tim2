@@ -148,7 +148,7 @@ const TemplatesRendering = () => {
           Pilihan template sesuai keinginan anda dan pasangan
         </p>
       </div>
-      <div className="flex flex-wrap mt-7 px-3 md:px-12">
+      <div className="flex flex-wrap mt-7 px-4 md:px-20 gap-2 md:gap-6">
         {!templates || templates.length === 0
           ? templateCardSkeleton
           : templateCard}

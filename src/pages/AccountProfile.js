@@ -143,15 +143,6 @@ const AccountProfile = () => {
                 !showStates[id] ? "hidden" : "flex"
               } flex-col gap-4`}
             >
-              <Button
-                type="button"
-                onClick={() => handlePayClick(order.checkout_url)}
-                className={`text-center text-sm text-primary-400 font-semibold hover:underline md:text-base ${
-                  order.order_verification !== 1 ? "" : "hidden"
-                }`}
-              >
-                Bayar
-              </Button>
 
               <Button
                 type={"button"}
@@ -187,15 +178,25 @@ const AccountProfile = () => {
           </p>
           <div className="flex flex-row gap-2">
             {!order.invitation_url ? (
-              <Button
-                type={"link"}
-                href={`/preview/${order.template_id}/${order.order_code}`}
-                className={
-                  "rounded-md px-2 py-1 mt-1 bg-light-pink text-white text-xs md:text-base"
-                }
+              <div className="flex flex-wrap gap-1 md:gap-2">
+
+                <Button
+                  type={"link"}
+                  href={`/preview/${order.template_id}/${order.order_code}`}
+                  className={
+                    "rounded-md px-2 py-1 mt-1 bg-light-pink text-white text-xs md:text-base"
+                  }
+                >
+                  Lihat Preview
+                </Button>
+                <Button
+                type="button"
+                onClick={() => handlePayClick(order.checkout_url)}
+                className={`rounded-md px-2 py-1 mt-1 bg-primary-400 text-white text-xs md:text-base`}
               >
-                Lihat Preview
+                Bayar
               </Button>
+              </div>
             ) : (
               <div className="flex flex-wrap gap-1 md:gap-2">
                 <Button
