@@ -37,7 +37,6 @@ const TemplateFormHandling = ({ data }) => {
       formData.append("template_name", templateName);
       formData.append("price", templatePrice);
       if(data[1]){
-        console.log('ke eksekusi gua');
         formData.append("thumbnail", templateThumbnail, `templateThumbnail${templateName}.jpeg`)
       }
       formData.append("user_id", data[0].dataUser.id);

@@ -152,7 +152,7 @@ const TemplateForm = () => {
                             </div>
                         : null}
                 </div>
-                <TemplateFormHandling data={auth}/>
+                <TemplateFormHandling data={[auth,true]}/>
             </div>
         </div>
     )
