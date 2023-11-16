@@ -32,6 +32,10 @@ const FormWish = (props) => {
                     console.error(data.errors)
                 }else {
                     props.reloadData();
+                    setText({
+                        guest_name: '',
+                        message: '',
+                    });
                   }
             } else {
                 console.error('Wedding Wish gagal');
@@ -53,6 +57,7 @@ const FormWish = (props) => {
                         }
                         name={"guest_name"}
                         placeholder={"Nama tamu undangan"}
+                        value={text.guest_name}
                         onChange={handleTextChanged}
                     />
                     <InputText
@@ -62,6 +67,7 @@ const FormWish = (props) => {
                         }
                         name={"message"}
                         placeholder={"Berikan ucapan kepada mempelai"}
+                        value={text.message}
                         onChange={handleTextChanged}
                     />
                     <Button type={'button'} isBlack onClick={SubmitHandling}>

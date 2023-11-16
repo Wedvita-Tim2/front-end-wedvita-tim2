@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 import Button from "../elements/Buttons";
-import img1 from '../assets/img/img-4.png'
-import img2 from '../assets/img/img-1.png'
-import img3 from '../assets/img/img-3.png'
+import img1 from '../assets/img/img-2.webp'
+import img2 from '../assets/img/img-1.webp'
+import img3 from '../assets/img/img-3.webp'
 import ImageSlider from "./ImageSlider";
 
 const Gallery = () => {
@@ -32,10 +32,10 @@ const Gallery = () => {
                 <div className="w-[400px]">
                     <img src={img1} alt="" className="scale-75 rounded-md"></img>
                 </div>
-                <div className="">
+                <div className="w-[400px]">
                     <img src={img2} alt="" className="scale-75 rounded-md"></img>
                 </div>
-                <div className="">
+                <div className="w-[400px]">
                     <img src={img3} alt="" className="scale-75 rounded-md"></img>
                 </div>
             </div>
