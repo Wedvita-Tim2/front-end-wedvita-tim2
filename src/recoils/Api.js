@@ -9,3 +9,8 @@ export const urlFront = atom({
     key: 'urlFront',
     default: 'http://localhost:3000'
 })
+
+export const apiBackendImage = atom({
+    key: 'imageApi',
+    default: 'http://localhost:8000',
+})

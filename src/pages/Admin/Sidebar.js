@@ -2,6 +2,7 @@ import { useRecoilState } from "recoil"
 import { authState } from "../../recoils/AuthState"
 import Button from "../../elements/Buttons";
 import { useNavigate } from "react-router-dom";
+import { AdminPanelContent } from "../../recoils/AdminPanelState";
 
 const Sidebar = () =>{
 
@@ -18,6 +19,18 @@ const Sidebar = () =>{
         navigate('/');
     };
 
+    const [selectedContent, setSelectedContent] = useRecoilState(AdminPanelContent);
+    const handleVerifikasiPage = () => {
+        setSelectedContent('VerifikasiPage');
+    }
+    const handleUploadDesignPage = () => {
+        setSelectedContent('UploadDesignPage');
+    }
+
+    const handleTemplateTablePage = () => {
+        setSelectedContent('TemplateTablePage');
+    }
+
     return(
         <aside className="bg-slate-300 h-full w-52 px-4 py-4 shadow-lg flex flex-col">
             <div className="text-center text-2xl mt-4 ">
@@ -30,8 +43,9 @@ const Sidebar = () =>{
                 <line x1="0" y1="1" x2="100%" y2="1" stroke="black" strokeWidth="2" /> 
             </svg>
             <div className="text-center text-2x1 flex flex-col">
-                <Button type={'link'} href={'/adminpanel'} className={'text-light-pink text-lg pb-5'}>Halaman Verifikasi</Button>
-                <Button type={'link'} href={'/adminpanel/design'} className={'text-primary-300 text-lg pb-3'}>Halaman Upload Design</Button>
+                <Button onClick={handleVerifikasiPage} className={'text-light-pink text-lg pb-5'}>Halaman Verifikasi</Button>
+                <Button onClick={handleUploadDesignPage} className={'text-primary-300 text-lg pb-3'}>Halaman Upload Design</Button>
+                <Button onClick={handleTemplateTablePage} className={'text-primary-300 text-lg pb-3'}>Halaman Template Table</Button>
             </div>
             <div className="absolute bottom-0 mb-7">
                 <Button type={'button'} onClick={handleLogout} isPrimary>Logout</Button>
