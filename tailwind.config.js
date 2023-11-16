@@ -11,7 +11,10 @@ module.exports = {
       fontFamily: {
         sans: ['Poppins', ...defaultTheme.fontFamily.sans],
         kaushan: ['"Kaushan Script"', 'cursive'],
-        niconne: ['Niconne']
+        niconne: ['Niconne'],
+        alata: ['Alata', 'sans-serif'],
+        gotu: ['Gotu', 'sans-serif'],
+        play: ['"Playfair Display"', 'serif']
       },
       colors :{
         'light-blue' : '#62DDEF6B',
@@ -29,7 +32,8 @@ module.exports = {
         'primary' : {100 :'#1B2F57', 200 : '#142442', 300:'#004AAD', 400:"#1200DD"},
         'dark-brown' : '#5A4739',
         'light-brown' : '#997E6B',
-        'dark-brown/10' : '#42250A1A'
+        'dark-brown/10' : '#42250A1A',
+        'gold' : '#FFD3A2'
       },
       width :{
         '115' : '460px'
