@@ -49,6 +49,8 @@ const SubmitHandling = ({ data }) => {
   const [quotesData, setQuotesData] = useRecoilState(quotesEvent);
   const [gmapsData, setGmapsData] = useRecoilState(linkGmapsEvent);
 
+
+
   const resetData = () => {
     setCoverImageData("");
     setBrideNameData("");
@@ -115,9 +117,11 @@ const SubmitHandling = ({ data }) => {
 
   const [visible, setVisible] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
   const handleSubmit = () => {
+    setLoading(true);
     const config = {
       headers: { "content-type": "multipart/form-data" },
     };
@@ -130,19 +134,45 @@ const SubmitHandling = ({ data }) => {
           resetData();
         } else {
           console.log("Failed to navigate. Response status is not 200.");
+          setFailed(true)
+          setMessage(response.data.message);
         }
       })
       .catch((error) => {
         setFailed(true)
+        console.log(error)
         if (error.response) {
           setMessage(error.response.data.message);
         } else {
           console.log(error);
         }
-      });
+      }).finally(() => {
+        setLoading(false); // Menyembunyikan overlay setelah proses selesai
+      });;
   };
   return (
     <div className="mt-12 flex justify-center md:justify-start">
+      {loading && (
+      <div
+        className="absolute flex items-center justify-center"
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "rgba(0, 0, 0, 0.7)",
+          zIndex: 999999,
+        }}
+      >
+        <div className="flex flex-wrap animate-bounce">
+          <div className="animate-spin bg-light-pink mt-2 rounded-md h-6 w-6 md:w-9 md:h-9 mr-3 "></div>
+          <p className="text-3xl md:text-5xl font-bold text-light-pink">
+            Tunggu Sebentar....
+          </p>
+        </div>
+      </div>
+    )}
       <Button isGradient onClick={handleSubmit}>
         Submit
       </Button>

@@ -5,6 +5,7 @@ import Register from "../pages/Auth/Register";
 import FindTemplatePage from "../pages/FindTemplatePage";
 import LandingPage from "../pages/LandingPage";
 import MainOrderForm from "../pages/OrderForm/MainOrderForm";
+import TemplateWedvita4 from "../template/TemplateWedvita4";
 
 const routes = [{
     path: '/',
@@ -33,6 +34,10 @@ const routes = [{
     path:'/order',
     element: <MainOrderForm/>
   },
+  {
+    path: '/template4',
+    element: <TemplateWedvita4/>
+  }
 ]
 
 export default routes

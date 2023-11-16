@@ -38,6 +38,21 @@ const Button = (props) => {
       "rounded-full",
       "md:py-3 md:px-12"
     );
+  if (props.isBlack)
+    className.push(
+      "bg-gray-800",
+      "text-md",
+      "rounded-md",
+      "shadow-md",
+      "text-white",
+      "py-2.5 px-2",
+      "md:px-12",
+      "font-normal",
+      "hover:bg-black",
+      "mt-4",
+      "transition", 
+      "duration-500"
+    );
 
   const onClick = () => {
     if (props.onClick) props.onClick();
