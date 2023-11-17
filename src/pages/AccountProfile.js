@@ -99,7 +99,6 @@ const AccountProfile = () => {
       axios
         .delete(`${apiAddress}api/orders/${id}`)
         .then(function (response) {
-          console.log(response);
           fetchData();
         })
         .catch(function (error) {
@@ -246,7 +245,6 @@ const AccountProfile = () => {
               </div>
             )}
           </div>
-          {console.log(order)}
         </div>
       ))
     ) : (

@@ -7,6 +7,8 @@ import img2 from "../assets/img/template-bg2.jpg";
 import img3 from "../assets/img/template-bg3.png";
 import FormWish from "../component/FormWish";
 import ListWish from "../component/ListWish";
+import LeafletMap from "../component/LeafletMap";
+import img6 from "../assets/img/tamplate2/logo.png";
 
 const TemplateWedvitaTest = (props) => {
   const apiAddress = useRecoilValue(apiBackend);
@@ -57,7 +59,7 @@ const TemplateWedvitaTest = (props) => {
     props.data[0] !== null ? `${apiAddress}${props.data[0].cover_image}` : img1;
   const smallScreen = `url(${cover_image})`;
   const largeScreen = `url(${cover_image})`;
-
+  const wedvita = '“Ciptakan Kenangan Abadi dengan Undangan Eksklusif Wedvita.”'
   const pria = props.data[0] !== null?props.data[0].groom_name:data.groom_name;
   const wanita = props.data[0] !== null?props.data[0].bride_name:data.bride_name;
 
@@ -311,7 +313,7 @@ const TemplateWedvitaTest = (props) => {
               {alamatGedung}
             </p>
             <div className="text-center py-4 pb-8">
-              <Button isPrimary type={"link"} href={maps} isExternal>
+              <Button isPrimary type={"link"} href={maps} isExternal className={`${props.data[0] !== null ? (props.data[0].lat!==null && props.data[0].lng!==null?'hidden':'' ):''}`}>
                 LIHAT LOKASI{" "}
               </Button>
             </div>
@@ -322,6 +324,13 @@ const TemplateWedvitaTest = (props) => {
           <p className="text-center text-dark-brown text-lg md:text-xl text-light text-md px-24 py-4 pb-16 font-kaushan">
             {teksKonten2}
           </p>
+        </div>
+      </div>
+
+      <div className="bg-light-brown py-6 px-12">
+        <p className="text-white text-center text-xl md:text-4xl mb-3 font-kaushan">Lokasi Acara Melalui Leaflet Map</p>
+        <div className={`mt-2 mx-auto w-115 md:w-full ${props.data[0] !== null ? (props.data[0].lat!==null && props.data[0].lng!==null?'relative':'hidden' ):''}`}>
+                <LeafletMap lat={props.data[0] !== null ? (props.data[0].lat!==null && props.data[0].lng!==null?props.data[0].lat:-6.871461776598065):-6.871461776598065} lng={props.data[0] !== null ?props.data[0].lng:107.57360083862629}/>
         </div>
       </div>
 
@@ -342,7 +351,7 @@ const TemplateWedvitaTest = (props) => {
       </div>
 
       {/* ini adalah konten-6 */}
-      <div className="grid grid-cols-2 inset-0">{galleryComponents}</div>
+      <div className="grid grid-cols-2 inset-0 py-8">{galleryComponents}</div>
         <p className="text-lg md:text-center text-black text-center md:text-2xl">
           Ucapan & Doa
         </p>
@@ -354,6 +363,11 @@ const TemplateWedvitaTest = (props) => {
               <ListWish data={!data ? '' : (props.data ? props.data[0]?.event_information_id : '')} reloadData={reloadData}/>
           </div>
       </div>
+
+     <div className="bg-light-brown pt-6 pb-36">
+            <img src={img6} alt="logo" className="mx-auto"></img>
+            <p className="font-kaushan text-white text-xl md:text-3xl text-center mt-20">{wedvita}</p>
+     </div>
     </div>
   );
 };

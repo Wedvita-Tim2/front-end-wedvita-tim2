@@ -13,7 +13,7 @@ const OrderPreviewTemplatePage = () => {
 
   useEffect(() => {
     // Check if the templateId is not found and setShowOrder accordingly.
-    if (templateId !== "1" && templateId !== "2" && templateId !== "3") {
+    if (templateId !== "1" && templateId !== "2" && templateId !== "3"&& templateId !== "4") {
       setShowOrder(false);
     } else {
       setShowOrder(true);
@@ -29,7 +29,7 @@ const OrderPreviewTemplatePage = () => {
       case "3":
         return <TemplateWedvita3 />;
       case "4":
-        return <TemplateWedvita4/>
+        return <TemplateWedvita4 data={[null]}/>
       default:
         return <NotFoundPage />;
     }

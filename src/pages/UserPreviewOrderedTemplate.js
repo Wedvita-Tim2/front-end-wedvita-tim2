@@ -20,6 +20,8 @@ const UserPreviewOrderedTemplate = (props) => {
       return <LoadingPage />;
     } else if (props.preview === true && data !== null && data[0].user_id !== userId) {
       return <NotFoundPage />;
+    }else if (props.preview !== true && data !== null && data[0].order_verification !== 1) {
+      return <NotFoundPage />;
     } else if (data[0].template_id == templateId) {
       switch (templateId) {
         case "1":
@@ -29,7 +31,7 @@ const UserPreviewOrderedTemplate = (props) => {
         case "3":
           return <TemplateWedvita3 />;
         case "4":
-          return <TemplateWedvita4 />;
+          return <TemplateWedvita4 data={data}/>;
         default:
           return <NotFoundPage />;
       }
