@@ -125,7 +125,7 @@ const TemplateForm = () => {
                         </div>: null}
                         </div>
                         {image && result? 
-                            <div className="relative w-48 h-72 overflow-hidden pl-8">
+                            <div className="relative w-9 h-16 overflow-hidden pl-8">
                                 <img src={image} alt="preview image" ></img>
                                 <Button
                                     type={"button"}
