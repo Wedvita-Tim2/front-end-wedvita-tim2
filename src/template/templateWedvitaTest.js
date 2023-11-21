@@ -337,16 +337,12 @@ const TemplateWedvitaTest = (props) => {
       {/* ini adalah konten-5 */}
       <div className="bg-gradient-to-r from-dark-brown to-light-brown">
         <p className="text-white text-center text-8xl md:text-[200px] pt-16 leading-[10rem] font-kaushan">
-          "
         </p>
         <p className="text-white text-center text-3xl  md:text-6xl tracking-[0.25rem] md:tracking-[.5rem] font-kaushan">
           {teksKonten4}
         </p>
-        <p
-          className={`text-center text-white text-lg md:text-xl my-4 tracking-[.5rem] md:tracking-[.75rem] pb-32 font-kaushan`}
-        >
-          {pria.toUpperCase() + " & " + wanita.toUpperCase()
-            }
+        <p className={`text-center text-white text-lg md:text-xl my-4 tracking-[.5rem] md:tracking-[.75rem] pb-32 font-kaushan`}>
+          {pria.toUpperCase() + " & " + wanita.toUpperCase()}
         </p>
       </div>
 
