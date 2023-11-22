@@ -27,7 +27,7 @@ const OrderPreviewTemplatePage = () => {
       case "2":
         return <TemplateWedvita2 data={[null]}/>;
       case "3":
-        return <TemplateWedvita3 />;
+        return <TemplateWedvita3 data={[null]}/>;
       case "4":
         return <TemplateWedvita4 data={[null]}/>
       default:

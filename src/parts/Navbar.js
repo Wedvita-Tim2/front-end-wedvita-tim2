@@ -102,7 +102,7 @@ const Navbar = () => {
 
   const menuItems = [
     { text: "Template", href: "/template" },
-    { text: "Portofolio", href: "/portfolio" },
+    // { text: "Portofolio", href: "/portfolio" },
     { text: "Bantuan", href: "/help" },
   ];
 

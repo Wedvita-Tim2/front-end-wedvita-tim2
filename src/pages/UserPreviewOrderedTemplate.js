@@ -29,7 +29,7 @@ const UserPreviewOrderedTemplate = (props) => {
         case "2":
           return <TemplateWedvita2 data={data}/>;
         case "3":
-          return <TemplateWedvita3 />;
+          return <TemplateWedvita3 data={data}/>;
         case "4":
           return <TemplateWedvita4 data={data}/>;
         default:
