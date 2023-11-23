@@ -3,6 +3,7 @@ import Button from "../elements/Buttons";
 import Modal from "../component/Modal";
 import { useRecoilValue } from "recoil";
 import { authState } from "../recoils/AuthState";
+import StageCanvas from "../component/canvas/Stage";
 
 const Hero = () => {
   const [showModal, setShowModal] = useState(false);
@@ -10,9 +11,9 @@ const Hero = () => {
 
   return (
     <>
-      <div className="grid relative md:grid-cols-2 md:mt-12">
-        <div className="overflow-hidden w-full h-80 mx-auto mb-2 md:pl-6 md:h-140 md:rounded-br-[244px] contrast-125">
-          <img src="/HeroThumbnail.png" alt="logo" className="mx-auto"></img>
+      <div className="grid relative md:grid-cols-2 md:mt-8">
+        <div className="overflow-hidden w-full flex align-middle h-80 mx-auto mb-2 md:pl-6 md:h-140 md:rounded-br-[244px] contrast-125">
+          <StageCanvas/>
         </div>
         <div className="md:ml-6 md:my-auto">
           <p className="mx-auto font-bold text-4xl text-primary-300 text-center md:text-7xl md:text-left">
