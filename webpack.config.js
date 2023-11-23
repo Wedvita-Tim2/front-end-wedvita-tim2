@@ -60,7 +60,7 @@ const config = {
       // Add your rules for custom modules here
       // Learn more about loaders from https://webpack.js.org/loaders/
     ],
-    ignoreWarnings: [/Failed to parse source map/],
+    
   },
   resolve: {
     fallback: {
