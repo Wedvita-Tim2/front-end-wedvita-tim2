@@ -48,8 +48,16 @@ const UserPreviewOrderedTemplate = (props) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${apiAddress}api/showOrderDetail/${orderCode}`
+          `${apiAddress}api/showOrderDetail/${orderCode}`,
+          {
+            headers: {
+              'ngrok-skip-browser-warning': 'true',
+              // Atau gunakan header sesuai kebutuhan Anda
+              // 'Custom-Header': 'value',
+            },
+          }
         );
+
         const data = response.data.Data;
         setOrderDetail(data); // Menyimpan data ke state
       } catch (error) {

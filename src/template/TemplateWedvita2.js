@@ -54,11 +54,11 @@ const TemplateWedvita2 = (props) => {
   const imageUrls = [];
   const attachment_name = [img3, img4, img5, img4];
   const coverImage =
-    props.data[0] !== null ? `${apiAddress}${props.data[0].cover_image}` : img3;
+    props.data[0] !== null ? `${apiAddress.replace(/\/$/, '')}${props.data[0].cover_image}` : img3;
   const imgKonten1 =
-    props.data[0] !== null ? `${apiAddress}${props.data[0].cover_image}` : img4;
+    props.data[0] !== null ? `${apiAddress.replace(/\/$/, '')}${props.data[0].cover_image}` : img4;
     const imgKonten2 =
-    props.data[0] !== null ? `${apiAddress}${props.data[0].attachment_name[0]}` : img5;
+    props.data[0] !== null ? `${apiAddress.replace(/\/$/, '')}${props.data[0].attachment_name[0]}` : img5;
 
   if (!props.data[0]) {
     for (let i = 0; i < attachment_name.length; i++) {
@@ -67,7 +67,7 @@ const TemplateWedvita2 = (props) => {
     }
   } else {
     for (let i = 0; i < props.data[0].attachment_name.length; i++) {
-      const imageUrl = `${apiAddress}${props.data[0].attachment_name[i]}`;
+      const imageUrl = `${apiAddress.replace(/\/$/, '')}${props.data[0].attachment_name[i]}`;
       imageUrls.push(imageUrl);
     }
   }

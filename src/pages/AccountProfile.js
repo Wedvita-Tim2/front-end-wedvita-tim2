@@ -51,8 +51,16 @@ const AccountProfile = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `${apiAddress}api/orders/${auth.dataUser.id}`
+        `${apiAddress}api/orders/${auth.dataUser.id}`, 
+        {
+          headers: {
+            'ngrok-skip-browser-warning': 'true',
+            // Atau gunakan header sesuai kebutuhan Anda
+            // 'Custom-Header': 'value',
+          },
+        }
       );
+  
       const data = response.data.Data;
       setOrderData(data); // Menyimpan data ke state
     } catch (error) {

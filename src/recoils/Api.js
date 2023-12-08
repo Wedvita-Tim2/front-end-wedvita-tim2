@@ -2,7 +2,7 @@ import { atom } from 'recoil';
 
 export const apiBackend= atom({
     key: 'backendApi',
-    default: 'http://localhost:8000/',
+    default: 'https://immense-perch-hot.ngrok-free.app/',
 });
 
 export const urlFront = atom({
@@ -12,5 +12,5 @@ export const urlFront = atom({
 
 export const apiBackendImage = atom({
     key: 'imageApi',
-    default: 'http://localhost:8000',
+    default: 'https://immense-perch-hot.ngrok-free.app',
 })

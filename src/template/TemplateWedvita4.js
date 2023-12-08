@@ -47,7 +47,7 @@ const TemplateWedvita4 = (props) => {
     const maps = props.data[0] !== null?props.data[0].maps_url:"https://maps.app.goo.gl/m3VcPHwk5NfXqMoz5";
     const wedvita = '“Ciptakan Kenangan Abadi dengan Undangan Eksklusif Wedvita.”'
     const imageUrls = [];
-    const coverImage = props.data[0] !== null ? `${apiAddress}${props.data[0].cover_image}` : img2;
+    const coverImage = props.data[0] !== null ? `${apiAddress.replace(/\/$/, '')}${props.data[0].cover_image}` : img2;
     const attachment_name = [img4, img5, img2, img4];
     if (!props.data[0]) {
         for (let i = 0; i < attachment_name.length; i++) {
@@ -56,7 +56,7 @@ const TemplateWedvita4 = (props) => {
         }
       } else {
         for (let i = 0; i < props.data[0].attachment_name.length; i++) {
-          const imageUrl = `${apiAddress}${props.data[0].attachment_name[i]}`;
+          const imageUrl = `${apiAddress.replace(/\/$/, '')}${props.data[0].attachment_name[i]}`;
           imageUrls.push(imageUrl);
         }
       }

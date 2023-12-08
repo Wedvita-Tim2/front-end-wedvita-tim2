@@ -56,7 +56,7 @@ const TemplateWedvitaTest = (props) => {
     };
   }
   const cover_image =
-    props.data[0] !== null ? `${apiAddress}${props.data[0].cover_image}` : img1;
+    props.data[0] !== null ? `${apiAddress.replace(/\/$/, '')}${props.data[0].cover_image}` : img1;
   const smallScreen = `url(${cover_image})`;
   const largeScreen = `url(${cover_image})`;
   const wedvita = '“Ciptakan Kenangan Abadi dengan Undangan Eksklusif Wedvita.”'
@@ -102,7 +102,7 @@ const TemplateWedvitaTest = (props) => {
     }
   } else {
     for (let i = 0; i < props.data[0].attachment_name.length; i++) {
-      const imageUrl = `${apiAddress}${props.data[0].attachment_name[i]}`;
+      const imageUrl = `${apiAddress.replace(/\/$/, '')}${props.data[0].attachment_name[i]}`;
       imageUrls.push(imageUrl);
     }
   }

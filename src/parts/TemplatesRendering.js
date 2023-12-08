@@ -11,6 +11,7 @@ import {
 import { authState } from "../recoils/AuthState";
 import Modal from "../component/Modal";
 import { apiBackend } from "../recoils/Api";
+import axios from "axios";
 
 const TemplatesRendering = () => {
   const [templates, setTemplates] = useRecoilState(TemplatesRecoil);
@@ -21,14 +22,22 @@ const TemplatesRendering = () => {
   const auth = useRecoilValue(authState);
   const navigate = useNavigate();
   const apiAddress = useRecoilValue(apiBackend)
+  
 
   const getTemplates = async () => {
     try {
-      const templateDatas = await fetch(apiAddress+"api/main");
-      const value = await templateDatas.json();
-      setTemplates(value.data);
+      const response = await axios.get(apiAddress + 'api/main', {
+        headers: {
+          'ngrok-skip-browser-warning': 'true',
+          // Atau gunakan header sesuai kebutuhan Anda
+          // 'Custom-Header': 'value',
+        },
+      });
+  
+      const value = response.data.data;
+      setTemplates(value);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -71,7 +80,7 @@ const TemplatesRendering = () => {
         }
       >
         <img
-          src={apiAddress + template.thumbnail}
+          src={apiAddress.replace(/\/$/, '') + template.thumbnail}
           alt={`Template ${template.id}`}
           className="z-10"
         />

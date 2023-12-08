@@ -70,10 +70,10 @@ const TemplateWedvita3 = (props) => {
     props.data[0] !== null ? props.data[0].building_name : "Novotel Bandung";
   const imgGallery1 = img5;
   const imgGallery2 =
-    props.data[0] !== null ? `${apiAddress}${props.data[0].cover_image}` : img4;
+    props.data[0] !== null ? `${apiAddress.replace(/\/$/, '')}${props.data[0].cover_image}` : img4;
   const imgGallery3 =
     props.data[0] !== null
-      ? `${apiAddress}${props.data[0].attachment_name[0]}`
+      ? `${apiAddress.replace(/\/$/, '')}${props.data[0].attachment_name[0]}`
       : img6;
   const imageUrls = [];
   const attachment_name = [img4, img6, img8, img9];
@@ -84,7 +84,7 @@ const TemplateWedvita3 = (props) => {
     }
   } else {
     for (let i = 0; i < props.data[0].attachment_name.length; i++) {
-      const imageUrl = `${apiAddress}${props.data[0].attachment_name[i]}`;
+      const imageUrl = `${apiAddress.replace(/\/$/, '')}${props.data[0].attachment_name[i]}`;
       imageUrls.push(imageUrl);
     }
   }

@@ -5,21 +5,29 @@ import { RateTemplate } from '../recoils/RateTemplate';
 import { useEffect } from 'react';
 import Button from '../elements/Buttons';
 import { apiBackend } from '../recoils/Api';
+import axios from 'axios';
 
 const Testimoni = () =>{
 
     const [testimoni, setTestimoni] = useRecoilState(RateTemplate)
     const apiAddress = useRecoilValue(apiBackend)
 
-    const rateData = async() =>{
-        try{
-            const datas = await fetch(apiAddress+"api/rating")
-            const value = await datas.json()
-            setTestimoni(value)
-        }catch(err){
-            console.error(err)
+    const rateData = async () => {
+        try {
+          const response = await axios.get(apiAddress + 'api/rating', {
+            headers: {
+              'ngrok-skip-browser-warning': 'true',
+              // Atau gunakan header sesuai kebutuhan Anda
+              // 'Custom-Header': 'value',
+            },
+          });
+      
+          const value = response.data;
+          setTestimoni(value);
+        } catch (err) {
+          console.error(err);
         }
-    }
+      };
 
     useEffect(()=>{
         rateData()

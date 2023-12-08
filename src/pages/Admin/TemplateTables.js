@@ -69,15 +69,23 @@ const TemplateTables = () => {
 
     const templateData = async () => {
         try {
-        const datas = await fetch(apiAddress + "api/main");
-        const value = await datas.json();
-        if (value.response === 200) {
+          const response = await axios.get(`${apiAddress}api/main`, {
+            headers: {
+              'ngrok-skip-browser-warning': 'true',
+              // Atau gunakan header sesuai kebutuhan Anda
+              // 'Custom-Header': 'value',
+            },
+          });
+      
+          const value = response.data;
+      
+          if (value.response === 200) {
             setTemplates(value.data);
-        }
+          }
         } catch (err) {
-        console.error(err);
+          console.error(err);
         }
-    };
+      };
 
     useEffect(() => {
         templateData();
