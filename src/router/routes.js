@@ -5,6 +5,7 @@ import Register from "../pages/Auth/Register";
 import FindTemplatePage from "../pages/FindTemplatePage";
 import LandingPage from "../pages/LandingPage";
 import MainOrderForm from "../pages/OrderForm/MainOrderForm";
+import VerifivayionEmailPage from "../pages/VerificationEmailPage";
 import TemplateWedvita4 from "../template/TemplateWedvita4";
 
 const routes = [{
@@ -37,6 +38,10 @@ const routes = [{
   {
     path: '/template4',
     element: <TemplateWedvita4/>
+  },
+  {
+    path: '/verification',
+    element: <VerifivayionEmailPage/>
   }
 ]
 
