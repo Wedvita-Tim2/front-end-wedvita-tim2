@@ -1,20 +1,29 @@
 import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { apiBackend } from "../recoils/Api";
+import axios from "axios";
 
 const ListWish = (props) => {
   const [wish, setWish] = useState([]);
   const apiAddress = useRecoilValue(apiBackend);
-
+  
   const wishData = async () => {
     try {
-      const datas = await fetch(apiAddress + "api/wishes/" + props.data);
-      const value = await datas.json();
-      setWish(value.wishData);
+      const response = await axios.get(apiAddress + "api/wishes/" + props.data, {
+        headers: {
+          'ngrok-skip-browser-warning': 'true',
+          // Atau gunakan header sesuai kebutuhan Anda
+          // 'Custom-Header': 'value',
+        },
+      });
+      
+    
+      setWish(response.data.wishData);
     } catch (err) {
       console.error(err);
     }
   };
+  
 
   useEffect(() => {
     if (!props.data) {
