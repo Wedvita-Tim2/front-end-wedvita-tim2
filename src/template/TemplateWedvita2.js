@@ -451,9 +451,10 @@ const TemplateWedvita2 = (props) => {
         <div className="md:col-span-2 overflow-hidden h-[600px] w-[500px]">
             <img src={imgKonten1} alt="Foto" className="object-cover w-full h-full" />
         </div>
-        <div className={`md:col-span-6 mt-2 mx-auto bottom-0 w-115 md:w-[800px] ${props.data[0] !== null ? (props.data[0].lat!==null && props.data[0].lng!==null?'relative':'hidden' ):''}`}>
-            <LeafletMap lat={props.data[0] !== null ?props.data[0].lat:-6.871461776598065} lng={props.data[0] !== null ?props.data[0].lng:107.57360083862629}/>
-          </div>
+        <div className={`md:col-span-6 mt-2 mx-auto bottom-0 w-115 md:w-[800px] ${props.data[0]?.lat !== null && props.data[0]?.lng !== null ? 'relative' : 'hidden'}`}>
+          <LeafletMap lat={props.data[0]?.lat ?? -6.871461776598065} lng={props.data[0]?.lng ?? 107.57360083862629}/>
+        </div>
+
       </div>
 
       <div>

@@ -7,7 +7,7 @@ export const apiBackend= atom({
 
 export const urlFront = atom({
     key: 'urlFront',
-    default: 'http://localhost:3000'
+    default: 'https://front-end-wedvita-tim2.vercel.app'
 })
 
 export const apiBackendImage = atom({
